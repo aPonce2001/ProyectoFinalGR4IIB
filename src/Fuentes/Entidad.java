@@ -9,4 +9,5 @@ public interface Entidad {
         
     public String getNombreEntidad();
     public String getDatos();
+    public String toQuery();
 }

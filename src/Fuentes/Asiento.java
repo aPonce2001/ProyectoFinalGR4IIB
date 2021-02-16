@@ -3,9 +3,6 @@ package Fuentes;
 
 //@author Andrés Ponce
 
-import java.sql.ResultSet;
-
- 
 public class Asiento implements Entidad{
     private int idAsiento;
     private Clase clase;
@@ -88,6 +85,11 @@ public class Asiento implements Entidad{
     @Override
     public String getDatos() {
         return ("(" + this.idAsiento +"," + this.clase.getTipo()+ "," + this.avion.getIdAvion() + "," + this.numero + ",\'" + this.ubicacion + "\',\'" + this.estado + "\')");
+    }
+
+    @Override
+    public String toQuery() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override

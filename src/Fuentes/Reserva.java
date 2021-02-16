@@ -69,6 +69,11 @@ public class Reserva implements Entidad{
     }
 
     @Override
+    public String toQuery() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
     public String toString() {
         return "Reserva No. " + idReserva + "\nDatos del cliente:\n" + cliente + "\nVuelo: " + vuelo + "\nAsiento: " + asiento;
     }    

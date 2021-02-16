@@ -45,7 +45,12 @@ public class Avion implements Entidad{
     public String getDatos() {
         return ("(" + this.idAvion +",\'" + descripcion +"\')");
     }
-
+    
+    @Override
+    public String toQuery() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     @Override
     public String toString() {
         return "Avion No." + idAvion + "\nDescripción: " + this.descripcion;

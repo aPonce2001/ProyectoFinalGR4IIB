@@ -46,7 +46,12 @@ public class Pais implements Entidad{
     public String getDatos() {
         return ("(" + this.idPais +",\'" + this.nombrePais +"\')");
     }
-
+    
+    @Override
+    public String toQuery() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     @Override
     public String toString() {
         return "Código ISO 3166-1: " + idPais + "\nNombre: " + nombrePais;
