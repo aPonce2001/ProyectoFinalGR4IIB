@@ -4,9 +4,9 @@ package CapaDatos;
  *
  * @author Dennis David
  */
-public class Dts_ClsAsiento {
+public class Dt_ClsAsiento {
 
-    public Dts_ClsAsiento() {
+    public Dt_ClsAsiento() {
     }
     
     public void insertarAsiento (String ubicacion,String estado,int id_clase_FK ){

@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,7 +17,7 @@ public class Dt_ClsConexion {
     public Dt_ClsConexion() {
     }
 
-    public static int executeQuery(String storeProcedure, List<Object> params) {
+    public static int executeQuery(String storeProcedure, ArrayList<Object[]> params) {
         int id = 0;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -27,18 +28,38 @@ public class Dt_ClsConexion {
             Connection con = DriverManager.getConnection(connectionURL);
             System.out.println("Conexión exitosa");
 
-            String SQL = "{call DB_Viaje.dbo.insertarClase(?)}";
+            //String SQL = "{call DB_Viaje.dbo.insertarClase(?,?)}";
+            String SQL = "{call DB_Viaje.dbo." +storeProcedure+"}";
             CallableStatement cs = con.prepareCall(SQL);
-            cs.setString("nombre", "Clase baja");
-            cs.setInt("capacidad", 100);
-            ResultSet rs = cs.executeQuery();
+            
+            for (Object[] param : params ) {
+                if(param[0].equals("String") ) {
+                    String columnName = String.valueOf(param[1]);
+                    String columnValue = String.valueOf(param[2]);
+                    
+                    cs.setString(columnName, columnValue);
+                } else if(param[0].equals("int")) {
+                    String columnName = String.valueOf(param[1]);
+                    int columnValue = (int)(param[2]);
+                    
+                    cs.setInt(columnName, columnValue);
+                } /*else if(param.equals("date")) {
+                    //cs.setDate("capacidad", 100);
+                }*/
+                
+            }
+            /*cs.setString("nombre", "Clase baja");
+            cs.setInt("capacidad", 100);*/
+            
+            cs.execute();
+            //ResultSet rs = cs.executeQuery();
             /*  while (rs.next()) {
                // System.out.println(rs.getString(1));
                 //System.out.println(cs);
             }
              */
             id = 1;
-            rs.close();
+            cs.close();
 
             //           Statement st = con.createStatement();
             //         ResultSet rs = st.executeQuery("select * from RESERVA");
@@ -53,4 +74,56 @@ public class Dt_ClsConexion {
         System.out.println(id);
         return id;
     }
+    
+    
+    public static int mostrarQuery(String storeProcedure, ArrayList<Object[]> params) {
+        int id = 0;
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String connectionURL = "jdbc:sqlserver://localhost;"
+                    + "databaseName=DB_Viaje;"
+                    + "user=admin;"
+                    + "password=Admin1234;";
+            Connection con = DriverManager.getConnection(connectionURL);
+            System.out.println("Conexión exitosa");
+ 
+            String SQL = "{call DB_Viaje.dbo." +storeProcedure+"}";
+            CallableStatement cs = con.prepareCall(SQL);
+            
+            for (Object[] param : params ) {
+                if(param[0].equals("String") ) {
+                    String columnName = String.valueOf(param[1]);
+                    String columnValue = String.valueOf(param[2]);
+                    
+                    cs.setString(columnName, columnValue);
+                } else if(param[0].equals("int")) {
+                    String columnName = String.valueOf(param[1]);
+                    int columnValue = (int)(param[2]);
+                    
+                    cs.setInt(columnName, columnValue);
+                } /*else if(param.equals("date")) {
+                    //cs.setDate("capacidad", 100);
+                }*/
+                
+            }
+            
+           
+            ResultSet rs = cs.executeQuery();
+              while (rs.next()) {
+               System.out.println("Id: " + rs.getString(1));//id
+                System.out.println("Nombre: " + rs.getString(2));//nombre
+              
+            }
+             
+            id = 1;
+            rs.close();
+ 
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println(id);
+        return id;
+    }
+    
+    
 }

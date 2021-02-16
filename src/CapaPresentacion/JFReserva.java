@@ -5,6 +5,8 @@
  */
 package CapaPresentacion;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Dennis David
@@ -226,6 +228,11 @@ public class JFReserva extends javax.swing.JFrame {
         jCBReservaComida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Desayuno", "Almuerzo", "Merienda" }));
 
         jBReservar.setText("Reservar");
+        jBReservar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBReservarActionPerformed(evt);
+            }
+        });
 
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -306,6 +313,14 @@ public class JFReserva extends javax.swing.JFrame {
       login.setVisible(true);
       dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jBReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReservarActionPerformed
+        if (rootPaneCheckingEnabled) {
+            JOptionPane.showInternalMessageDialog(null, "Reserva registradacon éxito");
+        } else {
+            JOptionPane.showInternalMessageDialog(null, "Reserve nuevamente");
+        }
+    }//GEN-LAST:event_jBReservarActionPerformed
 
     /**
      * @param args the command line arguments
