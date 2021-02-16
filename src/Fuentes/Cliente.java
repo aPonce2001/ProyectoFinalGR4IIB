@@ -55,6 +55,11 @@ public class Cliente implements Entidad{
     }
 
     @Override
+    public String toQuery() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
     public String toString() {
         return "Número de pasaporte: " + idCliente + "\nNombre: " + nombre + "\nPaís del cliente: " + pais.toString();
     }
