@@ -5,6 +5,6 @@ package Fuentes;
  
 public interface Entidad {
     
-    public String getNombreEntidad();
+    public String getNombreTabla();
     public String getDatos();
 }

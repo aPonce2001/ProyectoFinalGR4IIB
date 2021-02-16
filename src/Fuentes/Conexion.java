@@ -6,13 +6,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 //@author Andrés Ponce
 
 public class Conexion {
     private String url, user, password, baseDeDatos;
     private Connection con = null;
-    private Statement declaracion = null;
+    private Statement instruccionQuery = null;
 
     public Conexion() {
         this.url = "";
@@ -64,8 +66,8 @@ public class Conexion {
     
     public void subirALaBase(Entidad entidad){
         try {
-            this.declaracion = this.con.createStatement();
-            this.declaracion.execute("insert into " + entidad.getNombreEntidad() + " values " + entidad.getDatos());
+            this.instruccionQuery = this.con.createStatement();
+            this.instruccionQuery.execute("insert into" + " values ");
         } catch (SQLException ex){
             
         }
