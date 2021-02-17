@@ -36,6 +36,8 @@ public class Avion implements Entidad{
         this.descripcion = descripcion;
     }
     
+    //Operaciones para realizar los comandos de código SQL:
+    
     @Override
     public String getNombreEntidad() {
         return "AVION";
@@ -48,7 +50,7 @@ public class Avion implements Entidad{
     
     @Override
     public String toQuery() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ("ID_AVION = " + this.idAvion + ", DESCRIPCION = \'" + this.descripcion + "\'");
     }
     
     @Override

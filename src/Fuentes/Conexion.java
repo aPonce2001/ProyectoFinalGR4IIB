@@ -49,13 +49,22 @@ public class Conexion {
     public void setPassword(String password) {
         this.password = password;
     }
-        
+
+    public Statement getDeclaracion() {
+        return declaracion;
+    }
+
+    public void setDeclaracion(Statement declaracion) {
+        this.declaracion = declaracion;
+    }
+    
     /*conectarBaseDeDatos() realiza la conexión con la base de datos que está en el servidor.
     *Si las credenciales son correctas, retorna this, es decir, los datos que se encuentran en la conexión.
     *Caso contrario, retorna un null, como una bandera para decir que la información de ingreso es incorrecta.*/
     public Conexion conectarBaseDeDatos(){
         try {
             this.con = DriverManager.getConnection(url, user, password);
+            this.declaracion = this.con.createStatement();
             return this;
         } catch (SQLException ex) {
             return null;

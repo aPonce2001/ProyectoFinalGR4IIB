@@ -38,6 +38,8 @@ public class Clase implements Entidad{
         this.nombreClase = nombreClase;
     }
     
+    //Operaciones para realizar los comandos de código SQL:
+    
     @Override
     public String getNombreEntidad() {
         return "CLASE";
@@ -50,7 +52,7 @@ public class Clase implements Entidad{
 
     @Override
     public String toQuery() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ("ID_CLASE = " + this.idClase + ", NOMBRE_CLASE = \'" + this.nombreClase + "\'");
     }
     
     @Override

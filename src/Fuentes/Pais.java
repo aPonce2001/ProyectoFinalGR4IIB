@@ -37,6 +37,8 @@ public class Pais implements Entidad{
         this.nombrePais = nombrePais;
     }
 
+    //Operaciones para realizar los comandos de código SQL:
+    
     @Override
     public String getNombreEntidad() {
         return "PAIS";
@@ -49,7 +51,7 @@ public class Pais implements Entidad{
     
     @Override
     public String toQuery() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ("ID_PAIS = " + this.idPais + ", NOMBRE_PAIS = \'" + this.nombrePais + "\'");
     }
     
     @Override

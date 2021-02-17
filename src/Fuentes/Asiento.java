@@ -77,6 +77,8 @@ public class Asiento implements Entidad{
         this.estado = estado;
     }
 
+    //Operaciones para realizar los comandos de código SQL:
+    
     @Override
     public String getNombreEntidad() {
         return "ASIENTO";
@@ -89,7 +91,7 @@ public class Asiento implements Entidad{
 
     @Override
     public String toQuery() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return("ID_ASIENTO = " + this.idAsiento + ", TIPO = " + this.clase.getTipo() + ", ID_AVION = " + this.avion.getIdAvion() + ", NUMERO = " + this.numero + ", UBICACION = \'" + this.ubicacion + "\', ESTADO = \'" + this.estado + "\'");
     }
     
     @Override

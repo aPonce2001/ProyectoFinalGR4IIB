@@ -58,6 +58,8 @@ public class Reserva implements Entidad{
         this.asiento = asiento;
     }
 
+    //Operaciones para realizar los comandos de código SQL:
+    
     @Override
     public String getNombreEntidad() {
         return "RESERVA";
@@ -70,7 +72,7 @@ public class Reserva implements Entidad{
 
     @Override
     public String toQuery() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ("ID_RESERVA = " + this.idReserva + ", ID_CLIENTE = " + this.cliente.getIdCliente() + ", ID_VUELO = \'" + this.vuelo.getIdVuelo() + "\', ID_ASIENTO = " + this.asiento.getIdAsiento());
     }
     
     @Override

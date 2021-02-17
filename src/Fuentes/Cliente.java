@@ -44,6 +44,8 @@ public class Cliente implements Entidad{
         this.nombre = nombre;
     }
     
+    //Operaciones para realizar los comandos de código SQL:
+    
     @Override
     public String getNombreEntidad() {
         return "CLIENTE";
@@ -61,6 +63,6 @@ public class Cliente implements Entidad{
     
     @Override
     public String toString() {
-        return "Número de pasaporte: " + idCliente + "\nNombre: " + nombre + "\nPaís del cliente: " + pais.toString();
+        return ("ID_CLIENTE = " + this.idCliente + ", ID_PAIS = " + this.pais.getIdPais() + ", NOMBRE_CLIENTE = \'" + this.nombre + "\'");
     }
 }
