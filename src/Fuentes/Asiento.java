@@ -3,6 +3,9 @@ package Fuentes;
 
 //@author Andrés Ponce
 
+import java.sql.*;
+import java.util.ArrayList;
+
 public class Asiento implements Entidad{
     private int idAsiento;
     private Clase clase;
@@ -93,7 +96,56 @@ public class Asiento implements Entidad{
     public String toQuery() {
         return("ID_ASIENTO = " + this.idAsiento + ", TIPO = " + this.clase.getTipo() + ", ID_AVION = " + this.avion.getIdAvion() + ", NUMERO = " + this.numero + ", UBICACION = \'" + this.ubicacion + "\', ESTADO = \'" + this.estado + "\'");
     }
+
+    @Override
+    public Asiento obtenerEntidadDeBase(int ID, Conexion conexion) {
+        Asiento asiento = new Asiento();
+        Clase clase = new Clase();
+        Avion avion = new Avion();
+        try{
+            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM ASIENTO WHERE ID_ASIENTO = " + ID);
+            while(resultado.next()){
+                asiento.setIdAsiento(resultado.getInt(1));
+                asiento.setClase(clase.obtenerEntidadDeBase(resultado.getInt(2), conexion));
+                asiento.setAvion(avion.obtenerEntidadDeBase(resultado.getInt(3), conexion));
+                asiento.setNumero(resultado.getInt(4));
+                asiento.setUbicacion(resultado.getString(5));
+                asiento.setEstado(resultado.getBoolean(6));
+                return asiento;
+            }
+        }catch(SQLException ex){
+        }
+        return asiento;
+    }
+
+    @Override
+    public Asiento obtenerEntidadDeBase(String ID, Conexion conexion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
+    @Override
+    public ArrayList obtenerListaObjectos(Conexion conexion) {
+        ArrayList<Asiento> asientos = new ArrayList<Asiento>();
+        Asiento asiento = new Asiento();
+        Clase clase = new Clase();
+        Avion avion = new Avion();
+        try{
+            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM ASIENTO");
+            while(resultado.next()){
+                asiento.setIdAsiento(resultado.getInt(1));
+                asiento.setClase(clase.obtenerEntidadDeBase(resultado.getInt(2), conexion));
+                asiento.setAvion(avion.obtenerEntidadDeBase(resultado.getInt(3), conexion));
+                asiento.setNumero(resultado.getInt(4));
+                asiento.setUbicacion(resultado.getString(5));
+                asiento.setEstado(resultado.getBoolean(6));
+                asientos.add(asiento);
+                return asientos;
+            }
+        }catch(SQLException ex){
+        }
+        return asientos;
+    }
+ 
     @Override
     public String toString() {
         return "Asiento No. " + idAsiento + "\nClase: " + clase + "\nAvión: " + avion + "\nNúmero de asiento: " + numero + "\nUbicación: " + ubicacion + "\nEstado: " + (estado?("Ocupado"):("Disponible"));

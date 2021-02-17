@@ -216,7 +216,16 @@ public class Conexion {
     public void actualizarEnLaBase(int ID, Entidad entidad){
         try {
             this.declaracion = this.con.createStatement();
-            this.declaracion.execute("insert into " + entidad.getNombreEntidad() + " values " + entidad.getDatos());
+            this.declaracion.execute("UPDATE "+ entidad.getNombreEntidad() + " SET " + entidad.toQuery() + " WHERE ID_" + entidad.getNombreEntidad() + " = " + ID);
+        } catch (SQLException ex){
+            
+        }
+    }
+    
+    public void actualizarEnLaBase(String ID, Entidad entidad){
+        try {
+            this.declaracion = this.con.createStatement();
+            this.declaracion.execute("UPDATE "+ entidad.getNombreEntidad() + " SET " + entidad.toQuery() + " WHERE ID_" + entidad.getNombreEntidad() + " = \'" + ID + "\'");
         } catch (SQLException ex){
             
         }

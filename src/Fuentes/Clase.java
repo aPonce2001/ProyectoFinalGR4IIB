@@ -3,9 +3,8 @@ package Fuentes;
 
 //@author Andrés Ponce
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import java.sql.*;
+import java.util.ArrayList;
  
 public class Clase implements Entidad{
     
@@ -53,6 +52,42 @@ public class Clase implements Entidad{
     @Override
     public String toQuery() {
         return ("ID_CLASE = " + this.idClase + ", NOMBRE_CLASE = \'" + this.nombreClase + "\'");
+    }
+    
+    @Override
+    public Clase obtenerEntidadDeBase(int ID, Conexion conexion) {
+        Clase clase = new Clase();
+        try{
+            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM CLASE WHERE ID_CLASE = " + ID);
+            while(resultado.next()){
+                clase.setTipo(resultado.getInt(1));
+                clase.setNombreClase(resultado.getString(2));
+                return clase;
+            }
+        }catch(SQLException ex){
+        }
+        return clase;
+    }
+
+    @Override
+    public Clase obtenerEntidadDeBase(String ID, Conexion conexion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public ArrayList obtenerListaObjectos(Conexion conexion) {
+       ArrayList<Clase> clases = new ArrayList<Clase>();
+       Clase clase = new Clase();
+        try{
+            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM CLASE");
+            while(resultado.next()){
+                clase.setTipo(resultado.getInt(1));
+                clase.setNombreClase(resultado.getString(2));
+                clases.add(clase);
+            }
+        }catch(SQLException ex){
+        }
+        return clases;
     }
     
     @Override

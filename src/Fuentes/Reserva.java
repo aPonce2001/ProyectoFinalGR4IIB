@@ -3,9 +3,9 @@ package Fuentes;
 
 //@author Andrés Ponce
 
-import java.sql.ResultSet;
+import java.sql.*;
+import java.util.ArrayList;
 
- 
 public class Reserva implements Entidad{
     private int idReserva;
     private Cliente cliente;
@@ -74,6 +74,55 @@ public class Reserva implements Entidad{
     public String toQuery() {
         return ("ID_RESERVA = " + this.idReserva + ", ID_CLIENTE = " + this.cliente.getIdCliente() + ", ID_VUELO = \'" + this.vuelo.getIdVuelo() + "\', ID_ASIENTO = " + this.asiento.getIdAsiento());
     }
+
+    @Override
+    public Reserva obtenerEntidadDeBase(int ID, Conexion conexion) {
+        Reserva reserva = new Reserva();
+        Cliente cliente = new Cliente();
+        Vuelo vuelo = new Vuelo();
+        Asiento asiento = new Asiento();
+        try{
+            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM RESERVA WHERE ID_RESERVA = " + ID);
+            while(resultado.next()){
+                reserva.setIdReserva(resultado.getInt(1));
+                reserva.setCliente(cliente.obtenerEntidadDeBase(resultado.getInt(2), conexion));
+                reserva.setVuelo(vuelo.obtenerEntidadDeBase(resultado.getString(3), conexion));
+                reserva.setAsiento(asiento.obtenerEntidadDeBase(resultado.getInt(4), conexion));
+                return reserva;
+            }
+        }catch(SQLException ex){
+        }
+        return reserva;
+    }
+
+    @Override
+    public Reserva obtenerEntidadDeBase(String ID, Conexion conexion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList obtenerListaObjectos(Conexion conexion) {
+        ArrayList<Reserva> reservas = new ArrayList<>();
+        Reserva reserva = new Reserva();
+        Cliente cliente = new Cliente();
+        Vuelo vuelo = new Vuelo();
+        Asiento asiento = new Asiento();
+        try{
+            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM RESERVA");
+            while(resultado.next()){
+                reserva.setIdReserva(resultado.getInt(1));
+                reserva.setCliente(cliente.obtenerEntidadDeBase(resultado.getInt(2), conexion));
+                reserva.setVuelo(vuelo.obtenerEntidadDeBase(resultado.getString(3), conexion));
+                reserva.setAsiento(asiento.obtenerEntidadDeBase(resultado.getInt(4), conexion));
+                reservas.add(reserva);
+                return reservas;
+            }
+        }catch(SQLException ex){
+        }
+        return reservas;
+    }
+    
+    
     
     @Override
     public String toString() {

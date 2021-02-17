@@ -3,8 +3,8 @@ package Fuentes;
 
 //@author Andrés Ponce
 
-import java.sql.ResultSet;
-
+import java.sql.*;
+import java.util.ArrayList;
  
 public class Vuelo implements Entidad{
     private String idVuelo;
@@ -69,6 +69,51 @@ public class Vuelo implements Entidad{
         return ("(\'" + this.idVuelo +"\'," + this.avion.getIdAvion() + ",\'" + this.getRuta() +"\',\'" + this.estadoDeVuelo + "\')");
     }
 
+    @Override
+    public Vuelo obtenerEntidadDeBase(int ID, Conexion conexion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Vuelo obtenerEntidadDeBase(String ID, Conexion conexion) {
+        Vuelo vuelo = new Vuelo();
+        Avion avion = new Avion();
+        try{
+            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM VUELO WHERE ID_VUELO = \'" + ID + "\'");
+            while(resultado.next()){
+                vuelo.setIdVuelo(resultado.getString(1));
+                vuelo.setAvion(avion.obtenerEntidadDeBase(resultado.getString(2), conexion));
+                vuelo.setRuta(resultado.getString(3));
+                vuelo.setEstadoDeVuelo(resultado.getBoolean(4));
+                return vuelo;
+            }
+        }catch(SQLException ex){
+        }
+        return vuelo;
+    }
+
+    @Override
+    public ArrayList obtenerListaObjectos(Conexion conexion) {
+        ArrayList<Vuelo> vuelos = new ArrayList<Vuelo>();
+        Vuelo vuelo = new Vuelo();
+        Avion avion = new Avion();
+        try{
+            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM VUELO");
+            while(resultado.next()){
+                vuelo.setIdVuelo(resultado.getString(1));
+                vuelo.setAvion(avion.obtenerEntidadDeBase(resultado.getString(2), conexion));
+                vuelo.setRuta(resultado.getString(3));
+                vuelo.setEstadoDeVuelo(resultado.getBoolean(4));
+                vuelos.add(vuelo);
+                return vuelos;
+            }
+        }catch(SQLException ex){
+        }
+        return vuelos;
+    }
+
+    
+    
     @Override
     public String toQuery() {
         return ("ID_VUELO = \'" + this.idVuelo + "\', ID_AVION = " + this.avion.getIdAvion() + ", RUTA = \'" + this.ruta + "\', ESTADODEVUELO = \'" + this.estadoDeVuelo + "\'");

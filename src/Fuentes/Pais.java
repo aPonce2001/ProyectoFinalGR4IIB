@@ -3,9 +3,8 @@ package Fuentes;
 
 //@author Andrés Ponce
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import java.sql.*;
+import java.util.ArrayList;
  
 public class Pais implements Entidad{
     private int idPais;
@@ -52,6 +51,42 @@ public class Pais implements Entidad{
     @Override
     public String toQuery() {
         return ("ID_PAIS = " + this.idPais + ", NOMBRE_PAIS = \'" + this.nombrePais + "\'");
+    }
+
+    @Override
+    public Pais obtenerEntidadDeBase(int ID, Conexion conexion) {
+        Pais pais = new Pais();
+        try{
+            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM PAIS WHERE ID_PAIS = " + ID);
+            while(resultado.next()){
+                pais.setIdPais(resultado.getInt(1));
+                pais.setNombrePais(resultado.getString(2));
+                return pais;
+            }
+        }catch(SQLException ex){
+        }
+        return pais;
+    }
+
+    @Override
+    public Pais obtenerEntidadDeBase(String ID, Conexion conexion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public ArrayList obtenerListaObjectos(Conexion conexion) {
+       ArrayList<Pais> paises = new ArrayList<Pais>();
+       Pais pais = new Pais();
+        try{
+            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM PAIS");
+            while(resultado.next()){
+                pais.setIdPais(resultado.getInt(1));
+                pais.setNombrePais(resultado.getString(2));
+                paises.add(pais);
+            }
+        }catch(SQLException ex){
+        }
+        return paises;
     }
     
     @Override
