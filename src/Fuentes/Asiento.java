@@ -112,7 +112,6 @@ public class Asiento implements Entidad{
                 String ubicacion = resultado.getString(5);
                 boolean estado = resultado.getBoolean(6);
                 asiento = new Asiento(idAsiento, clase, avion, numero, ubicacion, estado);
-                return asiento;
             }
         }catch(SQLException ex){
         }
@@ -131,17 +130,18 @@ public class Asiento implements Entidad{
         Clase clase = new Clase();
         Avion avion = new Avion();
         try{
+            //Conexion conexion2 = conexion.clone();
+            //Conexion conexion3 = conexion.clone();
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM ASIENTO");
             while(resultado.next()){
                 int idAsiento = resultado.getInt(1);
-                clase = clase.obtenerEntidadDeBase(resultado.getInt(2), conexion);
-                avion = avion.obtenerEntidadDeBase(resultado.getInt(3), conexion);
+                boolean estado = resultado.getBoolean(6);
                 int numero = resultado.getInt(4);
                 String ubicacion = resultado.getString(5);
-                boolean estado = resultado.getBoolean(6);
+                clase = clase.obtenerEntidadDeBase(resultado.getInt(2), conexion);
+                avion = avion.obtenerEntidadDeBase(resultado.getInt(3), conexion);
                 asiento = new Asiento(idAsiento, clase, avion, numero, ubicacion, estado);
                 asientos.add(asiento);
-                return asientos;
             }
         }catch(SQLException ex){
         }

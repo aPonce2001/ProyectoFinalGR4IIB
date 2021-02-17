@@ -62,7 +62,6 @@ public class Pais implements Entidad{
                 int idPais = resultado.getInt(1);
                 String nombrePais = resultado.getString(2);
                 pais = new Pais(idPais, nombrePais);
-                return pais;
             }
         }catch(SQLException ex){
         }

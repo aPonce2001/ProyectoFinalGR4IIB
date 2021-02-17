@@ -89,7 +89,6 @@ public class Reserva implements Entidad{
                 vuelo = vuelo.obtenerEntidadDeBase(resultado.getString(3), conexion);
                 asiento = asiento.obtenerEntidadDeBase(resultado.getInt(4), conexion);
                 reserva = new Reserva(idReserva, cliente, vuelo, asiento);
-                return reserva;
             }
         }catch(SQLException ex){
         }
@@ -117,7 +116,6 @@ public class Reserva implements Entidad{
                 asiento = asiento.obtenerEntidadDeBase(resultado.getInt(4), conexion);
                 reserva = new Reserva(idReserva, cliente, vuelo, asiento);
                 reservas.add(reserva);
-                return reservas;
             }
         }catch(SQLException ex){
         }

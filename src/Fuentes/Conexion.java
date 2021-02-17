@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 //@author Andrés Ponce
 
@@ -71,6 +72,14 @@ public class Conexion {
         }
     }
     
+    public void cerrarConexion(){
+        try {
+            this.con.close();
+            this.declaracion.close();
+        } catch (SQLException ex) {
+        }
+    }
+    
     public void subirALaBase(Entidad entidad){
         try {
             this.declaracion = this.con.createStatement();
@@ -115,4 +124,247 @@ public class Conexion {
         } catch (SQLException ex){  
         }
     }
+    
+    public Asiento obtenerAsientoDeLaBase(int ID) {
+        Asiento asiento = new Asiento();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM ASIENTO WHERE ID_ASIENTO = " + ID);
+            while(resultado.next()){
+                int idAsiento = resultado.getInt(1);
+                Clase clase = this.obtenerClaseDeLaBase(resultado.getInt(2));
+                Avion avion = this.obtenerAvionDeLaBase(resultado.getInt(3));
+                int numero = resultado.getInt(4);
+                String ubicacion = resultado.getString(5);
+                boolean estado = resultado.getBoolean(6);
+                asiento = new Asiento(idAsiento, clase, avion, numero, ubicacion, estado);
+            }
+        }catch(SQLException ex){
+        }
+        return asiento;
+    }
+    
+    public ArrayList<Asiento> obtenerListaAsientos() {
+        ArrayList<Asiento> asientos = new ArrayList<Asiento>();
+        Asiento asiento = new Asiento();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM ASIENTO");
+            while(resultado.next()){
+                int idAsiento = resultado.getInt(1);
+                Clase clase = this.obtenerClaseDeLaBase(resultado.getInt(2));
+                Avion avion = this.obtenerAvionDeLaBase(resultado.getInt(3));
+                int numero = resultado.getInt(4);
+                String ubicacion = resultado.getString(5);
+                boolean estado = resultado.getBoolean(6);
+                asiento = new Asiento(idAsiento, clase, avion, numero, ubicacion, estado);
+                asientos.add(asiento);
+            }
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return asientos;
+    }
+    
+    public Avion obtenerAvionDeLaBase(int ID) {
+        Avion avion = new Avion();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM AVION WHERE ID_AVION = " + ID);
+            while(resultado.next()){
+                int idAvion = resultado.getInt(1);
+                String descripcion = resultado.getString(2);
+                avion = new Avion(idAvion, descripcion);
+            }
+        }catch(SQLException ex){
+        }
+        return avion;
+    }
+    
+    
+    public ArrayList<Avion> obtenerListaAviones() {
+       ArrayList<Avion> aviones = new ArrayList<Avion>();
+       Avion avion = new Avion();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM AVION");
+            while(resultado.next()){
+                int idAvion = resultado.getInt(1);
+                String descripcion = resultado.getString(2);
+                avion = new Avion(idAvion, descripcion);
+                aviones.add(avion);
+            }
+        }catch(SQLException ex){
+        }
+        return aviones;
+    }
+    
+    public Clase obtenerClaseDeLaBase(int ID) {
+        Clase clase = new Clase();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM CLASE WHERE ID_CLASE = " + ID);
+            while(resultado.next()){
+                clase = new Clase(resultado.getInt(1), resultado.getString(2));  
+            }
+        }catch(SQLException ex){
+        }
+        return clase;
+    }
+    
+    public ArrayList<Clase> obtenerListaClases() {
+       ArrayList<Clase> clases = new ArrayList<Clase>();
+       Clase clase = new Clase();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM CLASE");
+            while(resultado.next()){
+                clase = new Clase(resultado.getInt(1), resultado.getString(2));
+                clases.add(clase);
+            }
+        }catch(SQLException ex){
+        }
+        return clases;
+    }
+
+    public Cliente obtenerClienteDeLaBase(int ID) {
+        Cliente cliente = new Cliente();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM CLIENTE WHERE ID_CLIENTE = " + ID);
+            while(resultado.next()){
+                int idCliente = resultado.getInt(1);
+                Pais pais = this.obtenerPaisDeLaBase(resultado.getInt(2));
+                String nombre = resultado.getString(3);
+                cliente = new Cliente(idCliente, pais, nombre);
+            }
+            return cliente;
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return cliente;      
+    }
+    
+    public ArrayList<Cliente> obtenerListaClientes() {
+       ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+       Cliente cliente = new Cliente();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM CLIENTE");
+            while(resultado.next()){
+                int idCliente = resultado.getInt(1);
+                Pais pais = this.obtenerPaisDeLaBase(resultado.getInt(2));
+                String nombre = resultado.getString(3);
+                cliente = new Cliente(idCliente, pais, nombre);
+                clientes.add(cliente);
+            }
+        }catch(SQLException ex){
+        }
+        return clientes;
+    }
+    
+    public Pais obtenerPaisDeLaBase(int ID) {
+        Pais pais = new Pais();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM PAIS WHERE ID_PAIS = " + ID);
+            while(resultado.next()){
+                int idPais = resultado.getInt(1);
+                String nombrePais = resultado.getString(2);
+                pais = new Pais(idPais, nombrePais);
+            }
+            return pais;
+        }catch(SQLException ex){
+            return null;
+        }
+    }
+    
+    public ArrayList<Pais> obtenerListaPaises() {
+       ArrayList<Pais> paises = new ArrayList<Pais>();
+       Pais pais = new Pais();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM PAIS");
+            while(resultado.next()){
+                int idPais = resultado.getInt(1);
+                String nombrePais = resultado.getString(2);
+                pais = new Pais(idPais, nombrePais);
+                paises.add(pais);
+            }
+        }catch(SQLException ex){
+        }
+        return paises;
+    }
+
+    public Reserva obtenerReservaDeLaBase(int ID) {
+        Reserva reserva = new Reserva();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM RESERVA WHERE ID_RESERVA = " + ID);
+            while(resultado.next()){
+                int idReserva = resultado.getInt(1);
+                Cliente cliente = this.obtenerClienteDeLaBase(resultado.getInt(2));
+                Vuelo vuelo = this.obtenerVueloDeLaBase(resultado.getString(3));
+                Asiento asiento = this.obtenerAsientoDeLaBase(resultado.getInt(4));
+                reserva = new Reserva(idReserva, cliente, vuelo, asiento);
+            }
+        }catch(SQLException ex){
+        }
+        return reserva;
+    }
+    
+    public ArrayList<Reserva> obtenerListaReservas() {
+        ArrayList<Reserva> reservas = new ArrayList<>();
+        Reserva reserva = new Reserva();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM RESERVA");
+            while(resultado.next()){
+                int idReserva = resultado.getInt(1);
+                Cliente cliente = this.obtenerClienteDeLaBase(resultado.getInt(2));
+                Vuelo vuelo = this.obtenerVueloDeLaBase(resultado.getString(3));
+                Asiento asiento = this.obtenerAsientoDeLaBase(resultado.getInt(4));
+                reserva = new Reserva(idReserva, cliente, vuelo, asiento);
+                reservas.add(reserva);
+            }
+        }catch(SQLException ex){
+        }
+        return reservas;
+    }
+    
+    public Vuelo obtenerVueloDeLaBase(String ID) {
+        Vuelo vuelo = new Vuelo();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM VUELO WHERE ID_VUELO = \'" + ID + "\'");
+            while(resultado.next()){
+                String idVuelo = resultado.getString(1);
+                Avion avion = this.obtenerAvionDeLaBase(resultado.getInt(2));
+                String ruta = resultado.getString(3);
+                boolean estadoDeVuelo = resultado.getBoolean(4);
+                vuelo = new Vuelo(idVuelo, avion, ruta, estadoDeVuelo);
+            }
+        }catch(SQLException ex){
+        }
+        return vuelo;
+    }
+
+    public ArrayList<Vuelo> obtenerListaVuelos() {
+        ArrayList<Vuelo> vuelos = new ArrayList<Vuelo>();
+        Vuelo vuelo = new Vuelo();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM VUELO");
+            while(resultado.next()){
+                String idVuelo = resultado.getString(1);
+                Avion avion = this.obtenerAvionDeLaBase(resultado.getInt(2));
+                String ruta = resultado.getString(3);
+                boolean estadoDeVuelo = resultado.getBoolean(4);
+                vuelo = new Vuelo(idVuelo, avion, ruta, estadoDeVuelo);
+                vuelos.add(vuelo);
+            }
+        }catch(SQLException ex){
+        }
+        return vuelos;
+    }    
 }

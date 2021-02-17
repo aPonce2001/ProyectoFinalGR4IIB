@@ -60,8 +60,7 @@ public class Clase implements Entidad{
         try{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM CLASE WHERE ID_CLASE = " + ID);
             while(resultado.next()){
-                clase = new Clase(resultado.getInt(1), resultado.getString(2));
-                return clase;
+                clase = new Clase(resultado.getInt(1), resultado.getString(2));  
             }
         }catch(SQLException ex){
         }

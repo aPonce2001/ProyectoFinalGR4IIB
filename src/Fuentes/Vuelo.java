@@ -71,7 +71,20 @@ public class Vuelo implements Entidad{
 
     @Override
     public Vuelo obtenerEntidadDeBase(int ID, Conexion conexion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Vuelo vuelo = new Vuelo();
+        Avion avion = new Avion();
+        try{
+            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM VUELO WHERE ID_VUELO = \'" + ID + "\'");
+            while(resultado.next()){
+                String idVuelo = resultado.getString(1);
+                boolean estadoDeVuelo = resultado.getBoolean(4);
+                String ruta = resultado.getString(3);
+                avion = avion.obtenerEntidadDeBase(resultado.getInt(2), conexion);
+                vuelo = new Vuelo(idVuelo, avion, ruta, estadoDeVuelo);
+            }
+        }catch(SQLException ex){
+        }
+        return vuelo;
     }
 
     @Override
@@ -82,11 +95,10 @@ public class Vuelo implements Entidad{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM VUELO WHERE ID_VUELO = \'" + ID + "\'");
             while(resultado.next()){
                 String idVuelo = resultado.getString(1);
-                avion = avion.obtenerEntidadDeBase(resultado.getString(2), conexion);
-                String ruta = resultado.getString(3);
                 boolean estadoDeVuelo = resultado.getBoolean(4);
+                String ruta = resultado.getString(3);
+                avion = avion.obtenerEntidadDeBase(resultado.getInt(2), conexion);
                 vuelo = new Vuelo(idVuelo, avion, ruta, estadoDeVuelo);
-                return vuelo;
             }
         }catch(SQLException ex){
         }
@@ -102,12 +114,11 @@ public class Vuelo implements Entidad{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM VUELO");
             while(resultado.next()){
                 String idVuelo = resultado.getString(1);
-                avion = avion.obtenerEntidadDeBase(resultado.getString(2), conexion);
-                String ruta = resultado.getString(3);
                 boolean estadoDeVuelo = resultado.getBoolean(4);
+                String ruta = resultado.getString(3);
+                avion = avion.obtenerEntidadDeBase(resultado.getInt(2), conexion);
                 vuelo = new Vuelo(idVuelo, avion, ruta, estadoDeVuelo);
                 vuelos.add(vuelo);
-                return vuelos;
             }
         }catch(SQLException ex){
         }

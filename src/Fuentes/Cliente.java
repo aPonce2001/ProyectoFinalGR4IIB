@@ -67,19 +67,20 @@ public class Cliente implements Entidad{
     @Override
     public Cliente obtenerEntidadDeBase(int ID, Conexion conexion) {
         Cliente cliente = new Cliente();
-        Pais pais = new Pais();
         try{
+            Pais pais = new Pais();
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM CLIENTE WHERE ID_CLIENTE = " + ID);
             while(resultado.next()){
-                int idCliente = resultado.getInt(1);
-                pais = pais.obtenerEntidadDeBase(resultado.getInt(2), conexion);
-                String nombre = resultado.getString(3);
+                int idCliente = resultado.getInt("ID_CLIENTE");
+                String nombre = resultado.getString("NOMBRE_CLIENTE");
+                pais = pais.obtenerEntidadDeBase(resultado.getInt("ID_PAIS"), conexion);
                 cliente = new Cliente(idCliente, pais, nombre);
-                return cliente;
             }
+            return cliente;
         }catch(SQLException ex){
+            System.out.println(ex);
         }
-        return cliente;
+        return cliente;      
     }
 
     @Override
@@ -96,8 +97,8 @@ public class Cliente implements Entidad{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM CLIENTE");
             while(resultado.next()){
                 int idCliente = resultado.getInt(1);
-                pais = pais.obtenerEntidadDeBase(resultado.getInt(2), conexion);
                 String nombre = resultado.getString(3);
+                pais = pais.obtenerEntidadDeBase(resultado.getInt(2), conexion);
                 cliente = new Cliente(idCliente, pais, nombre);
                 clientes.add(cliente);
             }

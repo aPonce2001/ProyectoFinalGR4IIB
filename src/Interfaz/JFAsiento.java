@@ -220,10 +220,11 @@ public class JFAsiento extends javax.swing.JFrame {
     private void jBEliminarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarTipoActionPerformed
         int idAsiento= Integer.parseInt(this.jTFidasiento.getText());
         conexion.eliminarDeLaBase(idAsiento, Asiento.class);
+        this.jBRellenarTabla.doClick();
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
-        ArrayList<Asiento> asientos = this.asiento.obtenerListaObjectos(this.conexion);
+        ArrayList<Asiento> asientos = this.conexion.obtenerListaAsientos();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTAsientos.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[6];
@@ -241,11 +242,9 @@ public class JFAsiento extends javax.swing.JFrame {
     private void jBActualizarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarClaseActionPerformed
         int idAsiento= Integer.parseInt(this.jTFidasiento.getText());
         int tipo = Integer.parseInt(this.jTFtipo.getText());
-        Clase clase = new Clase();
-        clase = clase.obtenerEntidadDeBase(tipo, conexion);
+        Clase clase = this.conexion.obtenerClaseDeLaBase(tipo);
         int idAvion= Integer.parseInt(this.jTFidavion.getText());
-        Avion avion = new Avion();
-        avion = avion.obtenerEntidadDeBase(idAvion, conexion);
+        Avion avion = this.conexion.obtenerAvionDeLaBase(idAvion);
         int num = Integer.parseInt(this.jTFnumero.getText());
         String ubicacion = this.jTFubicacion.getText();
         boolean estado = false;
@@ -254,16 +253,15 @@ public class JFAsiento extends javax.swing.JFrame {
         }
         asiento = new Asiento(idAsiento, clase, avion, num, ubicacion, estado);
         this.conexion.actualizarEnLaBase(idAsiento, asiento);
+        this.jBRellenarTabla.doClick();
     }//GEN-LAST:event_jBActualizarClaseActionPerformed
 
     private void jBInsertarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInsertarTipoActionPerformed
         int idAsiento= Integer.parseInt(this.jTFidasiento.getText());
         int tipo = Integer.parseInt(this.jTFtipo.getText());
-        Clase clase = new Clase();
-        clase = clase.obtenerEntidadDeBase(tipo, conexion);
+        Clase clase = this.conexion.obtenerClaseDeLaBase(tipo);
         int idAvion= Integer.parseInt(this.jTFidavion.getText());
-        Avion avion = new Avion();
-        avion = avion.obtenerEntidadDeBase(idAvion, conexion);
+        Avion avion = this.conexion.obtenerAvionDeLaBase(idAvion);
         int num = Integer.parseInt(this.jTFnumero.getText());
         String ubicacion = this.jTFubicacion.getText();
         boolean estado = false;
@@ -272,6 +270,7 @@ public class JFAsiento extends javax.swing.JFrame {
         }
         asiento = new Asiento(idAsiento, clase, avion, num, ubicacion, estado);
         this.conexion.subirALaBase(asiento);
+        this.jBRellenarTabla.doClick();
     }//GEN-LAST:event_jBInsertarTipoActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed

@@ -113,6 +113,7 @@ public class JFLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        this.conexion.cerrarConexion();
         System.exit(0);
     }//GEN-LAST:event_jBSalirActionPerformed
 
@@ -127,7 +128,6 @@ public class JFLogin extends javax.swing.JFrame {
             jfMenu.setVisible(true);
             this.setVisible(false);
         }
-        this.setVisible(false);
     }//GEN-LAST:event_jBLoginActionPerformed
 
     public static void main(String args[]) {

@@ -11,12 +11,14 @@ public class JFCliente extends javax.swing.JFrame {
 
     Cliente cliente;
     static Conexion conexion;
+    ArrayList<Pais> paises;
     
     public JFCliente() {
         initComponents();
         this.cliente = new Cliente();
         this.conexion = new Conexion();
         this.setLocationRelativeTo(null);
+        ArrayList<Pais> paises = new ArrayList<Pais>();
     }
     
     public JFCliente(Conexion conexion) {
@@ -204,8 +206,7 @@ public class JFCliente extends javax.swing.JFrame {
     private void jBInsertarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInsertarTipoActionPerformed
         int idCliente = Integer.parseInt(this.jTFCliente.getText());
         int idPais = Integer.parseInt(this.jTFidpais.getText());
-        Pais pais = new Pais();
-        pais = pais.obtenerEntidadDeBase(idPais, conexion);
+        Pais pais = this.conexion.obtenerPaisDeLaBase(idPais);
         String nomb = this.jTFnombreyapell.getText();
         cliente =  new Cliente(idCliente, pais, nomb);
         this.conexion.subirALaBase(cliente);
@@ -219,7 +220,7 @@ public class JFCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
-        ArrayList<Cliente> clientes = this.cliente.obtenerListaObjectos(this.conexion);
+        ArrayList<Cliente> clientes = this.conexion.obtenerListaClientes();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTClientes.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[3];
@@ -234,8 +235,7 @@ public class JFCliente extends javax.swing.JFrame {
     private void jBActualizarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarClaseActionPerformed
         int idCliente = Integer.parseInt(this.jTFCliente.getText());
         int idPais = Integer.parseInt(this.jTFidpais.getText());
-        Pais pais = new Pais();
-        pais = pais.obtenerEntidadDeBase(idPais, conexion);
+        Pais pais = this.conexion.obtenerPaisDeLaBase(idPais);
         String nomb = this.jTFnombreyapell.getText();
         cliente =  new Cliente(idCliente, pais, nomb);
         this.conexion.actualizarEnLaBase(idCliente, cliente);

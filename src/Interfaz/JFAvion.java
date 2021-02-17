@@ -204,7 +204,7 @@ public class JFAvion extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEliminarAvionActionPerformed
 
     private void jBMostrarAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMostrarAvionActionPerformed
-        ArrayList<Avion> aviones = this.avion.obtenerListaObjectos(this.conexion);
+        ArrayList<Avion> aviones = this.conexion.obtenerListaAviones();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTAviones.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[2];

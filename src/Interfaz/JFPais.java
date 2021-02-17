@@ -197,13 +197,13 @@ public class JFPais extends javax.swing.JFrame {
     }//GEN-LAST:event_jBInsertarTipoActionPerformed
 
     private void jBEliminarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarTipoActionPerformed
-        int idPais= Integer.parseInt(this.jTFTipo.getText());
+        int idPais = Integer.parseInt(this.jTFTipo.getText());
         this.conexion.eliminarDeLaBase(idPais, Pais.class);
         jBRellenarTabla.doClick();
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
-        ArrayList<Pais> paises = this.pais.obtenerListaObjectos(this.conexion);
+        ArrayList<Pais> paises = this.conexion.obtenerListaPaises();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTPaises.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[2];
