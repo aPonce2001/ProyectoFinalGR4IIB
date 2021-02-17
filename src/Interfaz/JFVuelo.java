@@ -11,11 +11,15 @@ public class JFVuelo extends javax.swing.JFrame {
 
     Vuelo vuelo;
     static Conexion conexion;
+    ArrayList<Vuelo> vuelos;
+    ArrayList<Avion> aviones;
     
     public JFVuelo() {
         initComponents();
         this.vuelo = new Vuelo();
         this.conexion = new Conexion();
+        this.vuelos = new ArrayList<Vuelo>();
+        this.aviones = new ArrayList<Avion>();
         this.setLocationRelativeTo(null);
     }
     
@@ -23,8 +27,11 @@ public class JFVuelo extends javax.swing.JFrame {
         initComponents();
         this.vuelo = new Vuelo();
         this.conexion = conexion;
+        this.vuelos = this.conexion.obtenerListaVuelos();
+        this.aviones = this.conexion.obtenerListaAviones();
         this.setLocationRelativeTo(null);
         this.jBRellenarTabla.doClick();
+        this.llenarComboBoxAviones();
     }
 
     @SuppressWarnings("unchecked")
@@ -39,17 +46,16 @@ public class JFVuelo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTFVuelo = new javax.swing.JTextField();
-        jTFAvion = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTFruta = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTFestadoVuelo = new javax.swing.JTextField();
+        jCBAviones = new javax.swing.JComboBox<>();
         jBSalir = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTVuelo = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Vuelo");
 
         jBInsertarTipo.setText("Insertar");
@@ -84,51 +90,50 @@ public class JFVuelo extends javax.swing.JFrame {
 
         jLabel1.setText("ID Vuelo");
 
-        jLabel2.setText("ID Avion");
+        jLabel2.setText("Avión:");
 
-        jLabel3.setText("Estado del vuelo (En curso / Por despegar:)");
+        jLabel3.setText("Estado del vuelo (En curso / Por despegar):");
 
-        jLabel4.setText("Ruta");
+        jLabel4.setText("Ruta:");
+
+        jCBAviones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja un avión" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTFestadoVuelo, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(186, 186, 186)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(7, 7, 7)
-                                .addComponent(jTFVuelo))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4))
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTFAvion)
-                                    .addComponent(jTFruta))))))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFruta))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFVuelo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCBAviones, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTFVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFAvion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jCBAviones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFruta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,7 +160,15 @@ public class JFVuelo extends javax.swing.JFrame {
             new String [] {
                 "No. de Vuelo", "ID del Avión", "Ruta", "Estado del vuelo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTVuelo);
 
         setJMenuBar(jMenuBar1);
@@ -167,14 +180,15 @@ public class JFVuelo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBSalir, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jBActualizarClase)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -209,8 +223,7 @@ public class JFVuelo extends javax.swing.JFrame {
 
     private void jBInsertarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInsertarTipoActionPerformed
         String idVuelo = this.jTFVuelo.getText();
-        int idAvion = Integer.parseInt(this.jTFAvion.getText());
-        Avion avion = this.conexion.obtenerAvionDeLaBase(idAvion);
+        Avion avion = this.aviones.get(this.jCBAviones.getSelectedIndex() - 1);
         String rutaVuel = this.jTFruta.getText();
         boolean estadoVuel = false;
         if(this.jTFestadoVuelo.getText().equalsIgnoreCase("EN CURSO")){
@@ -221,29 +234,33 @@ public class JFVuelo extends javax.swing.JFrame {
         this.jBRellenarTabla.doClick();
     }//GEN-LAST:event_jBInsertarTipoActionPerformed
 
+    private void llenarComboBoxAviones(){
+        for(Avion aux: this.aviones){
+            this.jCBAviones.addItem("" + aux.getIdAvion() + " - " + aux.getDescripcion());
+        }
+    }
+    
     private void jBEliminarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarTipoActionPerformed
         String idVuelo = this.jTFVuelo.getText();
         this.conexion.eliminarDeLaBase(idVuelo, Vuelo.class);
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
-        ArrayList<Vuelo> vuelos = this.conexion.obtenerListaVuelos();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTVuelo.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[4];
-        for(int i = 0; i < vuelos.size(); i++){
-            fila[0] = vuelos.get(i).getIdVuelo();
-            fila[1] = vuelos.get(i).getAvion().getIdAvion();
-            fila[2] = vuelos.get(i).getRuta();
-            fila[3] = vuelos.get(i).isEstadoDeVuelo()?("En curso"):("Por despegar");
+        for(int i = 0; i < this.vuelos.size(); i++){
+            fila[0] = this.vuelos.get(i).getIdVuelo();
+            fila[1] = this.vuelos.get(i).getAvion().getIdAvion();
+            fila[2] = this.vuelos.get(i).getRuta();
+            fila[3] = this.vuelos.get(i).isEstadoDeVuelo()?("En curso"):("Por despegar");
             modeloTabla.addRow(fila);
         }
     }//GEN-LAST:event_jBRellenarTablaActionPerformed
 
     private void jBActualizarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarClaseActionPerformed
         String idVuelo = this.jTFVuelo.getText();
-        int idAvion = Integer.parseInt(this.jTFAvion.getText());
-        Avion avion = this.conexion.obtenerAvionDeLaBase(idAvion);
+        Avion avion = this.aviones.get(this.jCBAviones.getSelectedIndex() - 1);
         String rutaVuel = this.jTFruta.getText();
         boolean estadoVuel = false;
         if(this.jTFestadoVuelo.getText().equalsIgnoreCase("EN CURSO")){
@@ -296,6 +313,7 @@ public class JFVuelo extends javax.swing.JFrame {
     private javax.swing.JButton jBInsertarTipo;
     private javax.swing.JButton jBRellenarTabla;
     private javax.swing.JButton jBSalir;
+    private javax.swing.JComboBox<String> jCBAviones;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -303,7 +321,6 @@ public class JFVuelo extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTFAvion;
     private javax.swing.JTextField jTFVuelo;
     private javax.swing.JTextField jTFestadoVuelo;
     private javax.swing.JTextField jTFruta;

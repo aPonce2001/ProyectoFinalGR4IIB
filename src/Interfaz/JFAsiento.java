@@ -11,11 +11,17 @@ public class JFAsiento extends javax.swing.JFrame {
 
     Asiento asiento;
     static Conexion conexion;
+    ArrayList<Asiento> asientos;
+    ArrayList<Avion> aviones;
+    ArrayList<Clase> clases;
     
     public JFAsiento() {
         initComponents();
         this.asiento = new Asiento();
         this.conexion = new Conexion();
+        this.asientos = new ArrayList<Asiento>();
+        this.aviones = new ArrayList<Avion>();
+        this.clases = new ArrayList<Clase>();
         this.setLocationRelativeTo(null);
     }
     
@@ -23,8 +29,13 @@ public class JFAsiento extends javax.swing.JFrame {
         initComponents();
         this.asiento = new Asiento();
         this.conexion = conexion;
+        this.asientos = this.conexion.obtenerListaAsientos();
+        this.aviones = this.conexion.obtenerListaAviones();
+        this.clases = this.conexion.obtenerListaClases();
         this.setLocationRelativeTo(null);
         this.jBRellenarTabla.doClick();
+        this.llenarComboBoxAviones();
+        this.llenarComboBoxClases();
     }
 
     @SuppressWarnings("unchecked")
@@ -38,22 +49,21 @@ public class JFAsiento extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTFidasiento = new javax.swing.JTextField();
-        jTFtipo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTFidavion = new javax.swing.JTextField();
         jTFnumero = new javax.swing.JTextField();
         jTFestado = new javax.swing.JTextField();
         jTFubicacion = new javax.swing.JTextField();
+        jCBAviones = new javax.swing.JComboBox<>();
+        jCBClases = new javax.swing.JComboBox<>();
         jBInsertarTipo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTAsientos = new javax.swing.JTable();
         jBSalir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Asiento");
 
         jBEliminarTipo.setText("Eliminar");
@@ -83,13 +93,17 @@ public class JFAsiento extends javax.swing.JFrame {
 
         jLabel2.setText("Tipo:");
 
-        jLabel3.setText("ID Avión:");
+        jLabel3.setText("Avión:");
 
         jLabel4.setText("Número:");
 
         jLabel5.setText("Ubicación:");
 
         jLabel6.setText("Estado(Ocupado/Libre):");
+
+        jCBAviones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja un avión" }));
+
+        jCBClases.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija un tipo de asiento" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,14 +119,14 @@ public class JFAsiento extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTFtipo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFubicacion, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                    .addComponent(jTFestado, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                    .addComponent(jTFnumero, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                    .addComponent(jTFidavion, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                    .addComponent(jTFidasiento))
-                .addGap(25, 25, 25))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCBAviones, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTFidasiento)
+                    .addComponent(jTFestado)
+                    .addComponent(jTFubicacion, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTFnumero, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jCBClases, 0, 192, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,12 +137,12 @@ public class JFAsiento extends javax.swing.JFrame {
                     .addComponent(jTFidasiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jCBClases, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFidavion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jCBAviones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -159,7 +173,15 @@ public class JFAsiento extends javax.swing.JFrame {
             new String [] {
                 "ID del Asiento", "Tipo de asiento", "ID del Avión", "Número de asiento", "Ubicación", "Estado"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTAsientos);
 
         jBSalir.setText("Salir");
@@ -179,7 +201,7 @@ public class JFAsiento extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
+                        .addGap(140, 140, 140)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jBEliminarTipo)
                             .addComponent(jBInsertarTipo)
@@ -224,27 +246,24 @@ public class JFAsiento extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
-        ArrayList<Asiento> asientos = this.conexion.obtenerListaAsientos();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTAsientos.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[6];
-        for(int i = 0; i < asientos.size(); i++){
-            fila[0] = asientos.get(i).getIdAsiento();
-            fila[1] = asientos.get(i).getClase().getTipo();
-            fila[2] = asientos.get(i).getAvion().getIdAvion();
-            fila[3] = asientos.get(i).getNumero();
-            fila[4] = asientos.get(i).getUbicacion();
-            fila[5] = (asientos.get(i).isEstado())?("Ocupado"):("Disponible");
+        for(int i = 0; i < this.asientos.size(); i++){
+            fila[0] = this.asientos.get(i).getIdAsiento();
+            fila[1] = this.asientos.get(i).getClase().getTipo();
+            fila[2] = this.asientos.get(i).getAvion().getIdAvion();
+            fila[3] = this.asientos.get(i).getNumero();
+            fila[4] = this.asientos.get(i).getUbicacion();
+            fila[5] = (this.asientos.get(i).isEstado())?("Ocupado"):("Disponible");
             modeloTabla.addRow(fila);
         }
     }//GEN-LAST:event_jBRellenarTablaActionPerformed
 
     private void jBActualizarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarClaseActionPerformed
         int idAsiento= Integer.parseInt(this.jTFidasiento.getText());
-        int tipo = Integer.parseInt(this.jTFtipo.getText());
-        Clase clase = this.conexion.obtenerClaseDeLaBase(tipo);
-        int idAvion= Integer.parseInt(this.jTFidavion.getText());
-        Avion avion = this.conexion.obtenerAvionDeLaBase(idAvion);
+        Clase clase = this.clases.get(this.jCBClases.getSelectedIndex() - 1);
+        Avion avion = this.aviones.get(this.jCBAviones.getSelectedIndex() - 1);
         int num = Integer.parseInt(this.jTFnumero.getText());
         String ubicacion = this.jTFubicacion.getText();
         boolean estado = false;
@@ -258,10 +277,8 @@ public class JFAsiento extends javax.swing.JFrame {
 
     private void jBInsertarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInsertarTipoActionPerformed
         int idAsiento= Integer.parseInt(this.jTFidasiento.getText());
-        int tipo = Integer.parseInt(this.jTFtipo.getText());
-        Clase clase = this.conexion.obtenerClaseDeLaBase(tipo);
-        int idAvion= Integer.parseInt(this.jTFidavion.getText());
-        Avion avion = this.conexion.obtenerAvionDeLaBase(idAvion);
+        Clase clase = this.clases.get(this.jCBClases.getSelectedIndex() - 1);
+        Avion avion = this.aviones.get(this.jCBAviones.getSelectedIndex() - 1);
         int num = Integer.parseInt(this.jTFnumero.getText());
         String ubicacion = this.jTFubicacion.getText();
         boolean estado = false;
@@ -273,6 +290,18 @@ public class JFAsiento extends javax.swing.JFrame {
         this.jBRellenarTabla.doClick();
     }//GEN-LAST:event_jBInsertarTipoActionPerformed
 
+    private void llenarComboBoxAviones(){
+        for(Avion aux: this.aviones){
+            this.jCBAviones.addItem("" + aux.getIdAvion() + " - " + aux.getDescripcion());
+        }
+    }
+    
+    private void llenarComboBoxClases(){
+        for(Clase aux: this.clases){
+            this.jCBClases.addItem(aux.getNombreClase());
+        }
+    }
+    
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jBSalirActionPerformed
@@ -318,6 +347,8 @@ public class JFAsiento extends javax.swing.JFrame {
     private javax.swing.JButton jBInsertarTipo;
     private javax.swing.JButton jBRellenarTabla;
     private javax.swing.JButton jBSalir;
+    private javax.swing.JComboBox<String> jCBAviones;
+    private javax.swing.JComboBox<String> jCBClases;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -330,9 +361,7 @@ public class JFAsiento extends javax.swing.JFrame {
     private javax.swing.JTable jTAsientos;
     private javax.swing.JTextField jTFestado;
     private javax.swing.JTextField jTFidasiento;
-    private javax.swing.JTextField jTFidavion;
     private javax.swing.JTextField jTFnumero;
-    private javax.swing.JTextField jTFtipo;
     private javax.swing.JTextField jTFubicacion;
     // End of variables declaration//GEN-END:variables
 }

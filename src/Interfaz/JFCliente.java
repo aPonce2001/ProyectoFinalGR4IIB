@@ -11,22 +11,27 @@ public class JFCliente extends javax.swing.JFrame {
 
     Cliente cliente;
     static Conexion conexion;
+    ArrayList<Cliente> clientes;
     ArrayList<Pais> paises;
     
     public JFCliente() {
         initComponents();
         this.cliente = new Cliente();
         this.conexion = new Conexion();
+        this.clientes = new ArrayList<Cliente>();
+        this.paises = new ArrayList<Pais>();
         this.setLocationRelativeTo(null);
-        ArrayList<Pais> paises = new ArrayList<Pais>();
     }
     
     public JFCliente(Conexion conexion) {
         initComponents();
         this.cliente = new Cliente();
         this.conexion = conexion;
+        this.clientes = this.conexion.obtenerListaClientes();
+        this.paises = this.conexion.obtenerListaPaises();
         this.setLocationRelativeTo(null);
         this.jBRellenarTabla.doClick();
+        this.llenarComboBoxPais();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -40,17 +45,14 @@ public class JFCliente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTFCliente = new javax.swing.JTextField();
-        jTFidpais = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTFnombreyapell = new javax.swing.JTextField();
+        jCBPaises = new javax.swing.JComboBox<>();
         jBSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTClientes = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cliente");
 
         jBInsertarTipo.setText("Insertar");
@@ -85,43 +87,44 @@ public class JFCliente extends javax.swing.JFrame {
 
         jLabel1.setText("Pasaporte:");
 
-        jLabel2.setText("ID País:");
+        jLabel2.setText("País:");
 
         jLabel3.setText("Nombre y apellido:");
+
+        jCBPaises.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija un país" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTFidpais, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFnombreyapell, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                    .addComponent(jTFCliente))
-                .addGap(25, 25, 25))
+                    .addComponent(jTFCliente)
+                    .addComponent(jCBPaises, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTFnombreyapell))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jTFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFidpais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jCBPaises, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFnombreyapell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jBSalir.setText("Salir");
@@ -138,20 +141,16 @@ public class JFCliente extends javax.swing.JFrame {
             new String [] {
                 "No. Pasaporte", "ID Pais", "Nombre y Apellido"
             }
-        ));
-        jScrollPane1.setViewportView(jTClientes);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
-        jMenu1.setText("Menu");
-
-        jMenuItem1.setText("Salir");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
+        jScrollPane1.setViewportView(jTClientes);
 
         setJMenuBar(jMenuBar1);
 
@@ -162,42 +161,47 @@ public class JFCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 403, Short.MAX_VALUE)
+                                .addComponent(jBSalir)
+                                .addContainerGap())
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jBInsertarTipo)
                             .addComponent(jBEliminarTipo)
                             .addComponent(jBActualizarClase)
                             .addComponent(jBRellenarTabla))
-                        .addGap(116, 116, 116))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jBSalir)
-                        .addContainerGap())))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBInsertarTipo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBEliminarTipo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBActualizarClase)
-                .addGap(26, 26, 26)
-                .addComponent(jBRellenarTabla)
-                .addGap(8, 8, 8)
-                .addComponent(jBSalir)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBInsertarTipo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBEliminarTipo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBActualizarClase)
+                        .addGap(26, 26, 26)
+                        .addComponent(jBRellenarTabla)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -205,8 +209,7 @@ public class JFCliente extends javax.swing.JFrame {
 
     private void jBInsertarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInsertarTipoActionPerformed
         int idCliente = Integer.parseInt(this.jTFCliente.getText());
-        int idPais = Integer.parseInt(this.jTFidpais.getText());
-        Pais pais = this.conexion.obtenerPaisDeLaBase(idPais);
+        Pais pais = this.paises.get(this.jCBPaises.getSelectedIndex() - 1);
         String nomb = this.jTFnombreyapell.getText();
         cliente =  new Cliente(idCliente, pais, nomb);
         this.conexion.subirALaBase(cliente);
@@ -220,32 +223,32 @@ public class JFCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
-        ArrayList<Cliente> clientes = this.conexion.obtenerListaClientes();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTClientes.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[3];
-        for(int i = 0; i < clientes.size(); i++){
-            fila[0] = clientes.get(i).getIdCliente();
-            fila[1] = clientes.get(i).getPais().getIdPais();
-            fila[2] = clientes.get(i).getNombre();
+        for(int i = 0; i < this.clientes.size(); i++){
+            fila[0] = this.clientes.get(i).getIdCliente();
+            fila[1] = this.clientes.get(i).getPais().getIdPais();
+            fila[2] = this.clientes.get(i).getNombre();
             modeloTabla.addRow(fila);
         }
     }//GEN-LAST:event_jBRellenarTablaActionPerformed
 
     private void jBActualizarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarClaseActionPerformed
         int idCliente = Integer.parseInt(this.jTFCliente.getText());
-        int idPais = Integer.parseInt(this.jTFidpais.getText());
-        Pais pais = this.conexion.obtenerPaisDeLaBase(idPais);
+        Pais pais = this.paises.get(this.jCBPaises.getSelectedIndex() - 1);
         String nomb = this.jTFnombreyapell.getText();
         cliente =  new Cliente(idCliente, pais, nomb);
         this.conexion.actualizarEnLaBase(idCliente, cliente);
         this.jBRellenarTabla.doClick();
     }//GEN-LAST:event_jBActualizarClaseActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+    private void llenarComboBoxPais(){
+        for(Pais aux: this.paises){
+            this.jCBPaises.addItem(aux.getNombrePais());
+        }
+    }
+    
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jBSalirActionPerformed
@@ -291,17 +294,15 @@ public class JFCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBInsertarTipo;
     private javax.swing.JButton jBRellenarTabla;
     private javax.swing.JButton jBSalir;
+    private javax.swing.JComboBox<String> jCBPaises;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTClientes;
     private javax.swing.JTextField jTFCliente;
-    private javax.swing.JTextField jTFidpais;
     private javax.swing.JTextField jTFnombreyapell;
     // End of variables declaration//GEN-END:variables
 }

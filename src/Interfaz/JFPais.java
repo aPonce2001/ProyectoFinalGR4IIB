@@ -12,11 +12,13 @@ public class JFPais extends javax.swing.JFrame {
 
     public Pais pais;
     static Conexion conexion;
+    ArrayList<Pais> paises;
     
     public JFPais() {
         initComponents();
         this.pais = new Pais();
         this.conexion = new Conexion();
+        this.paises = new ArrayList<Pais>();
         this.setLocationRelativeTo(null);
     }
     
@@ -24,6 +26,7 @@ public class JFPais extends javax.swing.JFrame {
         initComponents();
         this.pais = new Pais();
         this.conexion = conexion;
+        this.paises = this.conexion.obtenerListaPaises();
         this.setLocationRelativeTo(null);
         jBRellenarTabla.doClick();
     }
@@ -46,7 +49,6 @@ public class JFPais extends javax.swing.JFrame {
         jBSalir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("País");
 
         jBInsertarTipo.setText("Insertar");
@@ -123,7 +125,15 @@ public class JFPais extends javax.swing.JFrame {
             new String [] {
                 "Código ISO 3166-1", "Nombre del país"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTPaises);
 
         jBSalir.setText("Salir");
@@ -203,13 +213,12 @@ public class JFPais extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
-        ArrayList<Pais> paises = this.conexion.obtenerListaPaises();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTPaises.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[2];
-        for(int i = 0; i < paises.size(); i++){
-            fila[0] = paises.get(i).getIdPais();
-            fila[1] = paises.get(i).getNombrePais();
+        for(int i = 0; i < this.paises.size(); i++){
+            fila[0] = this.paises.get(i).getIdPais();
+            fila[1] = this.paises.get(i).getNombrePais();
             modeloTabla.addRow(fila);
         }
     }//GEN-LAST:event_jBRellenarTablaActionPerformed

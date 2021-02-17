@@ -12,11 +12,13 @@ public class JFClase extends javax.swing.JFrame {
 
     Clase clase;
     static Conexion conexion;
+    ArrayList<Clase> clases;
     
     public JFClase() {
         initComponents();
         this.clase = new Clase();
         this.conexion = new Conexion();
+        this.clases = new ArrayList<Clase>();
         this.setLocationRelativeTo(null); 
     }
     
@@ -24,6 +26,7 @@ public class JFClase extends javax.swing.JFrame {
         initComponents();
         this.clase = new Clase();
         this.conexion = conexion;
+        this.clases = this.conexion.obtenerListaClases();
         this.setLocationRelativeTo(null); 
         jBRellenarTabla.doClick();
     }
@@ -49,7 +52,6 @@ public class JFClase extends javax.swing.JFrame {
 
         jMenu1.setText("jMenu1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clase");
 
         jBInsertarTipo.setText("Insertar");
@@ -126,7 +128,15 @@ public class JFClase extends javax.swing.JFrame {
             new String [] {
                 "Clase", "Nombre de la clase"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTClases);
 
         jBSalir.setText("Salir");
@@ -204,13 +214,12 @@ public class JFClase extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
-        ArrayList<Clase> clases = this.conexion.obtenerListaClases();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTClases.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[2];
-        for(int i = 0; i < clases.size(); i++){
-            fila[0] = clases.get(i).getTipo();
-            fila[1] = clases.get(i).getNombreClase();
+        for(int i = 0; i < this.clases.size(); i++){
+            fila[0] = this.clases.get(i).getTipo();
+            fila[1] = this.clases.get(i).getNombreClase();
             modeloTabla.addRow(fila);
         }
     }//GEN-LAST:event_jBRellenarTablaActionPerformed

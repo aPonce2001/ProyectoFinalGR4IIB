@@ -14,11 +14,13 @@ public class JFAvion extends javax.swing.JFrame {
      */
     public Avion avion;
     public static Conexion conexion;
+    ArrayList<Avion> aviones;
     
     public JFAvion() {
         initComponents();
         this.avion = new Avion();
         this.conexion = new Conexion();
+        this.aviones = new ArrayList();
         this.setLocationRelativeTo(null);
     }
     
@@ -26,6 +28,7 @@ public class JFAvion extends javax.swing.JFrame {
         initComponents();
         this.avion = new Avion();
         this.conexion = conexion;
+        this.aviones = this.conexion.obtenerListaAviones();
         this.setLocationRelativeTo(null);
         this.jBMostrarAvion.doClick();
     }
@@ -52,7 +55,6 @@ public class JFAvion extends javax.swing.JFrame {
         jTAviones = new javax.swing.JTable();
         jBSalir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Avión");
 
         jBInsertarAvion.setText("Insertar");
@@ -129,7 +131,15 @@ public class JFAvion extends javax.swing.JFrame {
             new String [] {
                 "No. Avión", "Descripción"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTAviones);
 
         jBSalir.setText("Salir");
@@ -204,13 +214,12 @@ public class JFAvion extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEliminarAvionActionPerformed
 
     private void jBMostrarAvionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMostrarAvionActionPerformed
-        ArrayList<Avion> aviones = this.conexion.obtenerListaAviones();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTAviones.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[2];
-        for(int i = 0; i < aviones.size(); i++){
-            fila[0] = aviones.get(i).getIdAvion();
-            fila[1] = aviones.get(i).getDescripcion();
+        for(int i = 0; i < this.aviones.size(); i++){
+            fila[0] = this.aviones.get(i).getIdAvion();
+            fila[1] = this.aviones.get(i).getDescripcion();
             modeloTabla.addRow(fila);
         }
     }//GEN-LAST:event_jBMostrarAvionActionPerformed
