@@ -68,64 +68,6 @@ public class Vuelo implements Entidad{
     public String getDatos() {
         return ("(\'" + this.idVuelo +"\'," + this.avion.getIdAvion() + ",\'" + this.getRuta() +"\',\'" + this.estadoDeVuelo + "\')");
     }
-
-    @Override
-    public Vuelo obtenerEntidadDeBase(int ID, Conexion conexion) {
-        Vuelo vuelo = new Vuelo();
-        Avion avion = new Avion();
-        try{
-            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM VUELO WHERE ID_VUELO = \'" + ID + "\'");
-            while(resultado.next()){
-                String idVuelo = resultado.getString(1);
-                boolean estadoDeVuelo = resultado.getBoolean(4);
-                String ruta = resultado.getString(3);
-                avion = avion.obtenerEntidadDeBase(resultado.getInt(2), conexion);
-                vuelo = new Vuelo(idVuelo, avion, ruta, estadoDeVuelo);
-            }
-        }catch(SQLException ex){
-        }
-        return vuelo;
-    }
-
-    @Override
-    public Vuelo obtenerEntidadDeBase(String ID, Conexion conexion) {
-        Vuelo vuelo = new Vuelo();
-        Avion avion = new Avion();
-        try{
-            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM VUELO WHERE ID_VUELO = \'" + ID + "\'");
-            while(resultado.next()){
-                String idVuelo = resultado.getString(1);
-                boolean estadoDeVuelo = resultado.getBoolean(4);
-                String ruta = resultado.getString(3);
-                avion = avion.obtenerEntidadDeBase(resultado.getInt(2), conexion);
-                vuelo = new Vuelo(idVuelo, avion, ruta, estadoDeVuelo);
-            }
-        }catch(SQLException ex){
-        }
-        return vuelo;
-    }
-
-    @Override
-    public ArrayList obtenerListaObjectos(Conexion conexion) {
-        ArrayList<Vuelo> vuelos = new ArrayList<Vuelo>();
-        Vuelo vuelo = new Vuelo();
-        Avion avion = new Avion();
-        try{
-            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM VUELO");
-            while(resultado.next()){
-                String idVuelo = resultado.getString(1);
-                boolean estadoDeVuelo = resultado.getBoolean(4);
-                String ruta = resultado.getString(3);
-                avion = avion.obtenerEntidadDeBase(resultado.getInt(2), conexion);
-                vuelo = new Vuelo(idVuelo, avion, ruta, estadoDeVuelo);
-                vuelos.add(vuelo);
-            }
-        }catch(SQLException ex){
-        }
-        return vuelos;
-    }
-
-    
     
     @Override
     public String toQuery() {

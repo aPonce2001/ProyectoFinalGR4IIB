@@ -55,39 +55,6 @@ public class Clase implements Entidad{
     }
     
     @Override
-    public Clase obtenerEntidadDeBase(int ID, Conexion conexion) {
-        Clase clase = new Clase();
-        try{
-            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM CLASE WHERE ID_CLASE = " + ID);
-            while(resultado.next()){
-                clase = new Clase(resultado.getInt(1), resultado.getString(2));  
-            }
-        }catch(SQLException ex){
-        }
-        return clase;
-    }
-
-    @Override
-    public Clase obtenerEntidadDeBase(String ID, Conexion conexion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public ArrayList obtenerListaObjectos(Conexion conexion) {
-       ArrayList<Clase> clases = new ArrayList<Clase>();
-       Clase clase = new Clase();
-        try{
-            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM CLASE");
-            while(resultado.next()){
-                clase = new Clase(resultado.getInt(1), resultado.getString(2));
-                clases.add(clase);
-            }
-        }catch(SQLException ex){
-        }
-        return clases;
-    }
-    
-    @Override
     public String toString() {
         return "Clase\n" + "Tipo:" + idClase + "\nNombre de la clase: " + nombreClase;
     }

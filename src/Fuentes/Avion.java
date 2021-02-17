@@ -54,53 +54,6 @@ public class Avion implements Entidad{
     }
     
     @Override
-    public Avion obtenerEntidadDeBase(int ID, Conexion conexion) {
-        Avion avion = new Avion();
-        try{
-            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM AVION WHERE ID_AVION = " + ID);
-            while(resultado.next()){
-                int idAvion = resultado.getInt(1);
-                String descripcion = resultado.getString(2);
-                avion = new Avion(idAvion, descripcion);
-            }
-        }catch(SQLException ex){
-        }
-        return avion;
-    }
-
-    @Override
-    public Avion obtenerEntidadDeBase(String ID, Conexion conexion) {
-        Avion avion = new Avion();
-        try{
-            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM AVION WHERE ID_AVION = " + ID);
-            while(resultado.next()){
-                int idAvion = resultado.getInt(1);
-                String descripcion = resultado.getString(2);
-                avion = new Avion(idAvion, descripcion);
-            }
-        }catch(SQLException ex){
-        }
-        return avion;
-    }
-    
-    @Override
-    public ArrayList<Avion> obtenerListaObjectos(Conexion conexion) {
-       ArrayList<Avion> aviones = new ArrayList<Avion>();
-       Avion avion = new Avion();
-        try{
-            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM AVION");
-            while(resultado.next()){
-                int idAvion = resultado.getInt(1);
-                String descripcion = resultado.getString(2);
-                avion = new Avion(idAvion, descripcion);
-                aviones.add(avion);
-            }
-        }catch(SQLException ex){
-        }
-        return aviones;
-    }
-    
-    @Override
     public String toString() {
         return "Avion No." + idAvion + "\nDescripción: " + this.descripcion;
     }

@@ -65,49 +65,6 @@ public class Cliente implements Entidad{
     }
     
     @Override
-    public Cliente obtenerEntidadDeBase(int ID, Conexion conexion) {
-        Cliente cliente = new Cliente();
-        try{
-            Pais pais = new Pais();
-            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM CLIENTE WHERE ID_CLIENTE = " + ID);
-            while(resultado.next()){
-                int idCliente = resultado.getInt("ID_CLIENTE");
-                String nombre = resultado.getString("NOMBRE_CLIENTE");
-                pais = pais.obtenerEntidadDeBase(resultado.getInt("ID_PAIS"), conexion);
-                cliente = new Cliente(idCliente, pais, nombre);
-            }
-            return cliente;
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-        return cliente;      
-    }
-
-    @Override
-    public Cliente obtenerEntidadDeBase(String ID, Conexion conexion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public ArrayList obtenerListaObjectos(Conexion conexion) {
-       ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-       Cliente cliente = new Cliente();
-       Pais pais = new Pais();
-        try{
-            ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM CLIENTE");
-            while(resultado.next()){
-                int idCliente = resultado.getInt(1);
-                String nombre = resultado.getString(3);
-                pais = pais.obtenerEntidadDeBase(resultado.getInt(2), conexion);
-                cliente = new Cliente(idCliente, pais, nombre);
-                clientes.add(cliente);
-            }
-        }catch(SQLException ex){
-        }
-        return clientes;
-    }
-    
-    @Override
     public String toString() {
         return ("ID_CLIENTE = " + this.idCliente + ", ID_PAIS = " + this.pais.getIdPais() + ", NOMBRE_CLIENTE = \'" + this.nombre + "\'");
     }
