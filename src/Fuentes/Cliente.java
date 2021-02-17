@@ -71,9 +71,10 @@ public class Cliente implements Entidad{
         try{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM CLIENTE WHERE ID_CLIENTE = " + ID);
             while(resultado.next()){
-                cliente.setIdCliente(resultado.getInt(1));
-                cliente.setPais(pais.obtenerEntidadDeBase(resultado.getInt(2), conexion));
-                cliente.setNombre(resultado.getString(3));
+                int idCliente = resultado.getInt(1);
+                pais = pais.obtenerEntidadDeBase(resultado.getInt(2), conexion);
+                String nombre = resultado.getString(3);
+                cliente = new Cliente(idCliente, pais, nombre);
                 return cliente;
             }
         }catch(SQLException ex){
@@ -94,9 +95,10 @@ public class Cliente implements Entidad{
         try{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM CLIENTE");
             while(resultado.next()){
-                cliente.setIdCliente(resultado.getInt(1));
-                cliente.setPais(pais.obtenerEntidadDeBase(resultado.getInt(2), conexion));
-                cliente.setNombre(resultado.getString(3));
+                int idCliente = resultado.getInt(1);
+                pais = pais.obtenerEntidadDeBase(resultado.getInt(2), conexion);
+                String nombre = resultado.getString(3);
+                cliente = new Cliente(idCliente, pais, nombre);
                 clientes.add(cliente);
             }
         }catch(SQLException ex){

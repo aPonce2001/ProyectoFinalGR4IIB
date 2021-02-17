@@ -59,8 +59,9 @@ public class Avion implements Entidad{
         try{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM AVION WHERE ID_AVION = " + ID);
             while(resultado.next()){
-                avion.setIdAvion(resultado.getInt(1));
-                avion.setDescripcion(resultado.getString(2));
+                int idAvion = resultado.getInt(1);
+                String descripcion = resultado.getString(2);
+                avion = new Avion(idAvion, descripcion);
                 return avion;
             }
         }catch(SQLException ex){
@@ -80,8 +81,9 @@ public class Avion implements Entidad{
         try{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM AVION");
             while(resultado.next()){
-                avion.setIdAvion(resultado.getInt(1));
-                avion.setDescripcion(resultado.getString(2));
+                int idAvion = resultado.getInt(1);
+                String descripcion = resultado.getString(2);
+                avion = new Avion(idAvion, descripcion);
                 aviones.add(avion);
             }
         }catch(SQLException ex){

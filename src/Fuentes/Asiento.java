@@ -105,12 +105,13 @@ public class Asiento implements Entidad{
         try{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM ASIENTO WHERE ID_ASIENTO = " + ID);
             while(resultado.next()){
-                asiento.setIdAsiento(resultado.getInt(1));
-                asiento.setClase(clase.obtenerEntidadDeBase(resultado.getInt(2), conexion));
-                asiento.setAvion(avion.obtenerEntidadDeBase(resultado.getInt(3), conexion));
-                asiento.setNumero(resultado.getInt(4));
-                asiento.setUbicacion(resultado.getString(5));
-                asiento.setEstado(resultado.getBoolean(6));
+                int idAsiento = resultado.getInt(1);
+                clase = clase.obtenerEntidadDeBase(resultado.getInt(2), conexion);
+                avion = avion.obtenerEntidadDeBase(resultado.getInt(3), conexion);
+                int numero = resultado.getInt(4);
+                String ubicacion = resultado.getString(5);
+                boolean estado = resultado.getBoolean(6);
+                asiento = new Asiento(idAsiento, clase, avion, numero, ubicacion, estado);
                 return asiento;
             }
         }catch(SQLException ex){
@@ -132,12 +133,13 @@ public class Asiento implements Entidad{
         try{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM ASIENTO");
             while(resultado.next()){
-                asiento.setIdAsiento(resultado.getInt(1));
-                asiento.setClase(clase.obtenerEntidadDeBase(resultado.getInt(2), conexion));
-                asiento.setAvion(avion.obtenerEntidadDeBase(resultado.getInt(3), conexion));
-                asiento.setNumero(resultado.getInt(4));
-                asiento.setUbicacion(resultado.getString(5));
-                asiento.setEstado(resultado.getBoolean(6));
+                int idAsiento = resultado.getInt(1);
+                clase = clase.obtenerEntidadDeBase(resultado.getInt(2), conexion);
+                avion = avion.obtenerEntidadDeBase(resultado.getInt(3), conexion);
+                int numero = resultado.getInt(4);
+                String ubicacion = resultado.getString(5);
+                boolean estado = resultado.getBoolean(6);
+                asiento = new Asiento(idAsiento, clase, avion, numero, ubicacion, estado);
                 asientos.add(asiento);
                 return asientos;
             }

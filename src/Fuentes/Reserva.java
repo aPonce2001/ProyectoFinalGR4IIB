@@ -84,10 +84,11 @@ public class Reserva implements Entidad{
         try{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM RESERVA WHERE ID_RESERVA = " + ID);
             while(resultado.next()){
-                reserva.setIdReserva(resultado.getInt(1));
-                reserva.setCliente(cliente.obtenerEntidadDeBase(resultado.getInt(2), conexion));
-                reserva.setVuelo(vuelo.obtenerEntidadDeBase(resultado.getString(3), conexion));
-                reserva.setAsiento(asiento.obtenerEntidadDeBase(resultado.getInt(4), conexion));
+                int idReserva = resultado.getInt(1);
+                cliente = cliente.obtenerEntidadDeBase(resultado.getInt(2), conexion);
+                vuelo = vuelo.obtenerEntidadDeBase(resultado.getString(3), conexion);
+                asiento = asiento.obtenerEntidadDeBase(resultado.getInt(4), conexion);
+                reserva = new Reserva(idReserva, cliente, vuelo, asiento);
                 return reserva;
             }
         }catch(SQLException ex){
@@ -110,10 +111,11 @@ public class Reserva implements Entidad{
         try{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM RESERVA");
             while(resultado.next()){
-                reserva.setIdReserva(resultado.getInt(1));
-                reserva.setCliente(cliente.obtenerEntidadDeBase(resultado.getInt(2), conexion));
-                reserva.setVuelo(vuelo.obtenerEntidadDeBase(resultado.getString(3), conexion));
-                reserva.setAsiento(asiento.obtenerEntidadDeBase(resultado.getInt(4), conexion));
+                int idReserva = resultado.getInt(1);
+                cliente = cliente.obtenerEntidadDeBase(resultado.getInt(2), conexion);
+                vuelo = vuelo.obtenerEntidadDeBase(resultado.getString(3), conexion);
+                asiento = asiento.obtenerEntidadDeBase(resultado.getInt(4), conexion);
+                reserva = new Reserva(idReserva, cliente, vuelo, asiento);
                 reservas.add(reserva);
                 return reservas;
             }

@@ -59,8 +59,9 @@ public class Pais implements Entidad{
         try{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM PAIS WHERE ID_PAIS = " + ID);
             while(resultado.next()){
-                pais.setIdPais(resultado.getInt(1));
-                pais.setNombrePais(resultado.getString(2));
+                int idPais = resultado.getInt(1);
+                String nombrePais = resultado.getString(2);
+                pais = new Pais(idPais, nombrePais);
                 return pais;
             }
         }catch(SQLException ex){
@@ -80,8 +81,9 @@ public class Pais implements Entidad{
         try{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM PAIS");
             while(resultado.next()){
-                pais.setIdPais(resultado.getInt(1));
-                pais.setNombrePais(resultado.getString(2));
+                int idPais = resultado.getInt(1);
+                String nombrePais = resultado.getString(2);
+                pais = new Pais(idPais, nombrePais);
                 paises.add(pais);
             }
         }catch(SQLException ex){

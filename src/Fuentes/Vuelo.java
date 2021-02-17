@@ -81,10 +81,11 @@ public class Vuelo implements Entidad{
         try{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM VUELO WHERE ID_VUELO = \'" + ID + "\'");
             while(resultado.next()){
-                vuelo.setIdVuelo(resultado.getString(1));
-                vuelo.setAvion(avion.obtenerEntidadDeBase(resultado.getString(2), conexion));
-                vuelo.setRuta(resultado.getString(3));
-                vuelo.setEstadoDeVuelo(resultado.getBoolean(4));
+                String idVuelo = resultado.getString(1);
+                avion = avion.obtenerEntidadDeBase(resultado.getString(2), conexion);
+                String ruta = resultado.getString(3);
+                boolean estadoDeVuelo = resultado.getBoolean(4);
+                vuelo = new Vuelo(idVuelo, avion, ruta, estadoDeVuelo);
                 return vuelo;
             }
         }catch(SQLException ex){
@@ -100,10 +101,11 @@ public class Vuelo implements Entidad{
         try{
             ResultSet resultado = conexion.getDeclaracion().executeQuery("SELECT * FROM VUELO");
             while(resultado.next()){
-                vuelo.setIdVuelo(resultado.getString(1));
-                vuelo.setAvion(avion.obtenerEntidadDeBase(resultado.getString(2), conexion));
-                vuelo.setRuta(resultado.getString(3));
-                vuelo.setEstadoDeVuelo(resultado.getBoolean(4));
+                String idVuelo = resultado.getString(1);
+                avion = avion.obtenerEntidadDeBase(resultado.getString(2), conexion);
+                String ruta = resultado.getString(3);
+                boolean estadoDeVuelo = resultado.getBoolean(4);
+                vuelo = new Vuelo(idVuelo, avion, ruta, estadoDeVuelo);
                 vuelos.add(vuelo);
                 return vuelos;
             }
