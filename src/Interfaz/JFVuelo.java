@@ -248,6 +248,7 @@ public class JFVuelo extends javax.swing.JFrame {
     private void jBEliminarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarTipoActionPerformed
         String idVuelo = this.jTFVuelo.getText();
         this.conexion.eliminarDeLaBase(idVuelo, Vuelo.class);
+        this.jBRellenarTabla.doClick();
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
