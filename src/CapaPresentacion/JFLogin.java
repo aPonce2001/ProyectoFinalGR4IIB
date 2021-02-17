@@ -12,17 +12,17 @@ import javax.swing.JOptionPane;
  */
 public class JFLogin extends javax.swing.JFrame {
 
-   JFRegistroCliente jFRegistroCliente;
-   JFReserva jFReserva;
-   
+    JFRegistroCliente jFRegistroCliente;
+    JFReserva jFReserva;
+
     public JFLogin() {
         initComponents();
         this.jTUsuario.requestFocus();
         this.jTContrasenaLogin.requestFocus();
-        jFRegistroCliente = new JFRegistroCliente(); 
-        jFReserva = new JFReserva();
+        jFRegistroCliente = new JFRegistroCliente();
+        //
         this.setLocationRelativeTo(null);
-       
+
     }
 
     /**
@@ -55,7 +55,7 @@ public class JFLogin extends javax.swing.JFrame {
 
         jLabel3.setText("Contraseña:");
 
-        jCBModo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Viajero" }));
+        jCBModo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Viajero", "Administrador" }));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imágenes/login.png"))); // NOI18N
 
@@ -145,15 +145,31 @@ public class JFLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIngresarActionPerformed
-       String usuario = "1";
+        String usuario = "1";
         String password = "1";
 
-       String passwordIngresado = this.jTContrasenaLogin.getText();
-       String usuarioIngresado = this.jTUsuario.getText();
-       
+        String passwordIngresado = this.jTContrasenaLogin.getText();
+        String usuarioIngresado = this.jTUsuario.getText();
+
         switch (this.jCBModo.getSelectedIndex()) {
             case 0:
-                 if (passwordIngresado.equals("") || usuarioIngresado.equals("")) {
+                
+                if (passwordIngresado.equals("") || usuarioIngresado.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Ingrese campos obligatorios");
+                } else {
+                    if (password.equals(passwordIngresado) && usuario.equals(usuarioIngresado)) {
+                        jFReserva = new JFReserva();
+                        jFReserva.setVisible(true);
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ingrese credenciales válidas");
+                    }
+                }
+
+                break;
+            case 1:
+
+                if (passwordIngresado.equals("") || usuarioIngresado.equals("")) {
                     JOptionPane.showMessageDialog(null, "Ingrese campos obligatorios");
                 } else {
                     if (password.equals(passwordIngresado) && usuario.equals(usuarioIngresado)) {
@@ -163,26 +179,13 @@ public class JFLogin extends javax.swing.JFrame {
                     }
                 }
                 break;
-               case 1:
-                if (passwordIngresado.equals("") || usuarioIngresado.equals("")) {
-                    JOptionPane.showMessageDialog(null, "Ingrese campos obligatorios");
-                } else {
-                    if (password.equals(passwordIngresado) && usuario.equals(usuarioIngresado)) {
-                        jFReserva.setVisible(true);
-                      
-                        
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Ingrese credenciales válidas");
-                    }
-                }
-                break; 
         }
-dispose();
+        dispose();
     }//GEN-LAST:event_jBIngresarActionPerformed
 
     private void jBRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegistrarseActionPerformed
-       jFRegistroCliente.setVisible(true);
-       dispose();
+        jFRegistroCliente.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBRegistrarseActionPerformed
 
     /**
@@ -217,7 +220,7 @@ dispose();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JFLogin().setVisible(true);
-                
+
             }
         });
     }

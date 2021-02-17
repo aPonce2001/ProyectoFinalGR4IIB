@@ -5,10 +5,13 @@
  */
 package CapaNegocio;
 
+import CapaComun.Cm_ClsClase;
 import CapaDatos.Dt_ClsClase;
 import static CapaDatos.Dt_ClsConexion.executeQuery;
 import CapaDatos.Dt_ClsPais;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -16,14 +19,17 @@ import java.util.ArrayList;
  */
 public class Ng_ClsClase {
 
-    Dt_ClsClase dt_Actividad =  new Dt_ClsClase();
+    Dt_ClsClase dt_Clase =  new Dt_ClsClase();
     
     public Ng_ClsClase() {
     }
     
     public int insertarClase(String nombre, int capacidad) {
-        return dt_Actividad.insertarClase(nombre, capacidad);
+        return dt_Clase.insertarClase(nombre, capacidad);
     }
-
+    
+     public List<Cm_ClsClase> mostrarClaseAll(JComboBox jCBClase) {
+         return dt_Clase.mostrarClaseAll(jCBClase);
+     }
     
 }

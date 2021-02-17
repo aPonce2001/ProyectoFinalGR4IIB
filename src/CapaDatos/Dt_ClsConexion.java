@@ -3,9 +3,11 @@ package CapaDatos;
 import java.sql.CallableStatement;
 import java.util.List;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
@@ -43,8 +45,12 @@ public class Dt_ClsConexion {
                     int columnValue = (int)(param[2]);
                     
                     cs.setInt(columnName, columnValue);
-                } /*else if(param.equals("date")) {
-                    //cs.setDate("capacidad", 100);
+                } /*else if(param[0].equals("date")) {
+                    
+                    String columnName = String.valueOf(param[1]);
+                    Date columnValue = (Date)(param[2]);
+                    
+                    cs.setDate(columnName, columnValue);
                 }*/
                 
             }
@@ -69,7 +75,7 @@ public class Dt_ClsConexion {
             //   System.out.println(id_reserva);
             //   }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("error catch es: " + e.getMessage());
         }
         System.out.println(id);
         return id;
