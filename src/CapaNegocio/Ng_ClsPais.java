@@ -5,7 +5,10 @@
  */
 package CapaNegocio;
 
+import CapaComun.Cm_ClsPais;
 import CapaDatos.Dt_ClsPais;
+import java.util.List;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -18,8 +21,8 @@ public class Ng_ClsPais {
     public Ng_ClsPais() {
     }
     
-     public int mostrarPaisAll() {
-         return dt_pais.mostrarPaisAll();
+     public List<Cm_ClsPais> mostrarPaisAll(JComboBox jCBPais) {
+         return dt_pais.mostrarPaisAll(jCBPais);
      }
      
 }

@@ -1,30 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package CapaPresentacion;
 
+import CapaComun.Cm_ClsComboItem;
+import CapaComun.Cm_ClsPais;
 import CapaNegocio.Ng_ClsCliente;
 import CapaNegocio.Ng_ClsPais;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
- *
  * @author Dennis David
  */
 public class JFRegistroCliente extends javax.swing.JFrame {
 
     Ng_ClsCliente ng_cliente;
     Ng_ClsPais ng_pais;
-    List<Object>listaPais;
+    List<Cm_ClsPais> listaPais;
 
     public JFRegistroCliente() {
         initComponents();
         ng_cliente = new Ng_ClsCliente();
         ng_pais = new Ng_ClsPais();
-       // listaPais = ng_pais.mostrarPaisAll();
+        listaPais = ng_pais.mostrarPaisAll(jCBPais);
+
         this.setLocationRelativeTo(null);
     }
 
@@ -74,7 +70,6 @@ public class JFRegistroCliente extends javax.swing.JFrame {
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imágenes/Registro.jpg"))); // NOI18N
 
-        jCBPais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Colombia", "Peru", "Chile" }));
         jCBPais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBPaisActionPerformed(evt);
@@ -187,13 +182,15 @@ public class JFRegistroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFNombreRegistroClienteActionPerformed
 
     private void jBRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegistrarClienteActionPerformed
+        Object item = jCBPais.getSelectedItem();
+        String value = ((Cm_ClsComboItem) item).getValue();
+        System.out.println("value es: " + value);
+        
         ng_cliente.insertarCliente(jTFNombreRegistroCliente.getText(),
                 jTFApellidoRegistroCliente.getText(), jTFCedulaRegistroCliente.getText(),
-                jPFContraseniaCliente.getText(), 1);
+                jPFContraseniaCliente.getText(),Integer.parseInt(value));
         //  JOptionPane.showInternalMessageDialog(null, "Registro realizado con éxito");
-        JFLogin login;
-        login = new JFLogin();
-        login.setVisible(true);
+         
     }//GEN-LAST:event_jBRegistrarClienteActionPerformed
 
     private void jCBPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPaisActionPerformed
@@ -201,7 +198,6 @@ public class JFRegistroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jCBPaisActionPerformed
 
     private void jBCancelarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarClienteActionPerformed
-
         JFLogin login;
         login = new JFLogin();
         login.setVisible(true);

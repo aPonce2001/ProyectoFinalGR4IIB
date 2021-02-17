@@ -1,6 +1,15 @@
 package CapaDatos;
 
+import CapaComun.Cm_ClsClase;
+import CapaComun.Cm_ClsComboItem;
+import CapaComun.Cm_ClsPais;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -39,7 +48,52 @@ public class Dt_ClsClase extends Dt_ClsConexion {
 
     }
 
-    public void mostrarClase(int id) {
+     
+    
+    public List<Cm_ClsClase> mostrarClaseAll(JComboBox jCBClase) {
+        List<Cm_ClsClase> listaClase = new ArrayList<Cm_ClsClase>();
+        String storeProcedure = "mostrarClaseAll()";
+
+        int id = 0;
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String connectionURL = "jdbc:sqlserver://localhost;"
+                    + "databaseName=DB_Viaje;"
+                    + "user=admin;"
+                    + "password=Admin1234;";
+            Connection con = DriverManager.getConnection(connectionURL);
+            System.out.println("Conexión exitosa");
+            String SQL = "{call DB_Viaje.dbo." + storeProcedure + "}";
+     
+            CallableStatement cs = con.prepareCall(SQL);
+             
+            ResultSet rs = cs.executeQuery();
+
+            //LLenamos nuestro ComboBox
+            jCBClase.addItem("Seleccione una opción");
+             
+            while (rs.next()) {
+
+                //System.out.println("Id: " + rs.getString(1));//id
+                //System.out.println("Nombre: " + rs.getString(2));//nombre
+                listaClase.add(new Cm_ClsClase(
+                        (int) rs.getInt("id"),
+                        (String) rs.getString("nombre"),
+                        (int) rs.getInt("capacidad")
+                ));
+                
+                 
+                 jCBClase.addItem(new Cm_ClsComboItem(rs.getString("nombre"), String.valueOf(rs.getInt("id"))));
+            }
+
+            id = 1;
+            rs.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listaClase;
 
     }
 }

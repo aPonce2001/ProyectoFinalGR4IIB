@@ -9,19 +9,19 @@ package CapaComun;
  *
  * @author Dennis David
  */
-public class Cm_ClsPais {
+public class Cm_ClsComida {
     
-    private int id;
+     private int id;
     private String nombre;
 
-    public Cm_ClsPais() {
+    public Cm_ClsComida() {
     }
 
-    public Cm_ClsPais(int id, String nombre) {
+    public Cm_ClsComida(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -37,6 +37,8 @@ public class Cm_ClsPais {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+     
     
     
 }

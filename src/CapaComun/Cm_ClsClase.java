@@ -1,27 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ 
 package CapaComun;
 
 /**
  *
  * @author Dennis David
  */
-public class Cm_ClsPais {
+public class Cm_ClsClase {
     
-    private int id;
+        private int id;
     private String nombre;
+    private int capacidad;
 
-    public Cm_ClsPais() {
+    public Cm_ClsClase() {
     }
 
-    public Cm_ClsPais(int id, String nombre) {
+    public Cm_ClsClase(int id, String nombre, int capacidad) {
         this.id = id;
         this.nombre = nombre;
+        this.capacidad = capacidad;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -36,6 +34,14 @@ public class Cm_ClsPais {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
     }
     
     
