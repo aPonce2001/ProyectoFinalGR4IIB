@@ -214,6 +214,7 @@ public class JFClase extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
+        this.clases = this.conexion.obtenerListaClases();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTClases.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[2];

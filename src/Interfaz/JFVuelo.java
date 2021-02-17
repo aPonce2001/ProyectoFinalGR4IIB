@@ -246,6 +246,7 @@ public class JFVuelo extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
+        this.vuelos = this.conexion.obtenerListaVuelos();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTVuelo.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[4];

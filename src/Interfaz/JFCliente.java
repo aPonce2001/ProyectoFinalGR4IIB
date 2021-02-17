@@ -223,6 +223,7 @@ public class JFCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
+        this.clientes = this.conexion.obtenerListaClientes();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTClientes.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[3];

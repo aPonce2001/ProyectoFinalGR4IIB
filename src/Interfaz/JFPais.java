@@ -213,6 +213,7 @@ public class JFPais extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
+        this.paises = this.conexion.obtenerListaPaises();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTPaises.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[2];

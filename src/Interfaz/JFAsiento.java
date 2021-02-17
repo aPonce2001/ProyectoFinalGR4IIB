@@ -246,6 +246,7 @@ public class JFAsiento extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
+        this.asientos = this.conexion.obtenerListaAsientos();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTAsientos.getModel();
         modeloTabla.setNumRows(0);
         Object[] fila = new Object[6];

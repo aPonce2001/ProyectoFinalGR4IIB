@@ -247,6 +247,7 @@ public class JFReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEliminarTipoActionPerformed
 
     private void jBRellenarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRellenarTablaActionPerformed
+        this.reservas = this.conexion.obtenerListaReservas();
         ArrayList<Reserva> reservas = this.conexion.obtenerListaReservas();
         DefaultTableModel modeloTabla = (DefaultTableModel) this.jTReservas.getModel();
         modeloTabla.setNumRows(0);
