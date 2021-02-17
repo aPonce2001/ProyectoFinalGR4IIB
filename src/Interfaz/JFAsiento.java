@@ -3,6 +3,7 @@ package Interfaz;
 
 import Fuentes.*;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 //@author Kelvin Ojeda
@@ -34,8 +35,6 @@ public class JFAsiento extends javax.swing.JFrame {
         this.clases = this.conexion.obtenerListaClases();
         this.setLocationRelativeTo(null);
         this.jBRellenarTabla.doClick();
-        this.llenarComboBoxAviones();
-        this.llenarComboBoxClases();
     }
 
     @SuppressWarnings("unchecked")
@@ -291,13 +290,21 @@ public class JFAsiento extends javax.swing.JFrame {
         this.jBRellenarTabla.doClick();
     }//GEN-LAST:event_jBInsertarTipoActionPerformed
 
-    private void llenarComboBoxAviones(){
+    public void llenarComboBoxAviones(){
+        this.aviones = this.conexion.obtenerListaAviones();
+        DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel)this.jCBAviones.getModel();
+        comboBoxModel.removeAllElements();
+        this.jCBAviones.addItem("Elija un avión");
         for(Avion aux: this.aviones){
             this.jCBAviones.addItem("" + aux.getIdAvion() + " - " + aux.getDescripcion());
         }
     }
     
-    private void llenarComboBoxClases(){
+    public void llenarComboBoxClases(){
+        this.clases = this.conexion.obtenerListaClases();
+        DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel)this.jCBClases.getModel();
+        comboBoxModel.removeAllElements();
+        this.jCBClases.addItem("Elija una clase");
         for(Clase aux: this.clases){
             this.jCBClases.addItem(aux.getNombreClase());
         }

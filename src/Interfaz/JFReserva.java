@@ -3,6 +3,7 @@ package Interfaz;
 
 import Fuentes.*;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 //@author KelvinOjeda
@@ -37,9 +38,6 @@ public class JFReserva extends javax.swing.JFrame {
         this.asientos = this.conexion.obtenerListaAsientos();
         this.setLocationRelativeTo(null);
         this.jBRellenarTabla.doClick();
-        this.llenarComboBoxAsientos();
-        this.llenarComboBoxClientes();
-        this.llenarComboBoxVuelos();
     }
 
     @SuppressWarnings("unchecked")
@@ -271,19 +269,31 @@ public class JFReserva extends javax.swing.JFrame {
         this.jBRellenarTabla.doClick();
     }//GEN-LAST:event_jBActualizarClaseActionPerformed
 
-    private void llenarComboBoxClientes(){
+    public void llenarComboBoxClientes(){
+        this.clientes = this.conexion.obtenerListaClientes();
+        DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel)this.jCBClientes.getModel();
+        comboBoxModel.removeAllElements();
+        this.jCBClientes.addItem("Elija su identificación");
         for(Cliente aux : this.clientes){
             this.jCBClientes.addItem("" + aux.getIdCliente() + " - " + aux.getNombre());
         }
     }
     
-    private void llenarComboBoxVuelos(){
+    public void llenarComboBoxVuelos(){
+        this.vuelos = this.conexion.obtenerListaVuelos();
+        DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel)this.jCBVuelos.getModel();
+        comboBoxModel.removeAllElements();
+        this.jCBVuelos.addItem("Elija un vuelo");
         for(Vuelo aux : this.vuelos){
             this.jCBVuelos.addItem(aux.getIdVuelo() + " - " + aux.getRuta());
         }
     }
     
-    private void llenarComboBoxAsientos(){
+    public void llenarComboBoxAsientos(){
+        this.asientos = this.conexion.obtenerListaAsientos();
+        DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel)this.jCBAsientos.getModel();
+        comboBoxModel.removeAllElements();
+        this.jCBAsientos.addItem("Elija un asiento");
         for(Asiento aux : this.asientos){
             this.jCBAsientos.addItem("" + aux.getIdAsiento() + " - " +(aux.isEstado()?("Ocupado"):("Libre")));
         }

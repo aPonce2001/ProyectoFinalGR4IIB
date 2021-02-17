@@ -3,6 +3,7 @@ package Interfaz;
 
 import Fuentes.*;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 //@author Kelvin Ojeda
@@ -31,7 +32,6 @@ public class JFCliente extends javax.swing.JFrame {
         this.paises = this.conexion.obtenerListaPaises();
         this.setLocationRelativeTo(null);
         this.jBRellenarTabla.doClick();
-        this.llenarComboBoxPais();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -244,7 +244,11 @@ public class JFCliente extends javax.swing.JFrame {
         this.jBRellenarTabla.doClick();
     }//GEN-LAST:event_jBActualizarClaseActionPerformed
 
-    private void llenarComboBoxPais(){
+    public void llenarComboBoxPais(){
+        this.paises = this.conexion.obtenerListaPaises();
+        DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel)this.jCBPaises.getModel();
+        comboBoxModel.removeAllElements();
+        this.jCBPaises.addItem("Elija un país");
         for(Pais aux: this.paises){
             this.jCBPaises.addItem(aux.getNombrePais());
         }

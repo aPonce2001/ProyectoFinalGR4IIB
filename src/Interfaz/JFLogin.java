@@ -113,7 +113,9 @@ public class JFLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        this.conexion.cerrarConexion();
+        if(this.conexion != null){
+            this.conexion.cerrarConexion();
+        }
         System.exit(0);
     }//GEN-LAST:event_jBSalirActionPerformed
 

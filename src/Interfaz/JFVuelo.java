@@ -3,6 +3,7 @@ package Interfaz;
 
 import Fuentes.*;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 //@author KelvinOjeda
@@ -234,7 +235,11 @@ public class JFVuelo extends javax.swing.JFrame {
         this.jBRellenarTabla.doClick();
     }//GEN-LAST:event_jBInsertarTipoActionPerformed
 
-    private void llenarComboBoxAviones(){
+    public void llenarComboBoxAviones(){
+        this.aviones = this.conexion.obtenerListaAviones();
+        DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel)this.jCBAviones.getModel();
+        comboBoxModel.removeAllElements();
+        this.jCBAviones.addItem("Elija un avión");
         for(Avion aux: this.aviones){
             this.jCBAviones.addItem("" + aux.getIdAvion() + " - " + aux.getDescripcion());
         }
