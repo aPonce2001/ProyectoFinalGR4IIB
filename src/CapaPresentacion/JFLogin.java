@@ -56,6 +56,11 @@ public class JFLogin extends javax.swing.JFrame {
         jLabel3.setText("Contraseña:");
 
         jCBModo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Viajero", "Administrador" }));
+        jCBModo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBModoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imágenes/login.png"))); // NOI18N
 
@@ -187,6 +192,10 @@ public class JFLogin extends javax.swing.JFrame {
         jFRegistroCliente.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBRegistrarseActionPerformed
+
+    private void jCBModoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBModoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBModoActionPerformed
 
     /**
      * @param args the command line arguments
