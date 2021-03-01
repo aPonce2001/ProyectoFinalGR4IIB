@@ -50,7 +50,7 @@ public class Pais implements Entidad{
     
     @Override
     public String toQuery() {
-        return ("ID_PAIS = " + this.idPais + ", NOMBRE_PAIS = \'" + this.nombrePais + "\'");
+        return ("ID_Pais = " + this.idPais + ", Nombre = \'" + this.nombrePais + "\'");
     }
     
     @Override

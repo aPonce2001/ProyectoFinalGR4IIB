@@ -50,7 +50,7 @@ public class Avion implements Entidad{
     
     @Override
     public String toQuery() {
-        return ("ID_AVION = " + this.idAvion + ", DESCRIPCION = \'" + this.descripcion + "\'");
+        return ("ID_Avion = " + this.idAvion + ", Descripcion = \'" + this.descripcion + "\'");
     }
     
     @Override

@@ -18,7 +18,7 @@ public class JFMenu extends javax.swing.JFrame {
    
     public JFMenu() {
         initComponents();
-        this.conexion = new Conexion();
+        this.conexion = null;
         this.setExtendedState(MAXIMIZED_BOTH);
         this.jfclase=new JFClase();
         this.jfavion= new JFAvion();

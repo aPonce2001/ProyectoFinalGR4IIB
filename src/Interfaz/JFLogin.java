@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 public class JFLogin extends javax.swing.JFrame {
 
-    static Conexion conexion;
+    static Conexion conexion = null;
     JFMenu jfMenu;
     
     public JFLogin() {
@@ -113,22 +113,19 @@ public class JFLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        if(this.conexion != null){
-            this.conexion.cerrarConexion();
-        }
         System.exit(0);
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoginActionPerformed
-        this.conexion = new Conexion("jdbc:sqlserver://sql5054.site4now.net", "DB_A6F631_AEREOPUERTOBD", this.jTFUser.getText(), this.jPFPassword.getText());
-        this.conexion = conexion.conectarBaseDeDatos();
-        if(conexion == null){
-            JOptionPane.showMessageDialog(null, "Credenciales incorrectas.\nPor favor, verifica la información e inténtalo nuevamente.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
-        }else{
+        try{
+            this.conexion = new Conexion("jdbc:sqlserver://sql5054.site4now.net", "DB_A6F631_AEREOPUERTOBD", this.jTFUser.getText(), this.jPFPassword.getText());
+            this.conexion.conectarBaseDeDatos();
             JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso.\nBienvenid@.", "Inicio de sesión exitoso", JOptionPane.INFORMATION_MESSAGE);
             jfMenu = new JFMenu(this.conexion);
             jfMenu.setVisible(true);
             this.setVisible(false);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Credenciales incorrectas.\nPor favor, verifica la información e inténtalo nuevamente.", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBLoginActionPerformed
 

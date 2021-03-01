@@ -94,7 +94,7 @@ public class Asiento implements Entidad{
 
     @Override
     public String toQuery() {
-        return("ID_ASIENTO = " + this.idAsiento + ", TIPO = " + this.clase.getTipo() + ", ID_AVION = " + this.avion.getIdAvion() + ", NUMERO = " + this.numero + ", UBICACION = \'" + this.ubicacion + "\', ESTADO = \'" + this.estado + "\'");
+        return("ID_asiento = " + this.idAsiento + ", ID_Clase = " + this.clase.getTipo() + ", ID_Avion = " + this.avion.getIdAvion() + ", Numero = " + this.numero + ", Ubicacion = \'" + this.ubicacion + "\', Estado = \'" + this.estado + "\'");
     }
  
     @Override

@@ -19,7 +19,7 @@ public class JFAsiento extends javax.swing.JFrame {
     public JFAsiento() {
         initComponents();
         this.asiento = new Asiento();
-        this.conexion = new Conexion();
+        this.conexion = null;
         this.asientos = new ArrayList<Asiento>();
         this.aviones = new ArrayList<Avion>();
         this.clases = new ArrayList<Clase>();

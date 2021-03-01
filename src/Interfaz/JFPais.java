@@ -17,7 +17,7 @@ public class JFPais extends javax.swing.JFrame {
     public JFPais() {
         initComponents();
         this.pais = new Pais();
-        this.conexion = new Conexion();
+        this.conexion =  null;;
         this.paises = new ArrayList<Pais>();
         this.setLocationRelativeTo(null);
     }

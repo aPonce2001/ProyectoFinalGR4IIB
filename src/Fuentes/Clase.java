@@ -51,7 +51,7 @@ public class Clase implements Entidad{
 
     @Override
     public String toQuery() {
-        return ("ID_CLASE = " + this.idClase + ", NOMBRECLASE = \'" + this.nombreClase + "\'");
+        return ("ID_Clase = " + this.idClase + ", Nombre = \'" + this.nombreClase + "\'");
     }
     
     @Override

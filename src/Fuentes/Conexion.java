@@ -1,11 +1,7 @@
 
 package Fuentes;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 //@author Andrés Ponce
@@ -14,8 +10,9 @@ public class Conexion {
     private String url, user, password, baseDeDatos;
     private Connection con = null;
     private Statement declaracion = null;
+    private PreparedStatement validacion = null;
 
-    public Conexion() {
+    public Conexion() throws SQLException, SQLException {
         this.url = "";
         this.user = "";
         this.password = "";
@@ -62,14 +59,29 @@ public class Conexion {
     /*conectarBaseDeDatos() realiza la conexión con la base de datos que está en el servidor.
     *Si las credenciales son correctas, retorna this, es decir, los datos que se encuentran en la conexión.
     *Caso contrario, retorna un null, como una bandera para decir que la información de ingreso es incorrecta.*/
-    public Conexion conectarBaseDeDatos(){
-        try {
-            this.con = DriverManager.getConnection(url, user, password);
-            this.declaracion = this.con.createStatement();
-            return this;
-        } catch (SQLException ex) {
-            return null;
+    public void conectarBaseDeDatos () throws SQLException{
+        this.con = DriverManager.getConnection(url, user, password);
+        this.declaracion = this.con.createStatement();
+    }
+    
+    public Cliente login(Cliente cliente) throws SQLException{
+        validacion = con.prepareStatement("SELECT * FROM Cliente WHERE Correo = \'" + cliente.getCorreo() + "\' AND Contrasenia = \'" + cliente.getContrasenia() + "\'");
+        ResultSet resultado = validacion.executeQuery();
+        while(resultado.next()){
+            long idCliente = resultado.getLong(1);
+            String correo = resultado.getString(2);
+            String contrasenia = resultado.getString(3);
+            String nombre = resultado.getString(4);
+            Pais pais = this.obtenerPaisDeLaBase(resultado.getInt(5));
+            long telefono = resultado.getLong(6);
+            Cliente clienteLogin = new Cliente(idCliente, correo, contrasenia, pais, nombre, telefono);
+            return clienteLogin;
         }
+        throw new SQLException("Credenciales incorrectas");
+    }
+    
+    public void registro(Cliente cliente){
+        this.subirALaBase(cliente);
     }
     
     public void cerrarConexion(){
@@ -98,29 +110,11 @@ public class Conexion {
         }
     }
     
-    public void actualizarEnLaBase(String ID, Entidad entidad){
-        try {
-            this.declaracion = this.con.createStatement();
-            this.declaracion.execute("UPDATE "+ entidad.getNombreEntidad() + " SET " + entidad.toQuery() + " WHERE ID_" + entidad.getNombreEntidad() + " = \'" + ID + "\'");
-        } catch (SQLException ex){
-            
-        }
-    }
-    
     public <Entidad> void eliminarDeLaBase(int ID, Class<Entidad> tipo){
         String nombre = tipo.getSimpleName().toUpperCase();
         try {
             this.declaracion = this.con.createStatement();
             this.declaracion.execute("DELETE FROM " + nombre + " WHERE ID_" + nombre + "=" + ID);
-        } catch (SQLException ex){  
-        }
-    }
-    
-    public <Entidad> void eliminarDeLaBase(String ID, Class<Entidad> tipo){
-        String nombre = tipo.getSimpleName().toUpperCase();
-        try {
-            this.declaracion = this.con.createStatement();
-            this.declaracion.execute("DELETE FROM " + nombre + " WHERE ID_" + nombre + "=\'" + ID + "\'");
         } catch (SQLException ex){  
         }
     }
@@ -227,16 +221,47 @@ public class Conexion {
         return clases;
     }
 
+    public Comida obtenerComidaDeLaBase(int ID){
+        Comida comida = new Comida();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM COMIDA WHERE ID_CLASE = " + ID);
+            while(resultado.next()){
+                comida = new Comida(resultado.getInt(0), resultado.getString(1), resultado.getString(2));
+            }
+        }catch(SQLException ex){
+        }
+        return comida;
+    }
+    
+    public ArrayList<Comida> obtenerListaComida(){
+        ArrayList<Comida> comidas = new ArrayList<Comida>();
+        Comida comida = new Comida();
+        try{
+            this.declaracion = this.con.createStatement();
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM COMIDA");
+            while(resultado.next()){
+                comida = new Comida(resultado.getInt(0), resultado.getString(1), resultado.getString(2));
+                comidas.add(comida);
+            }
+        }catch(SQLException ex){
+        }
+        return comidas;
+    }
+    
     public Cliente obtenerClienteDeLaBase(int ID) {
         Cliente cliente = new Cliente();
         try{
             this.declaracion = this.con.createStatement();
             ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM CLIENTE WHERE ID_CLIENTE = " + ID);
             while(resultado.next()){
-                int idCliente = resultado.getInt(1);
-                Pais pais = this.obtenerPaisDeLaBase(resultado.getInt(2));
-                String nombre = resultado.getString(3);
-                cliente = new Cliente(idCliente, pais, nombre);
+                long idCliente = resultado.getLong(1);
+                String correo = resultado.getString(2);
+                String contrasenia = resultado.getString(3);
+                String nombre = resultado.getString(4);
+                Pais pais = this.obtenerPaisDeLaBase(resultado.getInt(5));
+                long telefono = resultado.getLong(6);
+                cliente = new Cliente(idCliente, correo, contrasenia, pais, nombre, telefono);
             }
             return cliente;
         }catch(SQLException ex){
@@ -252,10 +277,13 @@ public class Conexion {
             this.declaracion = this.con.createStatement();
             ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM CLIENTE");
             while(resultado.next()){
-                int idCliente = resultado.getInt(1);
-                Pais pais = this.obtenerPaisDeLaBase(resultado.getInt(2));
-                String nombre = resultado.getString(3);
-                cliente = new Cliente(idCliente, pais, nombre);
+                long idCliente = resultado.getLong(1);
+                String correo = resultado.getString(2);
+                String contrasenia = resultado.getString(3);
+                String nombre = resultado.getString(4);
+                Pais pais = this.obtenerPaisDeLaBase(resultado.getInt(5));
+                long telefono = resultado.getLong(6);
+                cliente = new Cliente(idCliente, correo, contrasenia, pais, nombre, telefono);
                 clientes.add(cliente);
             }
         }catch(SQLException ex){
@@ -284,7 +312,7 @@ public class Conexion {
        Pais pais = new Pais();
         try{
             this.declaracion = this.con.createStatement();
-            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM PAIS");
+            ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM PAIS ORDER BY Nombre");
             while(resultado.next()){
                 int idPais = resultado.getInt(1);
                 String nombrePais = resultado.getString(2);
@@ -304,9 +332,10 @@ public class Conexion {
             while(resultado.next()){
                 int idReserva = resultado.getInt(1);
                 Cliente cliente = this.obtenerClienteDeLaBase(resultado.getInt(2));
-                Vuelo vuelo = this.obtenerVueloDeLaBase(resultado.getString(3));
+                Vuelo vuelo = this.obtenerVueloDeLaBase(resultado.getInt(3));
                 Asiento asiento = this.obtenerAsientoDeLaBase(resultado.getInt(4));
-                reserva = new Reserva(idReserva, cliente, vuelo, asiento);
+                Comida comida = this.obtenerComidaDeLaBase(resultado.getInt(5));
+                reserva = new Reserva(idReserva, cliente, vuelo, asiento, comida);
             }
         }catch(SQLException ex){
         }
@@ -322,9 +351,10 @@ public class Conexion {
             while(resultado.next()){
                 int idReserva = resultado.getInt(1);
                 Cliente cliente = this.obtenerClienteDeLaBase(resultado.getInt(2));
-                Vuelo vuelo = this.obtenerVueloDeLaBase(resultado.getString(3));
+                Vuelo vuelo = this.obtenerVueloDeLaBase(resultado.getInt(3));
                 Asiento asiento = this.obtenerAsientoDeLaBase(resultado.getInt(4));
-                reserva = new Reserva(idReserva, cliente, vuelo, asiento);
+                Comida comida = this.obtenerComidaDeLaBase(resultado.getInt(5));
+                reserva = new Reserva(idReserva, cliente, vuelo, asiento, comida);
                 reservas.add(reserva);
             }
         }catch(SQLException ex){
@@ -332,17 +362,19 @@ public class Conexion {
         return reservas;
     }
     
-    public Vuelo obtenerVueloDeLaBase(String ID) {
+    public Vuelo obtenerVueloDeLaBase(int ID) {
         Vuelo vuelo = new Vuelo();
         try{
             this.declaracion = this.con.createStatement();
             ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM VUELO WHERE ID_VUELO = \'" + ID + "\'");
             while(resultado.next()){
-                String idVuelo = resultado.getString(1);
+                int idVuelo = resultado.getInt(1);
                 Avion avion = this.obtenerAvionDeLaBase(resultado.getInt(2));
-                String ruta = resultado.getString(3);
-                boolean estadoDeVuelo = resultado.getBoolean(4);
-                vuelo = new Vuelo(idVuelo, avion, ruta, estadoDeVuelo);
+                Pais paisOrigen = this.obtenerPaisDeLaBase(resultado.getInt(3));
+                Pais paisDestino = this.obtenerPaisDeLaBase(resultado.getInt(4));
+                boolean estadoDeVuelo = resultado.getBoolean(5);
+                Timestamp fechaHora = resultado.getTimestamp(6);
+                vuelo = new Vuelo(idVuelo, avion, paisOrigen, paisDestino, estadoDeVuelo, fechaHora);
             }
         }catch(SQLException ex){
         }
@@ -356,11 +388,13 @@ public class Conexion {
             this.declaracion = this.con.createStatement();
             ResultSet resultado = this.declaracion.executeQuery("SELECT * FROM VUELO");
             while(resultado.next()){
-                String idVuelo = resultado.getString(1);
+                int idVuelo = resultado.getInt(1);
                 Avion avion = this.obtenerAvionDeLaBase(resultado.getInt(2));
-                String ruta = resultado.getString(3);
-                boolean estadoDeVuelo = resultado.getBoolean(4);
-                vuelo = new Vuelo(idVuelo, avion, ruta, estadoDeVuelo);
+                Pais paisOrigen = this.obtenerPaisDeLaBase(resultado.getInt(3));
+                Pais paisDestino = this.obtenerPaisDeLaBase(resultado.getInt(4));
+                boolean estadoDeVuelo = resultado.getBoolean(5);
+                Timestamp fechaHora = resultado.getTimestamp(6);
+                vuelo = new Vuelo(idVuelo, avion, paisOrigen, paisDestino, estadoDeVuelo, fechaHora);
                 vuelos.add(vuelo);
             }
         }catch(SQLException ex){

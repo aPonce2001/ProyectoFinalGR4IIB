@@ -17,7 +17,7 @@ public class JFClase extends javax.swing.JFrame {
     public JFClase() {
         initComponents();
         this.clase = new Clase();
-        this.conexion = new Conexion();
+        this.conexion = null;
         this.clases = new ArrayList<Clase>();
         this.setLocationRelativeTo(null); 
     }

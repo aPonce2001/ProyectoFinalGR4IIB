@@ -18,7 +18,7 @@ public class JFCliente extends javax.swing.JFrame {
     public JFCliente() {
         initComponents();
         this.cliente = new Cliente();
-        this.conexion = new Conexion();
+        this.conexion =  null;
         this.clientes = new ArrayList<Cliente>();
         this.paises = new ArrayList<Pais>();
         this.setLocationRelativeTo(null);

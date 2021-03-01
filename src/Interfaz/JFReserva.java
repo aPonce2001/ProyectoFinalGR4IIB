@@ -20,7 +20,7 @@ public class JFReserva extends javax.swing.JFrame {
     public JFReserva() {
         initComponents();
         this.reserva = new Reserva();
-        this.conexion = new Conexion();
+        this.conexion =  null;;
         this.reservas = new ArrayList<Reserva>();
         this.clientes = new ArrayList<Cliente>();
         this.vuelos = new ArrayList<Vuelo>();

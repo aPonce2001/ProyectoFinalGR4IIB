@@ -18,7 +18,7 @@ public class JFVuelo extends javax.swing.JFrame {
     public JFVuelo() {
         initComponents();
         this.vuelo = new Vuelo();
-        this.conexion = new Conexion();
+        this.conexion =  null;
         this.vuelos = new ArrayList<Vuelo>();
         this.aviones = new ArrayList<Avion>();
         this.setLocationRelativeTo(null);

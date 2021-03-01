@@ -19,7 +19,7 @@ public class JFAvion extends javax.swing.JFrame {
     public JFAvion() {
         initComponents();
         this.avion = new Avion();
-        this.conexion = new Conexion();
+        this.conexion = null;
         this.aviones = new ArrayList();
         this.setLocationRelativeTo(null);
     }
