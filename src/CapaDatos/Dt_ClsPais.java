@@ -39,14 +39,14 @@ public class Dt_ClsPais extends Dt_ClsConexion {
 
     }
 
-    public List<Cm_ClsPais> mostrarPaisAll(JComboBox jCBPais, Boolean isUpdatedAt, int selectedIdx) {
+    public List<Cm_ClsPais> mostrarPaisAll(JComboBox jCBPais) {
         List<Cm_ClsPais> listaPais = new ArrayList<Cm_ClsPais>();
         String storeProcedure = "mostrarPaisAll()";
 
         int id = 0;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionURL = "jdbc:sqlserver://192.168.0.188;"
+            String connectionURL = "jdbc:sqlserver://localhost;"
                     + "databaseName=DB_Viaje;"
                     + "user=admin;"
                     + "password=Admin1234;";
@@ -90,10 +90,6 @@ public class Dt_ClsPais extends Dt_ClsConexion {
                 
                  
                  jCBPais.addItem(new Cm_ClsComboItem(rs.getString("nombre"), String.valueOf(rs.getInt("id"))));
-            }
-            
-            if(isUpdatedAt) {
-                jCBPais.setSelectedIndex(selectedIdx);
             }
 
             id = 1;

@@ -15,14 +15,13 @@ public class Cm_ClsCliente {
     private String nombre;
     private String apellido;
     private String cedula;
-    private String passwd;
-    private int id_pais_fk;
+    private String id_pais_fk;
+    private int passwd;
 
     public Cm_ClsCliente() {
-        this.id = 0;
     }
 
-    public Cm_ClsCliente(int id, String nombre, String apellido, String cedula, String passwd, int id_pais_fk) {
+    public Cm_ClsCliente(int id, String nombre, String apellido, String cedula, String id_pais_fk, int passwd) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -63,19 +62,19 @@ public class Cm_ClsCliente {
         this.cedula = cedula;
     }
 
-    public int getId_pais_fk() {
+    public String getId_pais_fk() {
         return id_pais_fk;
     }
 
-    public void setId_pais_fk(int id_pais_fk) {
+    public void setId_pais_fk(String id_pais_fk) {
         this.id_pais_fk = id_pais_fk;
     }
 
-    public String getPasswd() {
+    public int getPasswd() {
         return passwd;
     }
 
-    public void setPasswd(String passwd) {
+    public void setPasswd(int passwd) {
         this.passwd = passwd;
     }
 
