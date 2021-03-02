@@ -68,7 +68,7 @@ public class Dt_ClsCliente {
 
     public List<Cm_ClsCliente> mostrarClienteAll() {
         List<Cm_ClsCliente> listaCliente = new ArrayList<Cm_ClsCliente>();
-        String storeProcedure = "mostrarClienteAll()";
+        String storeProcedureName = "mostrarClienteAll()";
 
         int id = 0;
         try {
@@ -80,7 +80,7 @@ public class Dt_ClsCliente {
             Connection con = DriverManager.getConnection(connectionURL);
             System.out.println("Conexión exitosa");
 
-            String SQL = "{call DB_Viaje.dbo." + storeProcedure + "}";
+            String SQL = "{call DB_Viaje.dbo." + storeProcedureName + "}";
             CallableStatement cs = con.prepareCall(SQL);
             ArrayList<Object[]> parametros = new ArrayList<Object[]>();
 
@@ -129,6 +129,85 @@ public class Dt_ClsCliente {
 
         return listaCliente;
 
+    }
+    
+    public Cm_ClsCliente inSesionXUserPass(String cedula, String passwd){
+        Cm_ClsCliente usuarioLogeado = new Cm_ClsCliente();
+        String storeProcedureName =  "inSesionXUserPass(?,?)";
+        
+         int id = 0;
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String connectionURL = "jdbc:sqlserver://localhost;"
+                    + "databaseName=DB_Viaje;"
+                    + "user=admin;"
+                    + "password=Admin1234;";
+            Connection con = DriverManager.getConnection(connectionURL);
+            System.out.println("Conexión exitosa");
+
+            String SQL = "{call DB_Viaje.dbo." + storeProcedureName + "}";
+            CallableStatement cs = con.prepareCall(SQL);
+            ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+
+            Object[] datosNombre = new Object[3];
+        datosNombre[0] = "String";
+        datosNombre[1] = "cedula_cliente";
+        datosNombre[2] = cedula;
+
+        Object[] datosApellido = new Object[3];
+        datosApellido[0] = "String";
+        datosApellido[1] = "passwd_cliente";
+        datosApellido[2] = passwd;
+ 
+        parametros.add(datosNombre);
+        parametros.add(datosApellido);
+   
+            for (Object[] param : parametros) {
+                if (param[0].equals("String")) {
+                    String columnName = String.valueOf(param[1]);
+                    String columnValue = String.valueOf(param[2]);
+
+                    cs.setString(columnName, columnValue);
+                } else if (param[0].equals("int")) {
+                    String columnName = String.valueOf(param[1]);
+                    int columnValue = (int) (param[2]);
+
+                    cs.setInt(columnName, columnValue);
+                }
+                /*else if(param.equals("date")) {
+                    //cs.setDate("capacidad", 100);
+                }*/
+
+            }
+
+            ResultSet rs = cs.executeQuery();
+
+            
+            while (rs.next()) {
+                // Procesando retoro de datos desde la base de datos
+                //   System.out.println("Id: " + rs.getString(1));//id
+                // System.out.println("Nombre: " + rs.getString(2));//nombre
+                usuarioLogeado = new Cm_ClsCliente(
+                        (int) rs.getInt("id"),
+                        (String) rs.getString("nombre"),
+                        (String) rs.getString("apellido"),
+                        (String) rs.getString("cedula"),
+                        (String) rs.getString("passwd"),
+                        (int) rs.getInt("id_pais_fk")
+                );
+                 
+            }
+
+            id = 1;
+            rs.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return usuarioLogeado;
+
+        
     }
 
 }

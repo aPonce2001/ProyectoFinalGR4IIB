@@ -19,6 +19,7 @@ public class Cm_ClsCliente {
     private int passwd;
 
     public Cm_ClsCliente() {
+        this.id = 0;
     }
 
     public Cm_ClsCliente(int id, String nombre, String apellido, String cedula, String id_pais_fk, int passwd) {

@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package CapaNegocio;
 
 import CapaComun.Cm_ClsCliente;
 import CapaDatos.Dt_ClsCliente;
 import java.util.List;
- 
-
-/**
+/*
  * @author Dennis David
  */
 public class Ng_ClsCliente {
@@ -28,4 +21,7 @@ public class Ng_ClsCliente {
          return dt_cliente.mostrarClienteAll();
      }
     
+    public Cm_ClsCliente inSesionXUserPass(String cedula, String passwd) {
+        return dt_cliente.inSesionXUserPass(cedula, passwd);
+    }
 }

@@ -17,8 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
+/*
  * @author Dennis David
  */
 public class JFReserva extends javax.swing.JFrame {
@@ -30,6 +29,7 @@ public class JFReserva extends javax.swing.JFrame {
     List<Cm_ClsComida> listaComida;
     List<Cm_ClsClase> listaClase;
     Ng_ClsReserva dt_reserva;
+    JFActualizarDatos jfactualizarDatos;
 
     public JFReserva() {
         initComponents();
@@ -73,6 +73,11 @@ public class JFReserva extends javax.swing.JFrame {
         jLabel1.setText("Reserve su viaje:");
 
         jBActualizarUsuario.setText("Actualizar Usuario");
+        jBActualizarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBActualizarUsuarioActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Seleccione su comida:");
 
@@ -167,58 +172,58 @@ public class JFReserva extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-      JFLogin login;
-      login = new JFLogin();
-      login.setVisible(true);
-      dispose();
+        JFLogin login;
+        login = new JFLogin();
+        login.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReservarActionPerformed
         Object item = jCBReservaComida.getSelectedItem();
         String value = ((Cm_ClsComboItem) item).getValue();
         System.out.println("value es: " + value);
-        
-        
+
         dt_reserva.insertarReserva(2, 33, Integer.parseInt(value));
-        
-       
+
+
     }//GEN-LAST:event_jBReservarActionPerformed
 
     private void jCBClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBClaseActionPerformed
-        
-        System.out.println("SElected item index es: "+ jCBClase.getSelectedIndex());
-        
-        
-        
-        if(jCBClase.getItemCount() > 1) {
+
+        System.out.println("SElected item index es: " + jCBClase.getSelectedIndex());
+
+        if (jCBClase.getItemCount() > 1) {
             Object item = jCBClase.getSelectedItem();
             String idClaseFk = ((Cm_ClsComboItem) item).getValue();
             listaAsiento = ng_asiento.mostrarAsientoXClase(Integer.parseInt(idClaseFk));
             addRowToJTable();
-        
+
         }
     }//GEN-LAST:event_jCBClaseActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        JTable source = (JTable)evt.getSource();
-        int row = source.rowAtPoint( evt.getPoint() );
-        int column = source.columnAtPoint( evt.getPoint() );
+        JTable source = (JTable) evt.getSource();
+        int row = source.rowAtPoint(evt.getPoint());
+        int column = source.columnAtPoint(evt.getPoint());
         if (column == 0) {
-            String s=source.getModel().getValueAt(row, column)+"";
-        JOptionPane.showMessageDialog(null, "Value: "+ s + "Columna: " +column +"Fila: " +row);
+            String s = source.getModel().getValueAt(row, column) + "";
+            JOptionPane.showMessageDialog(null, "Value: " + s + "Columna: " + column + "Fila: " + row);
         }
-                
+
     }//GEN-LAST:event_jTable1MouseClicked
 
-    public void addRowToJTable()
-    {
-        System.out.println("Lista tamaño "+listaAsiento.size());
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel(); 
+    private void jBActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarUsuarioActionPerformed
+        jfactualizarDatos = new JFActualizarDatos();
+        jfactualizarDatos.setVisible(true);
+
+    }//GEN-LAST:event_jBActualizarUsuarioActionPerformed
+
+    public void addRowToJTable() {
+        System.out.println("Lista tamaño " + listaAsiento.size());
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         Object rowData[] = new Object[3];
-        
-     
-        for(int i = 0; i < listaAsiento.size(); i++)
-        {
+
+        for (int i = 0; i < listaAsiento.size(); i++) {
             rowData[0] = listaAsiento.get(i).getId();
             rowData[1] = listaAsiento.get(i).getUbicacion();
             rowData[2] = listaAsiento.get(i).getEstado();

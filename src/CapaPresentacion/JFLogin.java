@@ -5,6 +5,8 @@
  */
 package CapaPresentacion;
 
+import CapaComun.Cm_ClsCliente;
+import CapaNegocio.Ng_ClsCliente;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,13 +16,15 @@ public class JFLogin extends javax.swing.JFrame {
 
     JFRegistroCliente jFRegistroCliente;
     JFReserva jFReserva;
+    Ng_ClsCliente ng_cliente;
+    Cm_ClsCliente cm_cliente;
 
     public JFLogin() {
         initComponents();
         this.jTUsuario.requestFocus();
-        this.jTContrasenaLogin.requestFocus();
+        this.jPFContrasena.requestFocus();
         jFRegistroCliente = new JFRegistroCliente();
-        //
+        ng_cliente = new Ng_ClsCliente();
         this.setLocationRelativeTo(null);
 
     }
@@ -38,8 +42,8 @@ public class JFLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTUsuario = new javax.swing.JTextField();
-        jTContrasenaLogin = new javax.swing.JTextField();
         jCBModo = new javax.swing.JComboBox<>();
+        jPFContrasena = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         jBIngresar = new javax.swing.JButton();
         jBRegistrarse = new javax.swing.JButton();
@@ -62,36 +66,41 @@ public class JFLogin extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imágenes/login.png"))); // NOI18N
+        jPFContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPFContrasenaActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/login.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(62, Short.MAX_VALUE)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTUsuario)
-                            .addComponent(jTContrasenaLogin)
-                            .addComponent(jCBModo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTUsuario)
+                    .addComponent(jCBModo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPFContrasena))
                 .addGap(38, 38, 38))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jLabel4)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(25, 25, 25)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jCBModo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -102,8 +111,8 @@ public class JFLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTContrasenaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jPFContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
         );
 
         jBIngresar.setText("Ingresar");
@@ -126,13 +135,13 @@ public class JFLogin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jBIngresar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(155, 155, 155)
                         .addComponent(jBRegistrarse))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +152,7 @@ public class JFLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBIngresar)
                     .addComponent(jBRegistrarse))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,12 +162,31 @@ public class JFLogin extends javax.swing.JFrame {
         String usuario = "1";
         String password = "1";
 
-        String passwordIngresado = this.jTContrasenaLogin.getText();
+        String passwordIngresado = this.jPFContrasena.getText();
         String usuarioIngresado = this.jTUsuario.getText();
 
         switch (this.jCBModo.getSelectedIndex()) {
             case 0:
-                
+               if (passwordIngresado.equals("") || usuarioIngresado.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Ingrese campos obligatorios");
+                } else {
+                 
+                   cm_cliente = ng_cliente.inSesionXUserPass(usuarioIngresado, passwordIngresado);
+                   
+                   System.out.println("cm_cliente.getCedula() es: " + cm_cliente.getCedula());
+                   System.out.println("ID es: " + cm_cliente.getId() );
+                   System.out.println("\n");
+                   System.out.println(cm_cliente.getId()  <= 0);
+                    if (cm_cliente.getId()  <= 0) {
+                        
+                       JOptionPane.showMessageDialog(null, "182 ALERT Ingrese credenciales válidas");
+                    } else {
+                        jFReserva = new JFReserva();
+                        jFReserva.setVisible(true);
+                    }
+                }
+                break;
+            case 1:
                 if (passwordIngresado.equals("") || usuarioIngresado.equals("")) {
                     JOptionPane.showMessageDialog(null, "Ingrese campos obligatorios");
                 } else {
@@ -172,30 +200,22 @@ public class JFLogin extends javax.swing.JFrame {
                 }
 
                 break;
-            case 1:
-
-                if (passwordIngresado.equals("") || usuarioIngresado.equals("")) {
-                    JOptionPane.showMessageDialog(null, "Ingrese campos obligatorios");
-                } else {
-                    if (password.equals(passwordIngresado) && usuario.equals(usuarioIngresado)) {
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Ingrese credenciales válidas");
-                    }
-                }
-                break;
         }
         dispose();
     }//GEN-LAST:event_jBIngresarActionPerformed
 
     private void jBRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegistrarseActionPerformed
         jFRegistroCliente.setVisible(true);
-        dispose();
+       // dispose();
     }//GEN-LAST:event_jBRegistrarseActionPerformed
 
     private void jCBModoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBModoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBModoActionPerformed
+
+    private void jPFContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPFContrasenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPFContrasenaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,8 +262,8 @@ public class JFLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPasswordField jPFContrasena;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTContrasenaLogin;
     private javax.swing.JTextField jTUsuario;
     // End of variables declaration//GEN-END:variables
 }
