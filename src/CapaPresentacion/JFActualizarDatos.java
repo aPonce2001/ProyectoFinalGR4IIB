@@ -191,8 +191,7 @@ public class JFActualizarDatos extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFNombreActualizarActionPerformed
 
     private void jBActualizarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarClienteActionPerformed
-        // TODO add your handling code here:
-        
+
         String passwd = jPFRegistroActualizar.getText();
         if(passwd.equals("")) {
             passwd = cm_cliente.getPasswd();
