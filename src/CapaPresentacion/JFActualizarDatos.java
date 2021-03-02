@@ -19,14 +19,13 @@ public class JFActualizarDatos extends javax.swing.JFrame {
     public JFActualizarDatos() {
          initComponents();
          
-         ng_cliente = new Ng_ClsCliente();
-         
          this.setLocationRelativeTo(null);
     }
     
     public JFActualizarDatos(Cm_ClsCliente cliente) {
          initComponents();
          
+         ng_cliente = new Ng_ClsCliente();
          cm_cliente = cliente;
          llenarCamposUsuario();
          ng_pais = new Ng_ClsPais();
@@ -207,29 +206,19 @@ public class JFActualizarDatos extends javax.swing.JFrame {
         System.out.println("jCBPaisUpdt.getSelectedIndex() es: " + jCBPaisUpdt.getSelectedIndex());
         
         int resultado = ng_cliente.actualizarCliente(
-            1,
-            "algo1", 
-            "algo2", 
-            "algo3",
-            "algo4", 
-            3
+            cm_cliente.getId(),
+            jTFNombreActualizar.getText(), 
+            jTFApellidoActualizar.getText(), 
+            jTFCedulaAct.getText(),
+            passwd, 
+            jCBPaisUpdt.getSelectedIndex()
         );
         
-//        int resultado = ng_cliente.actualizarCliente(
-//            cm_cliente.getId(),
-//            jTFNombreActualizar.getText(), 
-//            jTFApellidoActualizar.getText(), 
-//            jTFCedulaAct.getText(),
-//            passwd, 
-//            jCBPaisUpdt.getSelectedIndex()
-//        );
-        
-        /*if(resultado > 0) {
-            System.out.println("exito!");
+        if(resultado > 0) {
             JOptionPane.showMessageDialog(null, "Registro realizado con éxito");
         } else {
             JOptionPane.showMessageDialog(null, "Ocurrio un error!");
-        }*/
+        }
     }//GEN-LAST:event_jBActualizarClienteActionPerformed
 
     /**
