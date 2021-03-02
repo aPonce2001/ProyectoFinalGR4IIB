@@ -12,16 +12,23 @@ import CapaNegocio.Ng_ClsClase;
 import CapaNegocio.Ng_ClsCliente;
 import CapaNegocio.Ng_ClsComida;
 import CapaNegocio.Ng_ClsReserva;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /*
  * @author Dennis David
  */
-public class JFReserva extends javax.swing.JFrame {
+public class JFReserva extends javax.swing.JFrame implements MouseListener {
 
     Ng_ClsComida ng_comida;
     Ng_ClsAsiento ng_asiento;
@@ -31,15 +38,18 @@ public class JFReserva extends javax.swing.JFrame {
     List<Cm_ClsClase> listaClase;
     Ng_ClsReserva dt_reserva;
     JFActualizarDatos jfactualizarDatos;
-    
     Cm_ClsCliente cm_cliente;
+    public static JButton btnAsientos[];
+    ArrayList<Integer> listAsientosOcupados;
+    ArrayList<Integer> listAsientosSelect;
+    JPanel panel;
     
     public JFReserva() {
         initComponents();
         System.out.println("JFReserva public static void main(String args[]) Initialized");
         cm_cliente = new Cm_ClsCliente();
-        
         this.setLocationRelativeTo(null);
+        
     }
 
     public JFReserva(Cm_ClsCliente clienteLogueado) {
@@ -57,6 +67,9 @@ public class JFReserva extends javax.swing.JFrame {
         System.out.println("Cliente logueado es: " + cm_cliente.getNombre() + " " + cm_cliente.getApellido());
         
         this.setLocationRelativeTo(null);
+        
+        listAsientosSelect = new ArrayList<>();
+        
     }
 
     /**
@@ -74,10 +87,9 @@ public class JFReserva extends javax.swing.JFrame {
         jBReservar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
         jCBClase = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         lblUsuario = new javax.swing.JLabel();
+        scrollPane1 = new java.awt.ScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -111,21 +123,6 @@ public class JFReserva extends javax.swing.JFrame {
                 jCBClaseActionPerformed(evt);
             }
         });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Selecciona Reserva", "Ubicacion", "Estado"
-            }
-        ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jTable1);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Bienvenido"));
 
@@ -161,42 +158,46 @@ public class JFReserva extends javax.swing.JFrame {
                 .addComponent(jBReservar)
                 .addGap(134, 134, 134))
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCBReservaComida, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCBReservaComida, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBActualizarUsuario))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(98, 98, 98)
-                        .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jBActualizarUsuario))
+                    .addComponent(jBActualizarUsuario)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(94, 94, 94)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGap(50, 50, 50)
+                .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBReservaComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBReservar)
                     .addComponent(jBSalir))
@@ -214,13 +215,23 @@ public class JFReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReservarActionPerformed
-        Object item = jCBReservaComida.getSelectedItem();
+        
+        /*Object item = jCBReservaComida.getSelectedItem();
+        listAsientosSelect.size();
         String value = ((Cm_ClsComboItem) item).getValue();
         System.out.println("value es: " + value);
+        dt_reserva.insertarReserva(cm_cliente.getId(), 33, Integer.parseInt(value));*/
 
-        dt_reserva.insertarReserva(cm_cliente.getId(), 33, Integer.parseInt(value));
-
-
+     
+        for (int i = 0; i < listAsientosSelect.size(); i++) {
+            System.out.println("Arraylist contains:" + listAsientosSelect.get(i));
+           /* Object item = jCBReservaComida.getSelectedItem();
+            listAsientosSelect.size();
+            String value = ((Cm_ClsComboItem) item).getValue();
+            System.out.println("value es: " + value);
+            dt_reserva.insertarReserva(cm_cliente.getId(),  listAsientosSelect.get(i), Integer.parseInt(value));*/
+        }
+        
     }//GEN-LAST:event_jBReservarActionPerformed
 
     private void jCBClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBClaseActionPerformed
@@ -229,24 +240,112 @@ public class JFReserva extends javax.swing.JFrame {
 
         if (jCBClase.getItemCount() > 1) {
             Object item = jCBClase.getSelectedItem();
-            String idClaseFk = ((Cm_ClsComboItem) item).getValue();
-            listaAsiento = ng_asiento.mostrarAsientoXClase(Integer.parseInt(idClaseFk));
-            addRowToJTable();
-
+            
+            if(item instanceof Cm_ClsComboItem ) {
+                String idClaseFk = ((Cm_ClsComboItem) item).getValue();
+                System.out.println("idClaseFk: " + idClaseFk);
+                listaAsiento = ng_asiento.mostrarAsientoXClase(Integer.parseInt(idClaseFk));
+                createButtoms();
+                reviewStatusAsiento();
+            } else {
+                //limpiar
+                panel.setVisible(false);
+                
+            }
+            
+            
         }
+         
     }//GEN-LAST:event_jCBClaseActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        JTable source = (JTable) evt.getSource();
-        int row = source.rowAtPoint(evt.getPoint());
-        int column = source.columnAtPoint(evt.getPoint());
-        if (column == 0) {
-            String s = source.getModel().getValueAt(row, column) + "";
-            JOptionPane.showMessageDialog(null, "Value: " + s + "Columna: " + column + "Fila: " + row);
+    //Create buttom dinamically 
+        public void createButtoms() {
+        btnAsientos = new JButton[listaAsiento.size()];
+        panel = new JPanel(new GridLayout(0, 5, 10, 10));
+        for (int i = 0; i < btnAsientos.length; i++) {
+            btnAsientos[i] = new JButton(String.valueOf(i));
+            btnAsientos[i].setText("No. " + (i+1));
+            btnAsientos[i].setBackground(Color.GREEN);
+            add(btnAsientos[i]);
+            panel.add(btnAsientos[i]);
+            setVisible(true);
+            btnAsientos[i].addMouseListener(this);
         }
+        scrollPane1.add(panel);
+    }
+    
+    public void mousePressed(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
+   
+    public void mouseClicked(MouseEvent e) {
+        System.out.println("mouseClicked!!!");
+         if (e.getClickCount() == 1){
+            for (int i = 0; i < listaAsiento.size(); i++) {
+                if ((btnAsientos[i] == (JButton) e.getSource())) {
+                     btnAsientos[i].setBackground(Color.ORANGE);
+                    // JOptionPane.showMessageDialog(null, "Este es el id: " + i );
+                    listAsientosSelect.add(i);
+                }
+            }
+         } else if (e.getClickCount() == 2 && !e.isConsumed()) {
+            e.consume();
+            for (int i = 0; i < listaAsiento.size(); i++) {
+                if ((btnAsientos[i] == (JButton) e.getSource())) {
+                    btnAsientos[i].setBackground(Color.GREEN);
+                     System.out.println("Double Click" + (i+1));
+                     System.out.println("listAsientosSelect.size() es: " + listAsientosSelect.size());
+                     System.out.println("listaAsiento.get(i) es: " + listaAsiento.get(i).getId());
+                     System.out.println("listAsientosSelect.lastIndexOf(i) es: " + listAsientosSelect.lastIndexOf(i));
+                     listAsientosSelect.remove(listAsientosSelect.lastIndexOf(i));
+                     System.out.println("listAsientosSelect.size() es: " + listAsientosSelect.size());
+                           
+                }
+            }
+        }
+    }
+     
+    public void reviewStatusAsiento() {
+         System.out.println("reviewStatusAsiento");
+        listAsientosOcupados = new ArrayList<>();
+        for (int i = 0; i < listaAsiento.size(); i++) {
+            if (listaAsiento.get(i).getEstado().equals("Ocupado")) {
+                listAsientosOcupados.add(i);
+            }
+        }
+        displaydata(listAsientosOcupados);
+    }
+    
+       public static void displaydata(ArrayList l) {
+        for (int i = 0; i < l.size(); i++) {
+            int indice = (int) l.get(i);
+            //btnAsientos[indice].setEnabled(false);
+            btnAsientos[indice].setText("Ocupado");
+            btnAsientos[indice].setBackground(Color.RED);
+           // btnAsientos[indice].setBorder(BorderFactory.createLineBorder(Color.RED, 4));
+        }
+    }
+    /*
+    public void actionPerformed(ActionEvent e) {
+        ArrayList<Asiento> list = ListUsers();
+        if (e.getSource() instanceof JButton) {
+            String text = ((JButton) e.getSource()).getText();
+            ///  JOptionPane.showMessageDialog(null, "Número de reserva es: " +text);
+            String position = ((JButton) e.getSource()).getName();
 
-    }//GEN-LAST:event_jTable1MouseClicked
+            for (int i = 0; i < list.size(); i++) {
+                if ((btn[i] == (JButton) e.getSource())) {
+                    btn[i].setBackground(Color.RED);
+                    System.out.println("PINTO ORANGE:!! =D");
+                }
+            }
+        }
+        this.revalidate();
+        this.repaint();
+    }
 
+    */
     private void jBActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarUsuarioActionPerformed
         System.out.println(cm_cliente);
         jfactualizarDatos = new JFActualizarDatos(cm_cliente);
@@ -254,55 +353,12 @@ public class JFReserva extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jBActualizarUsuarioActionPerformed
 
-    public void addRowToJTable() {
-        System.out.println("Lista tamaño " + listaAsiento.size());
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        Object rowData[] = new Object[3];
-
-        for (int i = 0; i < listaAsiento.size(); i++) {
-            rowData[0] = listaAsiento.get(i).getId();
-            rowData[1] = listaAsiento.get(i).getUbicacion();
-            rowData[2] = listaAsiento.get(i).getEstado();
-            model.addRow(rowData);
-        }
-           
-    }
+   
   
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFReserva().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizarUsuario;
@@ -313,8 +369,7 @@ public class JFReserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblUsuario;
+    private java.awt.ScrollPane scrollPane1;
     // End of variables declaration//GEN-END:variables
 }
