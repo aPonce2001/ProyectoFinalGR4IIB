@@ -37,13 +37,14 @@ public class JFReserva extends javax.swing.JFrame {
     public JFReserva() {
         initComponents();
         System.out.println("JFReserva public static void main(String args[]) Initialized");
+        cm_cliente = new Cm_ClsCliente();
         
         this.setLocationRelativeTo(null);
     }
 
     public JFReserva(Cm_ClsCliente clienteLogueado) {
         initComponents();
-        System.out.println("JFReserva Initialized :(");
+        System.out.println("JFReserva Initialized Con Param");
         ng_comida = new Ng_ClsComida();
         ng_asiento = new Ng_ClsAsiento();
         ng_clase = new Ng_ClsClase();
@@ -247,6 +248,7 @@ public class JFReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jBActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarUsuarioActionPerformed
+        System.out.println(cm_cliente);
         jfactualizarDatos = new JFActualizarDatos(cm_cliente);
         jfactualizarDatos.setVisible(true);
 

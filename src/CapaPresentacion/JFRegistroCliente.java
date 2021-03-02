@@ -20,7 +20,7 @@ public class JFRegistroCliente extends javax.swing.JFrame {
         initComponents();
         ng_cliente = new Ng_ClsCliente();
         ng_pais = new Ng_ClsPais();
-        listaPais = ng_pais.mostrarPaisAll(jCBPais);
+        listaPais = ng_pais.mostrarPaisAll(jCBPais, false, 0);
 
         this.setLocationRelativeTo(null);
     }

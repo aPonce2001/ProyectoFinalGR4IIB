@@ -181,7 +181,7 @@ public class JFLogin extends javax.swing.JFrame {
                         
                        JOptionPane.showMessageDialog(null, "182 ALERT Ingrese credenciales válidas");
                     } else {
-                        jFReserva = new JFReserva();
+                        jFReserva = new JFReserva(cm_cliente);
                         jFReserva.setVisible(true);
                     }
                 }

@@ -61,6 +61,12 @@ public class Dt_ClsCliente {
     public int actualizarCliente(int id, String nombre, String apellido, String cedula, String passwd, int id_pais_fk) {
         ArrayList<Object[]> parametros = new ArrayList<Object[]>();
         Object[] datosNombre = new Object[3];
+        
+        Object[] datosId = new Object[3];
+        datosId[0] = "int";
+        datosId[1] = "id_cliente";
+        datosId[2] = id;
+        
         datosNombre[0] = "String";
         datosNombre[1] = "nombre_cliente";
         datosNombre[2] = nombre;
@@ -85,6 +91,7 @@ public class Dt_ClsCliente {
         datosPaisFk[1] = "id_pais_fk";
         datosPaisFk[2] = id_pais_fk;
 
+        parametros.add(datosId);
         parametros.add(datosNombre);
         parametros.add(datosApellido);
         parametros.add(datosCedula);
@@ -93,7 +100,7 @@ public class Dt_ClsCliente {
         
         System.out.println("dt -> actualizarCliente");
        
-        return executeQuery("actualizarCliente(?,?,?,?,?)", parametros);
+        return executeQuery("actualizarCliente(?,?,?,?,?,?)", parametros);
         
     }
 
