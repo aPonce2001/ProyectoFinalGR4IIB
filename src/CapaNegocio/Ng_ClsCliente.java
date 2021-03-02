@@ -17,6 +17,11 @@ public class Ng_ClsCliente {
         return dt_cliente.insertarCliente(nombre, apellido, cedula, passwd, id_pais_fk);
     }
     
+    public int actualizarCliente(int id, String nombre, String apellido, String cedula, String passwd, int id_pais_fk) {
+        System.out.println("ng -> actualizarCliente()");
+        return dt_cliente.actualizarCliente(id, nombre, apellido, cedula, passwd, id_pais_fk);
+    }
+    
     public List<Cm_ClsCliente> mostrarPaisAll() {
          return dt_cliente.mostrarClienteAll();
      }

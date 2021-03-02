@@ -3,6 +3,7 @@ package CapaPresentacion;
 
 import CapaComun.Cm_ClsAsiento;
 import CapaComun.Cm_ClsClase;
+import CapaComun.Cm_ClsCliente;
 import CapaComun.Cm_ClsComboItem;
 import CapaComun.Cm_ClsComida;
 import CapaComun.Cm_ClsPais;
@@ -30,8 +31,17 @@ public class JFReserva extends javax.swing.JFrame {
     List<Cm_ClsClase> listaClase;
     Ng_ClsReserva dt_reserva;
     JFActualizarDatos jfactualizarDatos;
-
+    
+    Cm_ClsCliente cm_cliente;
+    
     public JFReserva() {
+        initComponents();
+        System.out.println("JFReserva public static void main(String args[]) Initialized");
+        
+        this.setLocationRelativeTo(null);
+    }
+
+    public JFReserva(Cm_ClsCliente clienteLogueado) {
         initComponents();
         System.out.println("JFReserva Initialized :(");
         ng_comida = new Ng_ClsComida();
@@ -40,6 +50,11 @@ public class JFReserva extends javax.swing.JFrame {
         dt_reserva = new Ng_ClsReserva();
         listaClase = ng_clase.mostrarClaseAll(jCBClase);
         listaComida = ng_comida.mostrarPaisAll(jCBReservaComida);
+        cm_cliente = clienteLogueado;
+        lblUsuario.setText(cm_cliente.getNombre() + " " + cm_cliente.getApellido());
+        
+        System.out.println("Cliente logueado es: " + cm_cliente.getNombre() + " " + cm_cliente.getApellido());
+        
         this.setLocationRelativeTo(null);
     }
 
@@ -51,8 +66,6 @@ public class JFReserva extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jBActualizarUsuario = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -62,13 +75,10 @@ public class JFReserva extends javax.swing.JFrame {
         jCBClase = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        lblUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder("Bienvenido"));
-        jScrollPane1.setViewportView(jTextArea1);
 
         jLabel1.setText("Reserve su viaje:");
 
@@ -116,6 +126,29 @@ public class JFReserva extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Bienvenido"));
+
+        lblUsuario.setText("Usuario");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(234, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblUsuario)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        lblUsuario.getAccessibleContext().setAccessibleName("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,33 +168,34 @@ public class JFReserva extends javax.swing.JFrame {
                         .addComponent(jCBReservaComida, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBActualizarUsuario))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(98, 98, 98)
                         .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBActualizarUsuario))
-                .addGap(67, 67, 67)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jBActualizarUsuario))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(94, 94, 94)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBReservaComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBReservar)
                     .addComponent(jBSalir))
@@ -183,7 +217,7 @@ public class JFReserva extends javax.swing.JFrame {
         String value = ((Cm_ClsComboItem) item).getValue();
         System.out.println("value es: " + value);
 
-        dt_reserva.insertarReserva(2, 33, Integer.parseInt(value));
+        dt_reserva.insertarReserva(cm_cliente.getId(), 33, Integer.parseInt(value));
 
 
     }//GEN-LAST:event_jBReservarActionPerformed
@@ -213,7 +247,7 @@ public class JFReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jBActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarUsuarioActionPerformed
-        jfactualizarDatos = new JFActualizarDatos();
+        jfactualizarDatos = new JFActualizarDatos(cm_cliente);
         jfactualizarDatos.setVisible(true);
 
     }//GEN-LAST:event_jBActualizarUsuarioActionPerformed
@@ -276,9 +310,9 @@ public class JFReserva extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jCBReservaComida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables
 }
