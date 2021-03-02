@@ -21,8 +21,8 @@ public class Ng_ClsPais {
     public Ng_ClsPais() {
     }
     
-     public List<Cm_ClsPais> mostrarPaisAll(JComboBox jCBPais) {
-         return dt_pais.mostrarPaisAll(jCBPais);
+     public List<Cm_ClsPais> mostrarPaisAll(JComboBox jCBPais, Boolean isUpdateAt, int selectedIdx) {
+         return dt_pais.mostrarPaisAll(jCBPais, isUpdateAt, selectedIdx);
      }
      
 }
