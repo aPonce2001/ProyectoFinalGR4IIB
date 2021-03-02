@@ -1,13 +1,43 @@
 package CapaPresentacion;
 
+import CapaComun.Cm_ClsCliente;
+import CapaComun.Cm_ClsPais;
+import CapaNegocio.Ng_ClsCliente;
+import CapaNegocio.Ng_ClsPais;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  * @author Dennis David
  */
 public class JFActualizarDatos extends javax.swing.JFrame {
+    Cm_ClsCliente cm_cliente;
+    Ng_ClsPais ng_pais;
+    List<Cm_ClsPais> listaPais;
+    Ng_ClsCliente ng_cliente;
 
     public JFActualizarDatos() {
          initComponents();
+         
          this.setLocationRelativeTo(null);
+    }
+    
+    public JFActualizarDatos(Cm_ClsCliente cliente) {
+         initComponents();
+         
+         ng_cliente = new Ng_ClsCliente();
+         cm_cliente = cliente;
+         llenarCamposUsuario();
+         ng_pais = new Ng_ClsPais();
+         listaPais = ng_pais.mostrarPaisAll(jCBPaisUpdt, true, cm_cliente.getId_pais_fk());
+         
+         this.setLocationRelativeTo(null);
+    }
+    
+    public void llenarCamposUsuario() {
+        jTFNombreActualizar.setText(cm_cliente.getNombre());
+        jTFApellidoActualizar.setText(cm_cliente.getApellido());
+        jTFCedulaAct.setText(cm_cliente.getCedula());
     }
 
     /**
@@ -23,15 +53,13 @@ public class JFActualizarDatos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTFNombreActualizar = new javax.swing.JTextField();
         jTFApellidoActualizar = new javax.swing.JTextField();
-        jTFCedulaActualizar = new javax.swing.JTextField();
-        jTFPaisActualizar = new javax.swing.JTextField();
-        jTFUsuarioActualizar = new javax.swing.JTextField();
         jPFRegistroActualizar = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
+        jCBPaisUpdt = new javax.swing.JComboBox<>();
+        jTFCedulaAct = new javax.swing.JTextField();
         jBActualizarCliente = new javax.swing.JButton();
         jBCancelarCliente = new javax.swing.JButton();
 
@@ -48,8 +76,6 @@ public class JFActualizarDatos extends javax.swing.JFrame {
 
         jLabel4.setText("Pais:");
 
-        jLabel5.setText("Pasaporte:");
-
         jLabel6.setText("Contraseña:");
 
         jTFNombreActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -58,7 +84,7 @@ public class JFActualizarDatos extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imágenes/Actualizar.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Actualizar.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -68,47 +94,37 @@ public class JFActualizarDatos extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCBPaisUpdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(73, 73, 73)
+                        .addComponent(jPFRegistroActualizar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel1))
                             .addComponent(jLabel3))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(96, 96, 96)
-                                .addComponent(jTFCedulaActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTFNombreActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTFApellidoActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(10, 10, 10))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(77, 77, 77)
-                                .addComponent(jPFRegistroActualizar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(84, 84, 84)
-                                .addComponent(jTFUsuarioActualizar))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(114, 114, 114)
-                                .addComponent(jTFPaisActualizar)))
-                        .addContainerGap())))
+                        .addGap(96, 96, 96)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTFNombreActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                            .addComponent(jTFApellidoActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                            .addComponent(jTFCedulaAct, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addGap(10, 10, 10))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7)
-                .addGap(102, 102, 102))
+                .addGap(98, 98, 98))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTFNombreActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -119,23 +135,24 @@ public class JFActualizarDatos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTFCedulaActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFCedulaAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTFPaisActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTFUsuarioActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBPaisUpdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jPFRegistroActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jBActualizarCliente.setText("Actualizar");
+        jBActualizarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBActualizarClienteActionPerformed(evt);
+            }
+        });
 
         jBCancelarCliente.setText("Cancelar");
 
@@ -163,7 +180,7 @@ public class JFActualizarDatos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBActualizarCliente)
                     .addComponent(jBCancelarCliente))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -172,6 +189,37 @@ public class JFActualizarDatos extends javax.swing.JFrame {
     private void jTFNombreActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNombreActualizarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFNombreActualizarActionPerformed
+
+    private void jBActualizarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarClienteActionPerformed
+        // TODO add your handling code here:
+        
+        String passwd = jPFRegistroActualizar.getText();
+        if(passwd.equals("")) {
+            passwd = cm_cliente.getPasswd();
+        }
+        
+        System.out.println("cm_cliente.getId() es: " + cm_cliente.getId());
+        System.out.println("jTFNombreActualizar.getText() es: " + jTFNombreActualizar.getText());
+        System.out.println("jTFApellidoActualizar.getText() es: " + jTFApellidoActualizar.getText());
+        System.out.println("jTFCedulaAct.getText() es: " + jTFCedulaAct.getText());
+        System.out.println("passwd es: " + passwd);
+        System.out.println("jCBPaisUpdt.getSelectedIndex() es: " + jCBPaisUpdt.getSelectedIndex());
+        
+        int resultado = ng_cliente.actualizarCliente(
+            cm_cliente.getId(),
+            jTFNombreActualizar.getText(), 
+            jTFApellidoActualizar.getText(), 
+            jTFCedulaAct.getText(),
+            passwd, 
+            jCBPaisUpdt.getSelectedIndex()
+        );
+        
+        if(resultado > 0) {
+            JOptionPane.showMessageDialog(null, "Registro realizado con éxito");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error!");
+        }
+    }//GEN-LAST:event_jBActualizarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,19 +260,17 @@ public class JFActualizarDatos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizarCliente;
     private javax.swing.JButton jBCancelarCliente;
+    private javax.swing.JComboBox<String> jCBPaisUpdt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPasswordField jPFRegistroActualizar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTFApellidoActualizar;
-    private javax.swing.JTextField jTFCedulaActualizar;
+    private javax.swing.JTextField jTFCedulaAct;
     private javax.swing.JTextField jTFNombreActualizar;
-    private javax.swing.JTextField jTFPaisActualizar;
-    private javax.swing.JTextField jTFUsuarioActualizar;
     // End of variables declaration//GEN-END:variables
 }
