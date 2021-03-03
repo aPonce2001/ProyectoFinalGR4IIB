@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Dennis David
  */
-public class Dt_ClsAsiento {
+public class Dt_ClsAsiento extends Dt_ClsConexion {
 
     public Dt_ClsAsiento() {
     }
@@ -69,11 +69,7 @@ public class Dt_ClsAsiento {
         int id = 0;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionURL = "jdbc:sqlserver://localhost;"
-                    + "databaseName=DB_Viaje;"
-                    + "user=admin;"
-                    + "password=Admin1234;";
-            Connection con = DriverManager.getConnection(connectionURL);
+            Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
 
             String SQL = "{call DB_Viaje.dbo." + storeProcedure + "}";

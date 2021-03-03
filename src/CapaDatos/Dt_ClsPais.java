@@ -46,11 +46,7 @@ public class Dt_ClsPais extends Dt_ClsConexion {
         int id = 0;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionURL = "jdbc:sqlserver://192.168.0.188;"
-                    + "databaseName=DB_Viaje;"
-                    + "user=admin;"
-                    + "password=Admin1234;";
-            Connection con = DriverManager.getConnection(connectionURL);
+            Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
 
             String SQL = "{call DB_Viaje.dbo." + storeProcedure + "}";

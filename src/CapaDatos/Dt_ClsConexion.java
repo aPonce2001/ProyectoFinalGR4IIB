@@ -18,16 +18,21 @@ public class Dt_ClsConexion {
 
     public Dt_ClsConexion() {
     }
+    
+    public static String getConnectionString() {
+        String connectionURL = "jdbc:sqlserver://localhost;"
+                    + "databaseName=DB_Viaje;"
+                    + "user=admin;"
+                    + "password=Admin1234;";
+
+        return connectionURL;
+    }
 
     public static int executeQuery(String storeProcedure, ArrayList<Object[]> params) {
         int id = 0;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionURL = "jdbc:sqlserver://192.168.0.188;"
-                    + "databaseName=DB_Viaje;"
-                    + "user=admin;"
-                    + "password=Admin1234;";
-            Connection con = DriverManager.getConnection(connectionURL);
+            Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
 
             //String SQL = "{call DB_Viaje.dbo.insertarClase(?,?)}";
@@ -86,11 +91,7 @@ public class Dt_ClsConexion {
         int id = 0;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionURL = "jdbc:sqlserver://192.168.0.188;"
-                    + "databaseName=DB_Viaje;"
-                    + "user=admin;"
-                    + "password=Admin1234;";
-            Connection con = DriverManager.getConnection(connectionURL);
+            Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
  
             String SQL = "{call DB_Viaje.dbo." +storeProcedure+"}";
