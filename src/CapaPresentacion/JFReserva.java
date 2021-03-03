@@ -39,15 +39,19 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
     Ng_ClsReserva dt_reserva;
     JFActualizarDatos jfactualizarDatos;
     Cm_ClsCliente cm_cliente;
+    Cm_ClsAsiento cm_asiento;
     public static JButton btnAsientos[];
     ArrayList<Integer> listAsientosOcupados;
     ArrayList<Integer> listAsientosSelect;
     JPanel panel;
+    int contadorAsiento = 0;
+    int idAsientoSelect = 0;
     
     public JFReserva() {
         initComponents();
         System.out.println("JFReserva public static void main(String args[]) Initialized");
         cm_cliente = new Cm_ClsCliente();
+        cm_asiento = new Cm_ClsAsiento();
         this.setLocationRelativeTo(null);
         
     }
@@ -161,15 +165,9 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCBReservaComida, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel7)
+                        .addGap(23, 23, 23)
+                        .addComponent(jCBReservaComida, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,6 +177,12 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
                         .addGap(33, 33, 33)
                         .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(108, 108, 108))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,13 +191,13 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBActualizarUsuario)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                .addGap(78, 78, 78)
                 .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBReservaComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -215,23 +219,31 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReservarActionPerformed
-        
+
         /*Object item = jCBReservaComida.getSelectedItem();
         listAsientosSelect.size();
         String value = ((Cm_ClsComboItem) item).getValue();
         System.out.println("value es: " + value);
         dt_reserva.insertarReserva(cm_cliente.getId(), 33, Integer.parseInt(value));*/
-
-     
+        JOptionPane.showMessageDialog(null, "idAsientoSelect " + idAsientoSelect);
         for (int i = 0; i < listAsientosSelect.size(); i++) {
             System.out.println("Arraylist contains:" + listAsientosSelect.get(i));
-           /* Object item = jCBReservaComida.getSelectedItem();
-            listAsientosSelect.size();
-            String value = ((Cm_ClsComboItem) item).getValue();
-            System.out.println("value es: " + value);
-            dt_reserva.insertarReserva(cm_cliente.getId(),  listAsientosSelect.get(i), Integer.parseInt(value));*/
+            System.out.println("listaAsiento.get(i).getId()" + listaAsiento.get(i).getId());
+            System.out.println("listaAsiento.get(i).getId_clse_FK()" + listaAsiento.get(i).getId_clse_FK());
+            int resultado = ng_asiento.actualizarEstadoAsiento(idAsientoSelect,
+                    listaAsiento.get(i).getUbicacion(),
+                    "Ocupado",
+                    listaAsiento.get(i).getId_clse_FK());
+            if (resultado > 0) {
+
+                Object item = jCBReservaComida.getSelectedItem();
+                String value = ((Cm_ClsComboItem) item).getValue();
+
+                dt_reserva.insertarReserva(cm_cliente.getId(), idAsientoSelect, Integer.parseInt(value));
+            } else {
+                JOptionPane.showMessageDialog(null, "Fallo");
+            }
         }
-        
     }//GEN-LAST:event_jBReservarActionPerformed
 
     private void jCBClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBClaseActionPerformed
@@ -245,6 +257,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
                 String idClaseFk = ((Cm_ClsComboItem) item).getValue();
                 System.out.println("idClaseFk: " + idClaseFk);
                 listaAsiento = ng_asiento.mostrarAsientoXClase(Integer.parseInt(idClaseFk));
+               
                 createButtoms();
                 reviewStatusAsiento();
             } else {
@@ -260,10 +273,12 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
 
     //Create buttom dinamically 
         public void createButtoms() {
+              
         btnAsientos = new JButton[listaAsiento.size()];
         panel = new JPanel(new GridLayout(0, 5, 10, 10));
         for (int i = 0; i < btnAsientos.length; i++) {
             btnAsientos[i] = new JButton(String.valueOf(i));
+            btnAsientos[i] = new JButton(String.valueOf(listaAsiento.get(i).getId()));
             btnAsientos[i].setText("No. " + (i+1));
             btnAsientos[i].setBackground(Color.GREEN);
             add(btnAsientos[i]);
@@ -280,7 +295,26 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
     public void mouseExited(MouseEvent e) {}
    
     public void mouseClicked(MouseEvent e) {
-        System.out.println("mouseClicked!!!");
+        for (int i = 0; i < listaAsiento.size(); i++) {
+            if ((btnAsientos[i] == (JButton) e.getSource())) {
+                contadorAsiento += 1;
+                btnAsientos[i].setBackground(Color.ORANGE);
+                // JOptionPane.showMessageDialog(null, "Este es el id: " + i );
+                listAsientosSelect.add(i);
+                idAsientoSelect =  listaAsiento.get(i).getId();
+               /* if (contadorAsiento == 2) {
+                    btnAsientos[i].setBackground(Color.GREEN);
+                    //System.out.println("Double Click" + (i + 1));
+                   // System.out.println("listAsientosSelect.size() es: " + listAsientosSelect.size());
+                    //System.out.println("listaAsiento.get(i) es: " + listaAsiento.get(i).getId());
+                    //System.out.println("listAsientosSelect.lastIndexOf(i) es: " + listAsientosSelect.lastIndexOf(i));
+                    listAsientosSelect.remove(listAsientosSelect.lastIndexOf(i));
+                   // System.out.println("listAsientosSelect.size() es: " + listAsientosSelect.size());
+                    contadorAsiento = 0;
+                }*/
+            }
+        }
+        /* System.out.println("mouseClicked!!!");
          if (e.getClickCount() == 1){
             for (int i = 0; i < listaAsiento.size(); i++) {
                 if ((btnAsientos[i] == (JButton) e.getSource())) {
@@ -303,7 +337,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
                            
                 }
             }
-        }
+        }*/
     }
      
     public void reviewStatusAsiento() {
@@ -312,6 +346,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
         for (int i = 0; i < listaAsiento.size(); i++) {
             if (listaAsiento.get(i).getEstado().equals("Ocupado")) {
                 listAsientosOcupados.add(i);
+                 System.out.println("\n reviewStatusAsiento: " + i);
             }
         }
         displaydata(listAsientosOcupados);

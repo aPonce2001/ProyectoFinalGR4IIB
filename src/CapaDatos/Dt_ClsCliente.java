@@ -60,13 +60,13 @@ public class Dt_ClsCliente {
 
     public int actualizarCliente(int id, String nombre, String apellido, String cedula, String passwd, int id_pais_fk) {
         ArrayList<Object[]> parametros = new ArrayList<Object[]>();
-        Object[] datosNombre = new Object[3];
-        
+
         Object[] datosId = new Object[3];
         datosId[0] = "int";
         datosId[1] = "id_cliente";
         datosId[2] = id;
-        
+
+        Object[] datosNombre = new Object[3];
         datosNombre[0] = "String";
         datosNombre[1] = "nombre_cliente";
         datosNombre[2] = nombre;

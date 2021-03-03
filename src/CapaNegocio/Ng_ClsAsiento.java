@@ -15,12 +15,17 @@ import java.util.List;
  * @author Dennis David
  */
 public class Ng_ClsAsiento {
-    Dt_ClsAsiento dt_cliente = new Dt_ClsAsiento();
+    Dt_ClsAsiento dt_asiento = new Dt_ClsAsiento();
 
     public Ng_ClsAsiento() {
     }
     
      public List<Cm_ClsAsiento> mostrarAsientoXClase(int id_clase_FK) {
-         return dt_cliente.mostrarAsientoXClase(id_clase_FK);
+         return dt_asiento.mostrarAsientoXClase(id_clase_FK);
      }
+     
+     public  int actualizarEstadoAsiento(int id,String ubicacion,String estado,int id_clase_FK){
+         return dt_asiento.actualizarEstadoAsiento(id, ubicacion, estado, id_clase_FK);
+     }
+   
 }
