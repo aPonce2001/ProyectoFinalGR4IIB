@@ -34,8 +34,8 @@ public class Ng_ClsReserva {
         return dt_reserva.actualizarReserva(id, id_cliente_fk, id_asiento_fk, id_comida_fk);
     }
     
-    public List<Cm_ClsReserva> mostrarReservaXId(int id_cliente_fk) {
-        return dt_reserva.mostrarReservaXId(id_cliente_fk);
+    public List<Cm_ClsReserva> mostrarReservasXIdCliente(int id_cliente_fk) {
+        return dt_reserva.mostrarReservasXIdCliente(id_cliente_fk);
 
     }
    

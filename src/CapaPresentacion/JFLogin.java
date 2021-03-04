@@ -59,6 +59,12 @@ public class JFLogin extends javax.swing.JFrame {
 
         jLabel3.setText("Contraseña:");
 
+        jTUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTUsuarioActionPerformed(evt);
+            }
+        });
+
         jCBModo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Viajero", "Administrador" }));
         jCBModo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,12 +199,11 @@ public class JFLogin extends javax.swing.JFrame {
                     if (password.equals(passwordIngresado) && usuario.equals(usuarioIngresado)) {
                         jFReserva = new JFReserva();
                         jFReserva.setVisible(true);
-
                     } else {
                         JOptionPane.showMessageDialog(null, "Ingrese credenciales válidas");
+                        dispose();
                     }
                 }
-
                 break;
         }
         dispose();
@@ -216,6 +221,10 @@ public class JFLogin extends javax.swing.JFrame {
     private void jPFContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPFContrasenaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPFContrasenaActionPerformed
+
+    private void jTUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

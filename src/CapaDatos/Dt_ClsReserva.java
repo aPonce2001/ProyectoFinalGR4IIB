@@ -84,7 +84,7 @@ public class Dt_ClsReserva {
 
     }
 
-   public List<Cm_ClsReserva> mostrarReservaXId(int id_cliente_fk) {
+   public List<Cm_ClsReserva> mostrarReservasXIdCliente(int id_cliente_fk) {
         List<Cm_ClsReserva> listaReserva = new ArrayList<Cm_ClsReserva>();
         String storeProcedure = "mostrarReservaXId(?)";
 

@@ -23,7 +23,7 @@ public class Dt_ClsConexion {
         int id = 0;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionURL = "jdbc:sqlserver://192.168.0.188;"
+            String connectionURL = "jdbc:sqlserver://192.168.0.188;" //localhost
                     + "databaseName=DB_Viaje;"
                     + "user=admin;"
                     + "password=Admin1234;";

@@ -134,6 +134,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTUsuario">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTUsuarioActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="jCBModo">
           <Properties>

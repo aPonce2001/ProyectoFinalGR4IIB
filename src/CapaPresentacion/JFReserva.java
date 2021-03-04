@@ -7,6 +7,7 @@ import CapaComun.Cm_ClsCliente;
 import CapaComun.Cm_ClsComboItem;
 import CapaComun.Cm_ClsComida;
 import CapaComun.Cm_ClsPais;
+import CapaComun.Cm_ClsReserva;
 import CapaNegocio.Ng_ClsAsiento;
 import CapaNegocio.Ng_ClsClase;
 import CapaNegocio.Ng_ClsCliente;
@@ -40,6 +41,10 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
     JFActualizarDatos jfactualizarDatos;
     Cm_ClsCliente cm_cliente;
     Cm_ClsAsiento cm_asiento;
+    
+    Ng_ClsReserva ng_reserva;
+    List<Cm_ClsReserva> listaReserva;
+    
     public static JButton btnAsientos[];
     ArrayList<Integer> listAsientosOcupados;
     ArrayList<Integer> listAsientosSelect;
@@ -52,6 +57,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
         System.out.println("JFReserva public static void main(String args[]) Initialized");
         cm_cliente = new Cm_ClsCliente();
         cm_asiento = new Cm_ClsAsiento();
+        ng_reserva = new Ng_ClsReserva();
         this.setLocationRelativeTo(null);
         
     }
@@ -94,6 +100,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
         jPanel1 = new javax.swing.JPanel();
         lblUsuario = new javax.swing.JLabel();
         scrollPane1 = new java.awt.ScrollPane();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -151,6 +158,13 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
 
         lblUsuario.getAccessibleContext().setAccessibleName("");
 
+        jButton1.setText("Ver Reserva");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,33 +183,38 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
                         .addGap(23, 23, 23)
                         .addComponent(jCBReservaComida, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBActualizarUsuario))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(27, 27, 27)
+                                .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jBActualizarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBActualizarUsuario)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jBActualizarUsuario)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(78, 78, 78)
+                .addGap(43, 43, 43)
                 .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -225,25 +244,61 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
         String value = ((Cm_ClsComboItem) item).getValue();
         System.out.println("value es: " + value);
         dt_reserva.insertarReserva(cm_cliente.getId(), 33, Integer.parseInt(value));*/
-        JOptionPane.showMessageDialog(null, "idAsientoSelect " + idAsientoSelect);
+        // JOptionPane.showMessageDialog(null, "idAsientoSelect " + idAsientoSelect);
+        
+        if(listAsientosSelect.size() == 0 ) {
+                System.out.println("Seleccione un asiento");
+                 JOptionPane.showMessageDialog(null, "Seleccione un asiento");
+            }
+        
         for (int i = 0; i < listAsientosSelect.size(); i++) {
             System.out.println("Arraylist contains:" + listAsientosSelect.get(i));
             System.out.println("listaAsiento.get(i).getId()" + listaAsiento.get(i).getId());
             System.out.println("listaAsiento.get(i).getId_clse_FK()" + listaAsiento.get(i).getId_clse_FK());
-            int resultado = ng_asiento.actualizarEstadoAsiento(idAsientoSelect,
+            
+            System.out.println("idAsientoSelect es: " + idAsientoSelect);
+            
+            if(idAsientoSelect == 0 ) {
+                System.out.println("Seleccione un asiento");
+                 JOptionPane.showMessageDialog(null, "Seleccione un asiento");
+            } else if (jCBReservaComida.getSelectedIndex() == 0) {
+                System.out.println("Selecciona una comida para que no se muera :");
+                    JOptionPane.showMessageDialog(null, "Selecciona una comida para que no se muera :1");
+            } else {
+                int resultado = ng_asiento.actualizarEstadoAsiento(idAsientoSelect,
                     listaAsiento.get(i).getUbicacion(),
                     "Ocupado",
                     listaAsiento.get(i).getId_clse_FK());
-            if (resultado > 0) {
+                System.out.println("luego resultado");
+                if (resultado > 0) {
 
-                Object item = jCBReservaComida.getSelectedItem();
-                String value = ((Cm_ClsComboItem) item).getValue();
+                    Object item = jCBReservaComida.getSelectedItem();
+                    String value = ((Cm_ClsComboItem) item).getValue();
 
-                dt_reserva.insertarReserva(cm_cliente.getId(), idAsientoSelect, Integer.parseInt(value));
-            } else {
-                JOptionPane.showMessageDialog(null, "Fallo");
+                    int resultado2 = dt_reserva.insertarReserva(cm_cliente.getId(), idAsientoSelect, Integer.parseInt(value));
+
+                   
+                     if(resultado2 > 0) {
+                        
+                        JFMostrarReserva jfMostrarReserva = new JFMostrarReserva(new Cm_ClsReserva());
+                        jfMostrarReserva.setVisible(true);
+                         System.out.println("idAsientoSelect " + idAsientoSelect);
+                       
+                         btnAsientos[idAsientoSelect-1].setBackground(Color.RED);
+                         listaAsiento.get(idAsientoSelect-1).setEstado("Ocupado");
+                         listAsientosSelect.remove(0);
+                         
+                         
+                     } else {
+                         JOptionPane.showMessageDialog(null, "Fail Ingreso Reserva");
+                     }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Fallo Asiento");
+                }
             }
+           
         }
+         
     }//GEN-LAST:event_jBReservarActionPerformed
 
     private void jCBClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBClaseActionPerformed
@@ -277,10 +332,10 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
         btnAsientos = new JButton[listaAsiento.size()];
         panel = new JPanel(new GridLayout(0, 5, 10, 10));
         for (int i = 0; i < btnAsientos.length; i++) {
-            btnAsientos[i] = new JButton(String.valueOf(i));
             btnAsientos[i] = new JButton(String.valueOf(listaAsiento.get(i).getId()));
             btnAsientos[i].setText("No. " + (i+1));
             btnAsientos[i].setBackground(Color.GREEN);
+            //btnAsientos[i].
             add(btnAsientos[i]);
             panel.add(btnAsientos[i]);
             setVisible(true);
@@ -296,48 +351,43 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
    
     public void mouseClicked(MouseEvent e) {
         for (int i = 0; i < listaAsiento.size(); i++) {
-            if ((btnAsientos[i] == (JButton) e.getSource())) {
-                contadorAsiento += 1;
-                btnAsientos[i].setBackground(Color.ORANGE);
-                // JOptionPane.showMessageDialog(null, "Este es el id: " + i );
-                listAsientosSelect.add(i);
-                idAsientoSelect =  listaAsiento.get(i).getId();
-               /* if (contadorAsiento == 2) {
+            if ((btnAsientos[i] == (JButton) e.getSource())) {              
+                int idxSelected = listAsientosSelect.lastIndexOf(i) > -1 ? listAsientosSelect.get(listAsientosSelect.lastIndexOf(i)) : -1;
+                
+                System.out.println("listAsientosSelect.lastIndexOf(i) es: " + listAsientosSelect.lastIndexOf(i));
+                System.out.println("idxSelected es: " + idxSelected);
+                System.out.println("i es: " + i);
+                System.out.println(idxSelected == i);
+                
+                if(listaAsiento.get(i).getEstado().equals("Ocupado")) {
+                    System.out.println("No hace nada :(");
+                    idAsientoSelect =  0;
+                } else {
+                    if (idxSelected == i ) {
+                    listAsientosSelect.remove(listAsientosSelect.lastIndexOf(i));
                     btnAsientos[i].setBackground(Color.GREEN);
+                    idAsientoSelect =  0;
+                    
                     //System.out.println("Double Click" + (i + 1));
                    // System.out.println("listAsientosSelect.size() es: " + listAsientosSelect.size());
                     //System.out.println("listaAsiento.get(i) es: " + listaAsiento.get(i).getId());
                     //System.out.println("listAsientosSelect.lastIndexOf(i) es: " + listAsientosSelect.lastIndexOf(i));
-                    listAsientosSelect.remove(listAsientosSelect.lastIndexOf(i));
+                    
                    // System.out.println("listAsientosSelect.size() es: " + listAsientosSelect.size());
-                    contadorAsiento = 0;
-                }*/
-            }
-        }
-        /* System.out.println("mouseClicked!!!");
-         if (e.getClickCount() == 1){
-            for (int i = 0; i < listaAsiento.size(); i++) {
-                if ((btnAsientos[i] == (JButton) e.getSource())) {
-                     btnAsientos[i].setBackground(Color.ORANGE);
+                } else {
                     // JOptionPane.showMessageDialog(null, "Este es el id: " + i );
                     listAsientosSelect.add(i);
+                    idAsientoSelect =  listaAsiento.get(i).getId();
+                    btnAsientos[i].setBackground(Color.ORANGE);
+                    
+                    if(listAsientosSelect.size() >= 2) {
+                        btnAsientos[listAsientosSelect.get(0)].setBackground(Color.GREEN);
+                        listAsientosSelect.remove(0);
+                    } 
+                }
                 }
             }
-         } else if (e.getClickCount() == 2 && !e.isConsumed()) {
-            e.consume();
-            for (int i = 0; i < listaAsiento.size(); i++) {
-                if ((btnAsientos[i] == (JButton) e.getSource())) {
-                    btnAsientos[i].setBackground(Color.GREEN);
-                     System.out.println("Double Click" + (i+1));
-                     System.out.println("listAsientosSelect.size() es: " + listAsientosSelect.size());
-                     System.out.println("listaAsiento.get(i) es: " + listaAsiento.get(i).getId());
-                     System.out.println("listAsientosSelect.lastIndexOf(i) es: " + listAsientosSelect.lastIndexOf(i));
-                     listAsientosSelect.remove(listAsientosSelect.lastIndexOf(i));
-                     System.out.println("listAsientosSelect.size() es: " + listAsientosSelect.size());
-                           
-                }
-            }
-        }*/
+        }
     }
      
     public void reviewStatusAsiento() {
@@ -388,7 +438,13 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
 
     }//GEN-LAST:event_jBActualizarUsuarioActionPerformed
 
-   
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      System.out.println("(cm_cliente.getId(): " + cm_cliente.getId()); 
+                    listaReserva = ng_reserva.mostrarReservasXIdCliente(cm_cliente.getId());
+                    System.out.println("listaReserva: "+ listaReserva);
+                    
+    }//GEN-LAST:event_jButton1ActionPerformed
+
   
     
     /**
@@ -399,6 +455,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
     private javax.swing.JButton jBActualizarUsuario;
     private javax.swing.JButton jBReservar;
     private javax.swing.JButton jBSalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCBClase;
     private javax.swing.JComboBox<String> jCBReservaComida;
     private javax.swing.JLabel jLabel1;
