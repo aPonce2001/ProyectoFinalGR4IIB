@@ -3,7 +3,6 @@ package CapaDatos;
 
 import CapaComun.Cm_ClsCliente;
 import CapaComun.Cm_ClsReserva;
-import static CapaDatos.Dt_ClsConexion.executeQuery;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -16,7 +15,7 @@ import java.util.List;
 /**
  * @author Dennis David
  */
-public class Dt_ClsReserva {
+public class Dt_ClsReserva extends Dt_ClsConexion {
 
     public Dt_ClsReserva() {
     }
@@ -91,11 +90,7 @@ public class Dt_ClsReserva {
         int id = 0;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionURL = "jdbc:sqlserver://localhost;"
-                    + "databaseName=DB_Viaje;"
-                    + "user=admin;"
-                    + "password=Admin1234;";
-            Connection con = DriverManager.getConnection(connectionURL);
+            Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
 
             String SQL = "{call DB_Viaje.dbo." + storeProcedure + "}";
@@ -162,11 +157,7 @@ public class Dt_ClsReserva {
         int id = 0;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionURL = "jdbc:sqlserver://localhost;"
-                    + "databaseName=DB_Viaje;"
-                    + "user=admin;"
-                    + "password=Admin1234;";
-            Connection con = DriverManager.getConnection(connectionURL);
+            Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
 
             String SQL = "{call DB_Viaje.dbo." + storeProcedure + "}";

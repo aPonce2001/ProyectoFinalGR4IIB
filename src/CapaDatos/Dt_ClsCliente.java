@@ -2,7 +2,6 @@ package CapaDatos;
 
 import CapaComun.Cm_ClsCliente;
 import CapaComun.Cm_ClsPais;
-import static CapaDatos.Dt_ClsConexion.executeQuery;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +14,7 @@ import javax.swing.JComboBox;
  *
  * @author Dennis David
  */
-public class Dt_ClsCliente {
+public class Dt_ClsCliente extends Dt_ClsConexion {
 
     public Dt_ClsCliente() {
     }
@@ -115,11 +114,7 @@ public class Dt_ClsCliente {
         int id = 0;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionURL = "jdbc:sqlserver://192.168.0.188;"
-                    + "databaseName=DB_Viaje;"
-                    + "user=admin;"
-                    + "password=Admin1234;";
-            Connection con = DriverManager.getConnection(connectionURL);
+            Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
 
             String SQL = "{call DB_Viaje.dbo." + storeProcedureName + "}";
@@ -180,11 +175,7 @@ public class Dt_ClsCliente {
          int id = 0;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionURL = "jdbc:sqlserver://192.168.0.188;"
-                    + "databaseName=DB_Viaje;"
-                    + "user=admin;"
-                    + "password=Admin1234;";
-            Connection con = DriverManager.getConnection(connectionURL);
+            Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
 
             String SQL = "{call DB_Viaje.dbo." + storeProcedureName + "}";

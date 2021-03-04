@@ -14,7 +14,7 @@ import javax.swing.JComboBox;
 /**
  * @author Dennis David
  */
-public class Dt_ClsComida {
+public class Dt_ClsComida extends Dt_ClsConexion {
 
     public Dt_ClsComida() {
     }
@@ -39,11 +39,7 @@ public class Dt_ClsComida {
         int id = 0;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionURL = "jdbc:sqlserver://localhost;"
-                    + "databaseName=DB_Viaje;"
-                    + "user=admin;"
-                    + "password=Admin1234;";
-            Connection con = DriverManager.getConnection(connectionURL);
+            Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
 
             String SQL = "{call DB_Viaje.dbo." + storeProcedure + "}";

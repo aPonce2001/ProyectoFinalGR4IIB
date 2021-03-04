@@ -47,8 +47,6 @@ public class Dt_ClsClase extends Dt_ClsConexion {
     public void borrarClase(int id) {
 
     }
-
-     
     
     public List<Cm_ClsClase> mostrarClaseAll(JComboBox jCBClase) {
         List<Cm_ClsClase> listaClase = new ArrayList<Cm_ClsClase>();
@@ -57,11 +55,7 @@ public class Dt_ClsClase extends Dt_ClsConexion {
         int id = 0;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String connectionURL = "jdbc:sqlserver://localhost;"
-                    + "databaseName=DB_Viaje;"
-                    + "user=admin;"
-                    + "password=Admin1234;";
-            Connection con = DriverManager.getConnection(connectionURL);
+            Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
             String SQL = "{call DB_Viaje.dbo." + storeProcedure + "}";
      
