@@ -35,8 +35,8 @@ public class Ng_ClsReserva {
     }
     
     public List<Cm_ClsReserva> mostrarReservasXIdCliente(int id_cliente_fk) {
+        System.out.println("id_cliente_fk :" + dt_reserva.mostrarReservasXIdCliente(id_cliente_fk) );
         return dt_reserva.mostrarReservasXIdCliente(id_cliente_fk);
-
     }
    
      public List<Cm_ClsReserva> mostrarReservaAll() {

@@ -91,4 +91,113 @@ public class Dt_ClsComida extends Dt_ClsConexion {
         return listaComida;
 
     }
+    
+    
+     public List<Cm_ClsComida> mostrarComidaXId(int id_comida) {
+        List<Cm_ClsComida> listaComidaXId = new ArrayList<Cm_ClsComida>();
+        String storeProcedureName =  "mostrarComidaXId(?)";
+        
+        int id = 0;
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection(getConnectionString());
+            System.out.println("Conexión exitosa");
+
+            String SQL = "{call DB_Viaje.dbo." + storeProcedureName + "}";
+            CallableStatement cs = con.prepareCall(SQL);
+            ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+
+        Object[] datoComida = new Object[3];
+        datoComida[0] = "int";
+        datoComida[1] = "id_comida";
+        datoComida[2] = id_comida;
+ 
+        parametros.add(datoComida);
+  
+            for (Object[] param : parametros) {
+                if (param[0].equals("String")) {
+                    String columnName = String.valueOf(param[1]);
+                    String columnValue = String.valueOf(param[2]);
+
+                    cs.setString(columnName, columnValue);
+                } else if (param[0].equals("int")) {
+                    String columnName = String.valueOf(param[1]);
+                    int columnValue = (int) (param[2]);
+
+                    cs.setInt(columnName, columnValue);
+                }
+ 
+            }
+ 
+            ResultSet rs = cs.executeQuery();
+ 
+            while (rs.next()) {
+               
+                listaComidaXId.add(new Cm_ClsComida(
+                        (int) rs.getInt("id"),
+                        (String) rs.getString("nombre")
+                ));
+                 
+            }
+
+            id = 1;
+            rs.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listaComidaXId;
+   
+     }
+   
+       public List<Cm_ClsComida> mostrarComidaTabla() {
+        List<Cm_ClsComida> listaComida = new ArrayList<Cm_ClsComida>();
+        String storeProcedure = "mostrarComidaAll()";
+
+        int id = 0;
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection(getConnectionString());
+            System.out.println("Conexión exitosa");
+
+            String SQL = "{call DB_Viaje.dbo." + storeProcedure + "}";
+            CallableStatement cs = con.prepareCall(SQL);
+            ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+
+            for (Object[] param : parametros) {
+                if (param[0].equals("String")) {
+                    String columnName = String.valueOf(param[1]);
+                    String columnValue = String.valueOf(param[2]);
+
+                    cs.setString(columnName, columnValue);
+                } else if (param[0].equals("int")) {
+                    String columnName = String.valueOf(param[1]);
+                    int columnValue = (int) (param[2]);
+
+                    cs.setInt(columnName, columnValue);
+                }
+             
+            }
+            ResultSet rs = cs.executeQuery();
+  
+            while (rs.next()) {
+                listaComida.add(new Cm_ClsComida(
+                        (int) rs.getInt("id"),
+                        (String) rs.getString("nombre")
+                ));
+            }
+
+            id = 1;
+            rs.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listaComida;
+
+    }
+  
+    
 }

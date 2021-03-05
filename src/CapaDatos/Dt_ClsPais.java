@@ -54,15 +54,15 @@ public class Dt_ClsPais extends Dt_ClsConexion {
             ArrayList<Object[]> parametros = new ArrayList<Object[]>();
 
             for (Object[] param : parametros) {
+                System.out.println("param[0] PAIS:" + param[0]);
                 if (param[0].equals("String")) {
                     String columnName = String.valueOf(param[1]);
                     String columnValue = String.valueOf(param[2]);
-
                     cs.setString(columnName, columnValue);
                 } else if (param[0].equals("int")) {
+                    
                     String columnName = String.valueOf(param[1]);
                     int columnValue = (int) (param[2]);
-
                     cs.setInt(columnName, columnValue);
                 }
                 /*else if(param.equals("date")) {

@@ -42,7 +42,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
     Cm_ClsCliente cm_cliente;
     Cm_ClsAsiento cm_asiento;
     
-    Ng_ClsReserva ng_reserva;
+   // Ng_ClsReserva ng_reserva;
     List<Cm_ClsReserva> listaReserva;
     
     public static JButton btnAsientos[];
@@ -57,7 +57,6 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
         System.out.println("JFReserva public static void main(String args[]) Initialized");
         cm_cliente = new Cm_ClsCliente();
         cm_asiento = new Cm_ClsAsiento();
-        ng_reserva = new Ng_ClsReserva();
         this.setLocationRelativeTo(null);
         
     }
@@ -70,16 +69,18 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
         ng_clase = new Ng_ClsClase();
         dt_reserva = new Ng_ClsReserva();
         listaClase = ng_clase.mostrarClaseAll(jCBClase);
-        listaComida = ng_comida.mostrarPaisAll(jCBReservaComida);
+        listaComida = ng_comida.mostrarComidaAll(jCBReservaComida);
+        
         cm_cliente = clienteLogueado;
         lblUsuario.setText(cm_cliente.getNombre() + " " + cm_cliente.getApellido());
         
         System.out.println("Cliente logueado es: " + cm_cliente.getNombre() + " " + cm_cliente.getApellido());
-        
+        listaReserva = dt_reserva.mostrarReservasXIdCliente(cm_cliente.getId());
+        System.out.println("listaReserva: " + listaReserva.size());
         this.setLocationRelativeTo(null);
         
         listAsientosSelect = new ArrayList<>();
-        
+       
     }
 
     /**
@@ -100,7 +101,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
         jPanel1 = new javax.swing.JPanel();
         lblUsuario = new javax.swing.JLabel();
         scrollPane1 = new java.awt.ScrollPane();
-        jButton1 = new javax.swing.JButton();
+        jBMisReservas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -158,10 +159,10 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
 
         lblUsuario.getAccessibleContext().setAccessibleName("");
 
-        jButton1.setText("Ver Reserva");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBMisReservas.setText("Mis Reservas");
+        jBMisReservas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBMisReservasActionPerformed(evt);
             }
         });
 
@@ -197,7 +198,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jBActualizarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addComponent(jBMisReservas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -209,7 +210,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jBActualizarUsuario)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
+                        .addComponent(jBMisReservas)))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -239,13 +240,6 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
 
     private void jBReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBReservarActionPerformed
 
-        /*Object item = jCBReservaComida.getSelectedItem();
-        listAsientosSelect.size();
-        String value = ((Cm_ClsComboItem) item).getValue();
-        System.out.println("value es: " + value);
-        dt_reserva.insertarReserva(cm_cliente.getId(), 33, Integer.parseInt(value));*/
-        // JOptionPane.showMessageDialog(null, "idAsientoSelect " + idAsientoSelect);
-        
         if(listAsientosSelect.size() == 0 ) {
                 System.out.println("Seleccione un asiento");
                  JOptionPane.showMessageDialog(null, "Seleccione un asiento");
@@ -438,12 +432,12 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
 
     }//GEN-LAST:event_jBActualizarUsuarioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      System.out.println("(cm_cliente.getId(): " + cm_cliente.getId()); 
-                    listaReserva = ng_reserva.mostrarReservasXIdCliente(cm_cliente.getId());
-                    System.out.println("listaReserva: "+ listaReserva);
-                    
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jBMisReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMisReservasActionPerformed
+
+        JFMisReservas jfMisReservas = new JFMisReservas(listaReserva);
+        jfMisReservas.setVisible(true);
+        
+    }//GEN-LAST:event_jBMisReservasActionPerformed
 
   
     
@@ -453,9 +447,9 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBActualizarUsuario;
+    private javax.swing.JButton jBMisReservas;
     private javax.swing.JButton jBReservar;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCBClase;
     private javax.swing.JComboBox<String> jCBReservaComida;
     private javax.swing.JLabel jLabel1;

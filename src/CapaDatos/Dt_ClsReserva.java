@@ -84,6 +84,7 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
     }
 
    public List<Cm_ClsReserva> mostrarReservasXIdCliente(int id_cliente_fk) {
+       System.out.println("Entro mostrar reser: " + id_cliente_fk);
         List<Cm_ClsReserva> listaReserva = new ArrayList<Cm_ClsReserva>();
         String storeProcedure = "mostrarReservaXId(?)";
 
@@ -100,20 +101,25 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
             datosNombre[0] = "int";
             datosNombre[1] = "id_cliente_fk";
             datosNombre[2] = id_cliente_fk;
-            
+             System.out.println("datosNombre: " + datosNombre.length);
             parametros.add(datosNombre);
 
             for (Object[] param : parametros) {
+                 System.out.println("param[0]: " + param[0]);
                 if (param[0].equals("String")) {
                     String columnName = String.valueOf(param[1]);
                     String columnValue = String.valueOf(param[2]);
-
                     cs.setString(columnName, columnValue);
                 } else if (param[0].equals("int")) {
+                       System.out.println("param[0]: " + param[0]);
+                       System.out.println("columnName: " + param[1]);
+                       System.out.println("columnValue: " + param[2]);
                     String columnName = String.valueOf(param[1]);
                     int columnValue = (int) (param[2]);
-
                     cs.setInt(columnName, columnValue);
+                }else{ 
+                
+                 System.out.println("aqui cayo");
                 }
                 /*else if(param.equals("date")) {
                     //cs.setDate("capacidad", 100);
@@ -126,8 +132,8 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
             
             while (rs.next()) {
 
-                //   System.out.println("Id: " + rs.getString(1));//id
-                // System.out.println("Nombre: " + rs.getString(2));//nombre
+                   System.out.println("Id: " + rs.getString(1));//id
+                  System.out.println("Nombre: " + rs.getString(2));//nombre
                 listaReserva.add(new Cm_ClsReserva(
                         (int) rs.getInt("id"),
                         (Date) rs.getDate("fecha"),
@@ -143,16 +149,16 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
             rs.close();
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Cayó Exception: " +e.getMessage());
         }
-
+       System.out.println("listaReserva.size(): " + listaReserva.size());
         return listaReserva;
 
     }
    
      public List<Cm_ClsReserva> mostrarReservaAll() {
        List<Cm_ClsReserva> listaReserva = new ArrayList<Cm_ClsReserva>();
-        String storeProcedure = "mostrarReservaXId(?)";
+        String storeProcedure = "mostrarReservaAll(?)";
 
         int id = 0;
         try {
