@@ -20,9 +20,9 @@ public class Dt_ClsConexion {
     }
     
     public static String getConnectionString() {
-        String connectionURL = "jdbc:sqlserver://localhost;"
-                    + "databaseName=DB_Viaje;"
-                    + "user=admin;"
+        String connectionURL = "jdbc:sqlserver://sql5054.site4now.net;"
+                    + "databaseName=DB_A7086C_Viaje;"
+                    + "user=DB_A7086C_Viaje_admin;"
                     + "password=Admin1234;";
 
         return connectionURL;
@@ -37,7 +37,7 @@ public class Dt_ClsConexion {
             System.out.println("Conexión exitosa");
 
             //String SQL = "{call DB_Viaje.dbo.insertarClase(?,?)}";
-            String SQL = "{call DB_Viaje.dbo." +storeProcedure+"}";
+            String SQL = "{call DB_A7086C_Viaje.dbo." +storeProcedure+"}";
             CallableStatement cs = con.prepareCall(SQL);
             
             for (Object[] param : params ) {
@@ -95,7 +95,7 @@ public class Dt_ClsConexion {
             Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
  
-            String SQL = "{call DB_Viaje.dbo." +storeProcedure+"}";
+            String SQL = "{call DB_A7086C_Viaje.dbo." +storeProcedure+"}";
             CallableStatement cs = con.prepareCall(SQL);
             
             for (Object[] param : params ) {

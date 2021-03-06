@@ -104,7 +104,7 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
             Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
 
-            String SQL = "{call DB_Viaje.dbo." + storeProcedure + "}";
+            String SQL = "{call DB_A7086C_Viaje.dbo." + storeProcedure + "}";
             CallableStatement cs = con.prepareCall(SQL);
            ArrayList<Object[]> parametros = new ArrayList<Object[]>();
             Object[] datosNombre = new Object[3];
@@ -169,7 +169,7 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
             Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
 
-            String SQL = "{call DB_Viaje.dbo." + storeProcedure + "}";
+            String SQL = "{call DB_A7086C_Viaje.dbo." + storeProcedure + "}";
             CallableStatement cs = con.prepareCall(SQL);
            ArrayList<Object[]> parametros = new ArrayList<Object[]>();
        
