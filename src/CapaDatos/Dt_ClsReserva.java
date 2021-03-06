@@ -79,8 +79,18 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
 
     }
 
-    public void borrarReserva(int id) {
+    public void borrarReserva(int id_reserva) {
 
+        ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+
+        Object[] datosIdReserva = new Object[3];
+        datosIdReserva[0] = "int";
+        datosIdReserva[1] = "id_reserva";
+        datosIdReserva[2] = id_reserva;
+        
+        parametros.add(datosIdReserva);
+        
+        executeQuery("borrarReserva(?)", parametros);
     }
 
    public List<Cm_ClsReserva> mostrarReservasXIdCliente(int id_cliente_fk) {
@@ -105,15 +115,11 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
             parametros.add(datosNombre);
 
             for (Object[] param : parametros) {
-                 System.out.println("param[0]: " + param[0]);
                 if (param[0].equals("String")) {
                     String columnName = String.valueOf(param[1]);
                     String columnValue = String.valueOf(param[2]);
                     cs.setString(columnName, columnValue);
                 } else if (param[0].equals("int")) {
-                       System.out.println("param[0]: " + param[0]);
-                       System.out.println("columnName: " + param[1]);
-                       System.out.println("columnValue: " + param[2]);
                     String columnName = String.valueOf(param[1]);
                     int columnValue = (int) (param[2]);
                     cs.setInt(columnName, columnValue);
@@ -131,9 +137,6 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
 
             
             while (rs.next()) {
-
-                   System.out.println("Id: " + rs.getString(1));//id
-                  System.out.println("Nombre: " + rs.getString(2));//nombre
                 listaReserva.add(new Cm_ClsReserva(
                         (int) rs.getInt("id"),
                         (Date) rs.getDate("fecha"),
@@ -151,7 +154,7 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
         } catch (Exception e) {
             System.out.println("Cayó Exception: " +e.getMessage());
         }
-       System.out.println("listaReserva.size(): " + listaReserva.size());
+      
         return listaReserva;
 
     }

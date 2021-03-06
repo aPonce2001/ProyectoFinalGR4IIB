@@ -43,4 +43,7 @@ public class Ng_ClsReserva {
        return dt_reserva.mostrarReservaAll();
      }
     
+     public void borrarReserva(int id_reserva ) {
+          dt_reserva.borrarReserva(id_reserva); 
+     }
 }
