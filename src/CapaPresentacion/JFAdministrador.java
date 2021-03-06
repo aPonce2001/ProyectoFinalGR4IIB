@@ -3,26 +3,41 @@ package CapaPresentacion;
 
 //@author Andrés Ponce
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import CapaComun.*;
 import CapaDatos.*;
 import CapaNegocio.*;
 import java.util.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class JFAdministrador extends javax.swing.JFrame {
     
     private JFLogin jfLogin;
-    Ng_ClsClase ng_clsClase;
+    Ng_ClsPais ng_clsPais = new Ng_ClsPais();
+    Ng_ClsComida ng_clsComida = new Ng_ClsComida();
+    Ng_ClsClase ng_clsClase = new Ng_ClsClase();
+    Ng_ClsAsiento ng_clsAsiento = new Ng_ClsAsiento();
+    List<Cm_ClsClase> listaClasesCB;
+    List<Cm_ClsPais> listaPaises;
+    List<Cm_ClsComida> listaComidas;
     List<Cm_ClsClase> listaClases;
+    List<Cm_ClsAsiento> listaAsientos;
     
     public JFAdministrador() {
-        this.listaClases = this.ng_clsClase.mostrarClaseAll(jCBClase);
+        this.listaClasesCB = this.ng_clsClase.mostrarClaseAll(jCBClase);
         initComponents();
         this.setLocationRelativeTo(null);
         this.jLMapaMundi.setIcon(new ImageIcon("./src/Imagenes/Mapa Mundi.jpg"));
         this.jLImagenComida.setIcon(new ImageIcon("./src/Imagenes/ImagenComida.jpg"));
-        
-        this.listaClases = this.ng_clsClase.mostrarClaseAll(jCBClase);
+        this.ng_clsPais = new Ng_ClsPais();
+        this.ng_clsComida = new Ng_ClsComida();
+        this.ng_clsClase = new Ng_ClsClase();
+        this.ng_clsAsiento = new Ng_ClsAsiento();
+        this.listaClasesCB = this.ng_clsClase.mostrarClaseAll(jCBClase);
+        this.llenarTablaPaises();
+        this.llenarTablaComidas();
+        this.llenarTablaClases();
     }
 
     @SuppressWarnings("unchecked")
@@ -82,6 +97,7 @@ public class JFAdministrador extends javax.swing.JFrame {
 
         jTPEntidades.setBorder(javax.swing.BorderFactory.createTitledBorder("Entidades"));
 
+        jTPaises.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTPaises.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -192,16 +208,17 @@ public class JFAdministrador extends javax.swing.JFrame {
 
         jTPEntidades.addTab("País", jPPais);
 
+        jTComidas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTComidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Comida"
+                "N.º", "Comida"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -287,16 +304,17 @@ public class JFAdministrador extends javax.swing.JFrame {
 
         jTPEntidades.addTab("Comida", jPComida);
 
+        jTClases.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTClases.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre de la clase", "Capacidad"
+                "N.º", "Nombre de la clase", "Capacidad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -387,16 +405,17 @@ public class JFAdministrador extends javax.swing.JFrame {
 
         jTPEntidades.addTab("Clase", jPClase);
 
+        jTable3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Ubicación", "Estado", "Clase"
+                "N.º", "Ubicación", "Estado", "Clase"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -538,13 +557,67 @@ public class JFAdministrador extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void llenarTablaPaises(){
+        this.listaPaises = this.ng_clsPais.mostrarPaisAll(new JComboBox(), false, 0);
+        DefaultTableModel modeloTabla = (DefaultTableModel)this.jTPaises.getModel();
+        modeloTabla.setNumRows(0);
+        Object[] fila = new Object[2];
+        for(Cm_ClsPais aux : this.listaPaises){
+            fila[0] = aux.getId();
+            fila[1] = aux.getNombre();
+            modeloTabla.addRow(fila);
+        }
+    }
+    
+    private void llenarTablaComidas(){
+        this.listaComidas = this.ng_clsComida.mostrarComidaTabla();
+        DefaultTableModel modeloTabla = (DefaultTableModel)this.jTComidas.getModel();
+        modeloTabla.setNumRows(0);
+        Object[] fila = new Object[2];
+        for(Cm_ClsComida aux : this.listaComidas){
+            fila[0] = aux.getId();
+            fila[1] = aux.getNombre();
+            modeloTabla.addRow(fila);
+        }
+    }
+    
+    private void llenarTablaClases(){
+        this.listaClases = this.ng_clsClase.mostrarClaseAll(new JComboBox());
+        DefaultTableModel modeloTabla = (DefaultTableModel)this.jTClases.getModel();
+        modeloTabla.setNumRows(0);
+        Object[] fila = new Object[3];
+        for(Cm_ClsClase aux : this.listaClases){
+            fila[0] = aux.getId();
+            fila[1] = aux.getNombre();
+            fila[2] = aux.getCapacidad();
+            modeloTabla.addRow(fila);
+        }
+    }
+    
+    /*private void llenarTablaAsientos(){
+        this.listaAsientos = this.ng_clsAsiento.
+        DefaultTableModel modeloTabla = (DefaultTableModel)this.jTClases.getModel();
+        modeloTabla.setNumRows(0);
+        Object[] fila = new Object[3];
+        for(Cm_ClsClase aux : this.listaClases){
+            fila[0] = aux.getId();
+            fila[1] = aux.getNombre();
+            fila[2] = aux.getCapacidad();
+            modeloTabla.addRow(fila);
+        }
+    }*/
+    
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jBSalirActionPerformed
-
+    
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.listaClases = this.ng_clsClase.mostrarClaseAll(jCBClase);
+        this.llenarTablaPaises();
+        this.llenarTablaComidas();
+        this.llenarTablaClases();
+        this.jCBClase.removeAllItems();
+        this.listaClasesCB = this.ng_clsClase.mostrarClaseAll(jCBClase);
     }//GEN-LAST:event_formWindowOpened
 
     private void jTFComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFComidaActionPerformed

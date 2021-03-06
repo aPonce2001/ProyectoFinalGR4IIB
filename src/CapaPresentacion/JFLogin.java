@@ -55,7 +55,7 @@ public class JFLogin extends javax.swing.JFrame {
 
         jLabel1.setText("Modo");
 
-        jLabel2.setText("Usuario:");
+        jLabel2.setText("Pasaporte:");
 
         jLabel3.setText("Contraseña:");
 
