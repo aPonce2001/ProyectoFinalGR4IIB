@@ -191,7 +191,7 @@ public class JFRegistroCliente extends javax.swing.JFrame {
         if (respuesta >= 1) {
             JOptionPane.showMessageDialog(null, "Registro realizado con éxito");
         } else {
-            JOptionPane.showMessageDialog(null, "Ocurrio un error");
+            JOptionPane.showMessageDialog(null, "Ocurrió un error.");
         }
         limpiarCamposRegistro();
         dispose();
@@ -210,9 +210,6 @@ public class JFRegistroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jCBPaisActionPerformed
 
     private void jBCancelarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarClienteActionPerformed
-        JFLogin login;
-        login = new JFLogin();
-        login.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBCancelarClienteActionPerformed
 
