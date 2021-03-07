@@ -5,11 +5,10 @@ package CapaPresentacion;
 
 import javax.swing.*;
 import CapaComun.*;
-import CapaDatos.*;
 import CapaNegocio.*;
 import java.util.*;
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.regex.*;
 
 public class JFAdministrador extends javax.swing.JFrame {
     
@@ -23,6 +22,10 @@ public class JFAdministrador extends javax.swing.JFrame {
     List<Cm_ClsComida> listaComidas;
     List<Cm_ClsClase> listaClases;
     List<Cm_ClsAsiento> listaAsientos;
+    private Pattern patNombrePais = Pattern.compile("[a-zA-ZñáéíóúÑÁÉÍÓÚ\\s]{1,70}");
+    private Pattern patNombres = Pattern.compile("[a-zA-ZñáéíóúÑÁÉÍÓÚ\\s]{1,25}");
+    private Pattern patCapacidad = Pattern.compile("[0-9]+");
+    private Pattern patContrasenia = Pattern.compile("^(?=.*[0-9])(?=.*[a-zñáéíóú])(?=.*[A-ZÑÁÉÍÓÚ]).{6,64}$");
     
     public JFAdministrador() {
         this.listaClasesCB = this.ng_clsClase.mostrarClaseAll(jCBClase);
@@ -54,6 +57,7 @@ public class JFAdministrador extends javax.swing.JFrame {
         jTFNombrePais = new javax.swing.JTextField();
         jTFCodigoPais = new javax.swing.JTextField();
         jBAddPais = new javax.swing.JButton();
+        jLMaximoPais = new javax.swing.JLabel();
         jLMapaMundi = new javax.swing.JLabel();
         jPComida = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -62,6 +66,7 @@ public class JFAdministrador extends javax.swing.JFrame {
         jBAddComida = new javax.swing.JButton();
         jLComida = new javax.swing.JLabel();
         jTFComida = new javax.swing.JTextField();
+        jLMaximoComida = new javax.swing.JLabel();
         jLImagenComida = new javax.swing.JLabel();
         jPClase = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -72,6 +77,7 @@ public class JFAdministrador extends javax.swing.JFrame {
         jTFNombreClase = new javax.swing.JTextField();
         jTFCapacidad = new javax.swing.JTextField();
         jBAddClase = new javax.swing.JButton();
+        jLMaximoClase = new javax.swing.JLabel();
         jPAsiento = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
@@ -141,6 +147,9 @@ public class JFAdministrador extends javax.swing.JFrame {
             }
         });
 
+        jLMaximoPais.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLMaximoPais.setText("Máximo 70 caracteres");
+
         javax.swing.GroupLayout jPAgregarPaisLayout = new javax.swing.GroupLayout(jPAgregarPais);
         jPAgregarPais.setLayout(jPAgregarPaisLayout);
         jPAgregarPaisLayout.setHorizontalGroup(
@@ -154,13 +163,16 @@ public class JFAdministrador extends javax.swing.JFrame {
                             .addComponent(jLNombrePais))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPAgregarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFNombrePais)
+                            .addGroup(jPAgregarPaisLayout.createSequentialGroup()
+                                .addComponent(jLMaximoPais)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jTFNombrePais, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                             .addComponent(jTFCodigoPais))
                         .addContainerGap())
                     .addGroup(jPAgregarPaisLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(jBAddPais)
-                        .addContainerGap(61, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPAgregarPaisLayout.setVerticalGroup(
             jPAgregarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,8 +186,10 @@ public class JFAdministrador extends javax.swing.JFrame {
                     .addComponent(jLNombrePais)
                     .addComponent(jTFNombrePais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLMaximoPais)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBAddPais)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
 
         jLMapaMundi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -200,9 +214,9 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addGroup(jPPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPPaisLayout.createSequentialGroup()
-                        .addComponent(jPAgregarPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLMapaMundi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPAgregarPais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLMapaMundi, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
 
@@ -244,33 +258,39 @@ public class JFAdministrador extends javax.swing.JFrame {
             }
         });
 
+        jLMaximoComida.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLMaximoComida.setText("Máximo 25 caracteres");
+
         javax.swing.GroupLayout jPAgregarComidaLayout = new javax.swing.GroupLayout(jPAgregarComida);
         jPAgregarComida.setLayout(jPAgregarComidaLayout);
         jPAgregarComidaLayout.setHorizontalGroup(
             jPAgregarComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarComidaLayout.createSequentialGroup()
-                .addContainerGap(69, Short.MAX_VALUE)
+                .addContainerGap(70, Short.MAX_VALUE)
                 .addComponent(jBAddComida)
-                .addGap(58, 58, 58))
+                .addGap(57, 57, 57))
             .addGroup(jPAgregarComidaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPAgregarComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFComida)
                     .addGroup(jPAgregarComidaLayout.createSequentialGroup()
-                        .addComponent(jLComida)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTFComida))
+                        .addGroup(jPAgregarComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLComida)
+                            .addComponent(jLMaximoComida))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPAgregarComidaLayout.setVerticalGroup(
             jPAgregarComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarComidaLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLComida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTFComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBAddComida)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLMaximoComida)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBAddComida))
         );
 
         jLImagenComida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -297,7 +317,7 @@ public class JFAdministrador extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPComidaLayout.createSequentialGroup()
                         .addComponent(jPAgregarComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(16, 16, 16)
                         .addComponent(jLImagenComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -348,6 +368,9 @@ public class JFAdministrador extends javax.swing.JFrame {
             }
         });
 
+        jLMaximoClase.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLMaximoClase.setText("Máximo 25 caracteres");
+
         javax.swing.GroupLayout jPAgregarClaseLayout = new javax.swing.GroupLayout(jPAgregarClase);
         jPAgregarClase.setLayout(jPAgregarClaseLayout);
         jPAgregarClaseLayout.setHorizontalGroup(
@@ -359,11 +382,13 @@ public class JFAdministrador extends javax.swing.JFrame {
                     .addComponent(jLNombreClase))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPAgregarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPAgregarClaseLayout.createSequentialGroup()
-                        .addComponent(jBAddClase)
-                        .addGap(0, 44, Short.MAX_VALUE))
                     .addComponent(jTFNombreClase)
-                    .addComponent(jTFCapacidad))
+                    .addComponent(jTFCapacidad)
+                    .addGroup(jPAgregarClaseLayout.createSequentialGroup()
+                        .addGroup(jPAgregarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBAddClase)
+                            .addComponent(jLMaximoClase))
+                        .addGap(0, 44, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPAgregarClaseLayout.setVerticalGroup(
@@ -373,13 +398,15 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addGroup(jPAgregarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLNombreClase)
                     .addComponent(jTFNombreClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLMaximoClase)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPAgregarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLCapacidad)
-                    .addComponent(jTFCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLCapacidad))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBAddClase)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPClaseLayout = new javax.swing.GroupLayout(jPClase);
@@ -439,9 +466,9 @@ public class JFAdministrador extends javax.swing.JFrame {
             }
         });
 
-        jCBUbicacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elije la ubicación", "Intermedio", "Ventana" }));
+        jCBUbicacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opción", "Intermedio", "Ventana" }));
 
-        jCBEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elije el estado", "Disponible", "Ocupado" }));
+        jCBEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opción", "Disponible", "Ocupado" }));
 
         javax.swing.GroupLayout jPAgregarAsientoLayout = new javax.swing.GroupLayout(jPAgregarAsiento);
         jPAgregarAsiento.setLayout(jPAgregarAsientoLayout);
@@ -647,19 +674,50 @@ public class JFAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFCapacidadActionPerformed
 
     private void jBAddPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddPaisActionPerformed
-        
+        Matcher matCodigo = this.patCapacidad.matcher(this.jTFCodigoPais.getText());
+        Matcher matNombrePais = this.patNombrePais.matcher(this.jTFNombrePais.getText());
+        if(matCodigo.matches() && matNombrePais.matches()){
+            
+        }else{
+            String error = "";
+            error += matCodigo.matches()?"":"- El código de país ingresado no es válido.\n";
+            error += matNombrePais.matches()?"":"- El nombre del país ingresado no es válido.\n";
+            JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n" + error, "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jBAddPaisActionPerformed
 
     private void jBAddComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddComidaActionPerformed
-        
+        Matcher matNombreComida = this.patNombres.matcher(this.jTFComida.getText());
+        if(matNombreComida.matches()){
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n- El nombre de la comida ingresada no es válido.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jBAddComidaActionPerformed
 
     private void jBAddClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddClaseActionPerformed
-        
+        Matcher matNombreClase = this.patNombres.matcher(this.jTFNombreClase.getText());
+        Matcher matCapacidad = this.patCapacidad.matcher(this.jTFCapacidad.getText());
+        if(matNombreClase.matches() && matCapacidad.matches()){
+            
+        }else{
+            String error = "";
+            error += matNombreClase.matches()?"":"- El nombre de la clase ingresada no es válido.\n";
+            error += matCapacidad.matches()?"":"- La capacidad ingresada no es válida.\n";
+            JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n" + error, "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jBAddClaseActionPerformed
 
     private void jBAddAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddAsientoActionPerformed
-        
+        if(this.jCBUbicacion.getSelectedIndex() != 0 && this.jCBEstado.getSelectedIndex() != 0 && this.jCBClase.getSelectedIndex() != 0){
+            
+        }else{
+            String error = "";
+            error += (this.jCBUbicacion.getSelectedIndex() != 0)?"":"- No ha seleccionado una ubicación.\n";
+            error += (this.jCBEstado.getSelectedIndex() != 0)?"":"- No ha seleccionado un estado.\n";
+            error += (this.jCBClase.getSelectedIndex() != 0)?"":"- No ha seleccionado una clase.\n";
+            JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n" + error, "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jBAddAsientoActionPerformed
 
     public static void main(String args[]) {
@@ -710,6 +768,9 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLEstado;
     private javax.swing.JLabel jLImagenComida;
     private javax.swing.JLabel jLMapaMundi;
+    private javax.swing.JLabel jLMaximoClase;
+    private javax.swing.JLabel jLMaximoComida;
+    private javax.swing.JLabel jLMaximoPais;
     private javax.swing.JLabel jLNombreClase;
     private javax.swing.JLabel jLNombrePais;
     private javax.swing.JLabel jLUbicacion;
