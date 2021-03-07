@@ -699,7 +699,14 @@ public class JFAdministrador extends javax.swing.JFrame {
         Matcher matNombreClase = this.patNombres.matcher(this.jTFNombreClase.getText());
         Matcher matCapacidad = this.patCapacidad.matcher(this.jTFCapacidad.getText());
         if(matNombreClase.matches() && matCapacidad.matches()){
-            
+            int respuesta = this.ng_clsClase.insertarClase(this.jTFNombreClase.getText(), Integer.parseInt(this.jTFCapacidad.getText()));
+            if(respuesta >= 1){
+                this.llenarTablaClases();
+                this.jCBClase.removeAllItems();
+                this.listaClasesCB = this.ng_clsClase.mostrarClaseAll(jCBClase);
+            }else{
+                JOptionPane.showMessageDialog(null, "Ocurrió un error con la solicitud.\nPor favor, inténtelo más tarde.\n\nSi el problema persiste, por favor, comuníquese con los estudiantes.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+            }
         }else{
             String error = "";
             error += matNombreClase.matches()?"":"- El nombre de la clase ingresada no es válido.\n";
