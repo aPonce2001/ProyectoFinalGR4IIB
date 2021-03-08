@@ -57,7 +57,7 @@ public class Dt_ClsClase extends Dt_ClsConexion {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
-            String SQL = "{call DB_A7086C_Viaje.dbo." + storeProcedure + "}";
+            String SQL = "{call DB_Viaje.dbo." + storeProcedure + "}";
      
             CallableStatement cs = con.prepareCall(SQL);
              
