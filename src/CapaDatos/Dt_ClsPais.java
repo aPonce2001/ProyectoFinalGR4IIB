@@ -25,7 +25,15 @@ public class Dt_ClsPais extends Dt_ClsConexion {
     }
 
     public int insertarPais(String nombre) {
-        return 0;
+     
+        ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+        Object[] datosPais = new Object[3];
+        datosPais[0] = "String";
+        datosPais[1] = "nombre_Pais";
+        datosPais[2] = nombre;
+        
+        parametros.add(datosPais);
+        return executeQuery("insertarPais(?)", parametros);
 
     }
 

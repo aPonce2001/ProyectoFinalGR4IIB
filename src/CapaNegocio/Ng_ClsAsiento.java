@@ -7,6 +7,7 @@ package CapaNegocio;
 
 import CapaComun.Cm_ClsAsiento;
 import CapaComun.Cm_ClsCliente;
+import CapaComun.Cm_ClsReserva;
 import CapaDatos.Dt_ClsAsiento;
 import java.util.List;
 
@@ -28,4 +29,8 @@ public class Ng_ClsAsiento {
          return dt_asiento.actualizarEstadoAsiento(id, ubicacion, estado, id_clase_FK);
      }
    
+     
+     public List<Cm_ClsAsiento> mostrarAsientoAll() {
+       return dt_asiento.mostrarAsientoAll();
+     }
 }

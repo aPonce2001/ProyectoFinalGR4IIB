@@ -29,4 +29,8 @@ public class Ng_ClsComida {
     public List<Cm_ClsComida> mostrarComidaTabla() {
          return dt_comida.mostrarComidaTabla();
      }
+    
+    public int insertarComida(String nombre) {
+        return dt_comida.insertarComida(nombre);
+   }
 }

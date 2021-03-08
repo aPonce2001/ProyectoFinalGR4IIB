@@ -19,8 +19,16 @@ public class Dt_ClsComida extends Dt_ClsConexion {
     public Dt_ClsComida() {
     }
     
-    public void insertarComida (String nombre){
+    public int insertarComida (String nombre){
+       ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+        Object[] datosComida = new Object[3];
+        datosComida[0] = "String";
+        datosComida[1] = "nombre_comida";
+        datosComida[2] = nombre;
+ 
+        parametros.add(datosComida);
         
+        return executeQuery("insertarComida(?)", parametros);
     }
     
     public void actualizarComida (int id,String nombre){
