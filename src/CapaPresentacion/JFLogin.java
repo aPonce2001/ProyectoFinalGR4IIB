@@ -16,6 +16,7 @@ public class JFLogin extends javax.swing.JFrame {
 
     JFRegistroCliente jFRegistroCliente;
     JFReserva jFReserva;
+    JFAdministrador jFAdministrador;
     Ng_ClsCliente ng_cliente;
     Cm_ClsCliente cm_cliente;
 
@@ -55,7 +56,7 @@ public class JFLogin extends javax.swing.JFrame {
 
         jLabel1.setText("Modo");
 
-        jLabel2.setText("Usuario:");
+        jLabel2.setText("Pasaporte:");
 
         jLabel3.setText("Contraseña:");
 
@@ -189,6 +190,7 @@ public class JFLogin extends javax.swing.JFrame {
                     } else {
                         jFReserva = new JFReserva(cm_cliente);
                         jFReserva.setVisible(true);
+                        dispose();
                     }
                 }
                 break;
@@ -197,16 +199,15 @@ public class JFLogin extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Ingrese campos obligatorios");
                 } else {
                     if (password.equals(passwordIngresado) && usuario.equals(usuarioIngresado)) {
-                        jFReserva = new JFReserva();
-                        jFReserva.setVisible(true);
+                        jFAdministrador = new JFAdministrador();
+                        jFAdministrador.setVisible(true);
+                        dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "Ingrese credenciales válidas");
-                        dispose();
                     }
                 }
                 break;
         }
-        dispose();
     }//GEN-LAST:event_jBIngresarActionPerformed
 
     private void jBRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegistrarseActionPerformed
