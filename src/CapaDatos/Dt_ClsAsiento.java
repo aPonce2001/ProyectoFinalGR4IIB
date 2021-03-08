@@ -134,7 +134,7 @@ public class Dt_ClsAsiento extends Dt_ClsConexion {
     public List<Cm_ClsAsiento> mostrarAsientoAll() {
 
        List<Cm_ClsAsiento> listaAsiento = new ArrayList<Cm_ClsAsiento>();
-        String storeProcedure = "mostrarAsientoAll(?)";
+        String storeProcedure = "mostrarAsientoAll()";
 
         int id = 0;
         try {

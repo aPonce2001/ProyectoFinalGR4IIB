@@ -20,16 +20,16 @@ public class Dt_ClsConexion {
     }
     
     public static String getConnectionString() {
-        String connectionURL = "jdbc:sqlserver://localhost;"
+        String connectionURL = "jdbc:sqlserver://sql5054.site4now.net;"
                     + "databaseName="+getDbName()+";"
-                    + "user=admin;"
+                    + "user=DB_A7086C_Viaje_admin;"
                     + "password=Admin1234;";
 
         return connectionURL;
     }
     
     public static String getDbName() {
-        String dbName = "DB_Viaje";
+        String dbName = "DB_A7086C_Viaje";
         return dbName;
     }
 

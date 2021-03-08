@@ -23,7 +23,6 @@ public class JFLogin extends javax.swing.JFrame {
     public JFLogin() {
         initComponents();
         this.jTUsuario.requestFocus();
-        this.jPFContrasena.requestFocus();
         jFRegistroCliente = new JFRegistroCliente();
         ng_cliente = new Ng_ClsCliente();
         this.setLocationRelativeTo(null);
@@ -142,11 +141,11 @@ public class JFLogin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBIngresar)
-                        .addGap(155, 155, 155)
-                        .addComponent(jBRegistrarse))
+                        .addComponent(jBRegistrarse)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBIngresar))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -155,11 +154,11 @@ public class JFLogin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBIngresar)
                     .addComponent(jBRegistrarse))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -216,15 +215,15 @@ public class JFLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jBRegistrarseActionPerformed
 
     private void jCBModoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBModoActionPerformed
-        // TODO add your handling code here:
+        this.jTUsuario.requestFocus();
     }//GEN-LAST:event_jCBModoActionPerformed
 
     private void jPFContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPFContrasenaActionPerformed
-        // TODO add your handling code here:
+        this.jBIngresar.doClick();
     }//GEN-LAST:event_jPFContrasenaActionPerformed
 
     private void jTUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTUsuarioActionPerformed
-        // TODO add your handling code here:
+        this.jBIngresar.doClick();
     }//GEN-LAST:event_jTUsuarioActionPerformed
 
     /**

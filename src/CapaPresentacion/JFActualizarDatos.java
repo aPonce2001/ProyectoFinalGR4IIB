@@ -63,7 +63,7 @@ public class JFActualizarDatos extends javax.swing.JFrame {
         jBActualizarCliente = new javax.swing.JButton();
         jBCancelarCliente = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Actualización");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Actualización de datos"));
@@ -157,6 +157,11 @@ public class JFActualizarDatos extends javax.swing.JFrame {
         });
 
         jBCancelarCliente.setText("Cancelar");
+        jBCancelarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCancelarClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,6 +226,10 @@ public class JFActualizarDatos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ocurrio un error!");
         }
     }//GEN-LAST:event_jBActualizarClienteActionPerformed
+
+    private void jBCancelarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarClienteActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jBCancelarClienteActionPerformed
 
     /**
      * @param args the command line arguments

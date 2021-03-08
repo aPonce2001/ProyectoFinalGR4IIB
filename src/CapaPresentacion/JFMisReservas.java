@@ -61,7 +61,7 @@ public class JFMisReservas extends javax.swing.JFrame {
         jBAceptar = new javax.swing.JButton();
         jBBorrarReserva = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel1.setText("MIS RESERVAS");
@@ -92,10 +92,10 @@ public class JFMisReservas extends javax.swing.JFrame {
             }
         ));
         jTablaMisReservas.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jTablaMisReservasAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -163,7 +163,7 @@ public class JFMisReservas extends javax.swing.JFrame {
             rowData[0] = listaMisReserva.get(i).getFecha();
             rowData[1] = listaMisReserva.get(i).getIdAsientoFk();
             System.out.println("listaMisReserva.get(i).getIdComidaFk(): "+listaMisReserva.get(i).getIdComidaFk());
-            rowData[2] = listaAllComida.get(listaMisReserva.get(i).getIdComidaFk()).getNombre();
+            rowData[2] = listaAllComida.get(listaMisReserva.get(i).getIdComidaFk() - 1).getNombre();
             rowData[3] = "ELIMINAR";
             model.addRow(rowData);
         }

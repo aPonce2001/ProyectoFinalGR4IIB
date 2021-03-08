@@ -24,16 +24,24 @@ public class Dt_ClsPais extends Dt_ClsConexion {
     public Dt_ClsPais() {
     }
 
-    public int insertarPais(String nombre) {
+    public int insertarPais(int ID, String nombre) {
      
         ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+         
+        Object[] id = new Object[3];
+        id[0] = "int";
+        id[1] = "id_Pais";
+        id[2] = ID;
+        
         Object[] datosPais = new Object[3];
         datosPais[0] = "String";
         datosPais[1] = "nombre_Pais";
         datosPais[2] = nombre;
         
+        parametros.add(id);
         parametros.add(datosPais);
-        return executeQuery("insertarPais(?)", parametros);
+        
+        return executeQuery("insertarPais(?,?)", parametros);
 
     }
 
