@@ -4,8 +4,7 @@ import CapaComun.Cm_ClsComboItem;
 import CapaComun.Cm_ClsPais;
 import CapaNegocio.Ng_ClsCliente;
 import CapaNegocio.Ng_ClsPais;
-import java.util.*;
-import java.util.regex.*;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,9 +15,6 @@ public class JFRegistroCliente extends javax.swing.JFrame {
     Ng_ClsCliente ng_cliente;
     Ng_ClsPais ng_pais;
     List<Cm_ClsPais> listaPais;
-    private Pattern patNombre = Pattern.compile("[a-zA-ZñáéíóúÑÁÉÍÓÚ\\s]{1,25}");
-    private Pattern patPasaporte = Pattern.compile("[0-9]{10}");
-    private Pattern patContrasenia = Pattern.compile("^(?=.*[0-9])(?=.*[a-zñáéíóú])(?=.*[A-ZÑÁÉÍÓÚ]).{6,64}$");
 
     public JFRegistroCliente() {
         initComponents();
@@ -49,9 +45,6 @@ public class JFRegistroCliente extends javax.swing.JFrame {
         jPFContraseniaCliente = new javax.swing.JPasswordField();
         jCBPais = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        jLMaximo1 = new javax.swing.JLabel();
-        jLMaximo2 = new javax.swing.JLabel();
-        jLFormatoContrasenia = new javax.swing.JLabel("<html>La contraseña debe tener de 6 a 64 caracteres y contener una combinación de caracteres en mayúscula, minúscula y números.</html>");
         jBRegistrarCliente = new javax.swing.JButton();
         jBCancelarCliente = new javax.swing.JButton();
 
@@ -64,9 +57,9 @@ public class JFRegistroCliente extends javax.swing.JFrame {
 
         jLabel2.setText("Apellido:");
 
-        jLabel3.setText("Pasaporte:");
+        jLabel3.setText("Cedula:");
 
-        jLabel4.setText("País:");
+        jLabel4.setText("Pais:");
 
         jLabel6.setText("Contraseña:");
 
@@ -76,83 +69,68 @@ public class JFRegistroCliente extends javax.swing.JFrame {
             }
         });
 
+        jCBPais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBPaisActionPerformed(evt);
+            }
+        });
+
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Registro.jpg"))); // NOI18N
-
-        jLMaximo1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jLMaximo1.setText("Máximo 25 caracteres");
-
-        jLMaximo2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jLMaximo2.setText("Máximo 25 caracteres");
-
-        jLFormatoContrasenia.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jLFormatoContrasenia.setText("<html>La contraseña debe tener de 6 a 64 caracteres y contener una combinación de caracteres en mayúscula, minúscula y números.</html>");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLFormatoContrasenia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCBPais, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLMaximo1)
-                            .addComponent(jLMaximo2)
-                            .addComponent(jTFNombreRegistroCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                            .addComponent(jTFApellidoRegistroCliente)
-                            .addComponent(jTFCedulaRegistroCliente)
-                            .addComponent(jPFContraseniaCliente))))
-                .addGap(468, 468, 468))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1))
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFCedulaRegistroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFApellidoRegistroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFNombreRegistroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPFContraseniaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBPais, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(62, 62, 62))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTFNombreRegistroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jTFApellidoRegistroCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFNombreRegistroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLMaximo1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFApellidoRegistroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLMaximo2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFCedulaRegistroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jTFCedulaRegistroCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jPFContraseniaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLFormatoContrasenia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCBPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCBPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addContainerGap())
         );
 
         jBRegistrarCliente.setText("Registrar");
@@ -174,26 +152,26 @@ public class JFRegistroCliente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBRegistrarCliente)
-                .addGap(36, 36, 36)
+                .addGap(52, 52, 52)
                 .addComponent(jBCancelarCliente)
-                .addGap(49, 49, 49))
+                .addGap(60, 60, 60))
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(29, 29, 29)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(24, 24, 24)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBRegistrarCliente)
                     .addComponent(jBCancelarCliente))
-                .addContainerGap())
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -204,35 +182,22 @@ public class JFRegistroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFNombreRegistroClienteActionPerformed
 
     private void jBRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegistrarClienteActionPerformed
-        Matcher matNombre = this.patNombre.matcher(this.jTFNombreRegistroCliente.getText());
-        Matcher matApellido = this.patNombre.matcher(this.jTFApellidoRegistroCliente.getText());
-        Matcher matPasaporte = this.patPasaporte.matcher(this.jTFCedulaRegistroCliente.getText());
-        Matcher matContrasenia = this.patContrasenia.matcher(this.jPFContraseniaCliente.getText());
-        if(matNombre.matches() && matApellido.matches() && matPasaporte.matches() && matContrasenia.matches() && this.jCBPais.getSelectedIndex() != 0){
-            Object item = jCBPais.getSelectedItem();
-            String value = ((Cm_ClsComboItem) item).getValue();
-            System.out.println("value es: " + value);
-
-            int respuesta = ng_cliente.insertarCliente(jTFNombreRegistroCliente.getText(),
-                    jTFApellidoRegistroCliente.getText(), jTFCedulaRegistroCliente.getText(),
-                    jPFContraseniaCliente.getText(),Integer.parseInt(value));
-
-            if (respuesta >= 1) {
-                JOptionPane.showMessageDialog(null, "Registro realizado con éxito");
-                    limpiarCamposRegistro();
-                    dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Ocurrió un error.\nVerifique la información e inténtelo nuevamente.\n\nSi el problema persiste, comuníquese inmediatamente con los estudiantes.");
-            }
-        }else{
-            String error = "";
-            error += matNombre.matches()?"":"- El nombre ingresado no es válido.\n";
-            error += matApellido.matches()?"":"- El apellido ingresado no es válido.\n";
-            error += matPasaporte.matches()?"":"- El número de pasaporte ingresado no es válido.\n";
-            error += matContrasenia.matches()?"":"- La contraseña ingresada no es válida. La contraseña debe tener de 6 a 64 caracteres y contener una combinación de caracteres en mayúscula, minúscula y números.\n";
-            error += this.jCBPais.getSelectedIndex() != 0?"":"- No ha seleccionado un país.\n";
-            JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n" + error, "Error en el registro", JOptionPane.ERROR_MESSAGE);
+        Object item = jCBPais.getSelectedItem();
+        String value = ((Cm_ClsComboItem) item).getValue();
+        System.out.println("value es: " + value);
+        
+        int respuesta = ng_cliente.insertarCliente(jTFNombreRegistroCliente.getText(),
+                jTFApellidoRegistroCliente.getText(), jTFCedulaRegistroCliente.getText(),
+                jPFContraseniaCliente.getText(),Integer.parseInt(value));
+        
+        if (respuesta >= 1) {
+            JOptionPane.showMessageDialog(null, "Registro realizado con éxito");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error");
         }
+        limpiarCamposRegistro();
+        dispose();
+        
     }//GEN-LAST:event_jBRegistrarClienteActionPerformed
 
     public void limpiarCamposRegistro(){
@@ -242,7 +207,14 @@ public class JFRegistroCliente extends javax.swing.JFrame {
         jPFContraseniaCliente.setText("");
         jCBPais.setSelectedIndex(0);
     }
+    private void jCBPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPaisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBPaisActionPerformed
+
     private void jBCancelarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarClienteActionPerformed
+        JFLogin login;
+        login = new JFLogin();
+        login.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBCancelarClienteActionPerformed
 
@@ -285,9 +257,6 @@ public class JFRegistroCliente extends javax.swing.JFrame {
     private javax.swing.JButton jBCancelarCliente;
     private javax.swing.JButton jBRegistrarCliente;
     private javax.swing.JComboBox<String> jCBPais;
-    private javax.swing.JLabel jLFormatoContrasenia;
-    private javax.swing.JLabel jLMaximo1;
-    private javax.swing.JLabel jLMaximo2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
