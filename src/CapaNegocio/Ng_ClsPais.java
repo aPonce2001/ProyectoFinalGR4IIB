@@ -25,4 +25,9 @@ public class Ng_ClsPais {
          return dt_pais.mostrarPaisAll(jCBPais, isUpdateAt, selectedIdx);
      }
      
+     
+     public int insertarPais(String nombre) {
+        return dt_pais.insertarPais(nombre);
+    }
+     
 }
