@@ -21,11 +21,16 @@ public class Dt_ClsConexion {
     
     public static String getConnectionString() {
         String connectionURL = "jdbc:sqlserver://localhost;"
-                    + "databaseName=DB_Viaje;"
+                    + "databaseName="+getDbName()+";"
                     + "user=admin;"
                     + "password=Admin1234;";
 
         return connectionURL;
+    }
+    
+    public static String getDbName() {
+        String dbName = "DB_Viaje";
+        return dbName;
     }
 
     public static int executeQuery(String storeProcedure, ArrayList<Object[]> params) {
@@ -35,9 +40,8 @@ public class Dt_ClsConexion {
 
             Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
-
-            //String SQL = "{call DB_Viaje.dbo.insertarClase(?,?)}";
-            String SQL = "{call DB_Viaje.dbo." +storeProcedure+"}";
+            
+            String SQL = "{call "+getDbName()+".dbo." +storeProcedure+"}";
             CallableStatement cs = con.prepareCall(SQL);
             
             for (Object[] param : params ) {
@@ -95,7 +99,7 @@ public class Dt_ClsConexion {
             Connection con = DriverManager.getConnection(getConnectionString());
             System.out.println("Conexión exitosa");
  
-            String SQL = "{call DB_Viaje.dbo." +storeProcedure+"}";
+            String SQL = "{call "+getDbName()+".dbo." +storeProcedure+"}";
             CallableStatement cs = con.prepareCall(SQL);
             
             for (Object[] param : params ) {
