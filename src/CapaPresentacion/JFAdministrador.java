@@ -30,7 +30,7 @@ public class JFAdministrador extends javax.swing.JFrame {
     public JFAdministrador() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.jLImagenComida.setIcon(new ImageIcon("./src/Imagenes/ImagenComida.jpg"));
+        
         this.ng_clsPais = new Ng_ClsPais();
         this.ng_clsComida = new Ng_ClsComida();
         this.ng_clsClase = new Ng_ClsClase();
@@ -71,11 +71,22 @@ public class JFAdministrador extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTComidas = new javax.swing.JTable();
         jPAgregarComida = new javax.swing.JPanel();
-        jBAddComida = new javax.swing.JButton();
+        jBRmComida = new javax.swing.JButton();
         jLComida = new javax.swing.JLabel();
-        jTFComida = new javax.swing.JTextField();
+        jTFIdComidaRm = new javax.swing.JTextField();
         jLMaximoComida = new javax.swing.JLabel();
-        jLImagenComida = new javax.swing.JLabel();
+        jPAgregarComida1 = new javax.swing.JPanel();
+        jBAddComida1 = new javax.swing.JButton();
+        jLComida1 = new javax.swing.JLabel();
+        jTFComida = new javax.swing.JTextField();
+        jLMaximoComida1 = new javax.swing.JLabel();
+        jPAgregarComida2 = new javax.swing.JPanel();
+        jBModComida = new javax.swing.JButton();
+        jLComida2 = new javax.swing.JLabel();
+        jTFComidaMod = new javax.swing.JTextField();
+        jLMaximoComida2 = new javax.swing.JLabel();
+        jLComida3 = new javax.swing.JLabel();
+        jTFIdComidaMod = new javax.swing.JTextField();
         jPClase = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTClases = new javax.swing.JTable();
@@ -171,7 +182,7 @@ public class JFAdministrador extends javax.swing.JFrame {
                             .addGroup(jPAgregarPaisLayout.createSequentialGroup()
                                 .addComponent(jLMaximoPais)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTFNombrePais, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                            .addComponent(jTFNombrePais, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                             .addComponent(jTFCodigoPais))
                         .addContainerGap())
                     .addGroup(jPAgregarPaisLayout.createSequentialGroup()
@@ -238,7 +249,7 @@ public class JFAdministrador extends javax.swing.JFrame {
                                 .addComponent(jLMaximoPais1)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jTFCodigoPaisActualizar)
-                            .addComponent(jTFNombrePaisActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
+                            .addComponent(jTFNombrePaisActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(jPActualizarPaisLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
@@ -320,7 +331,7 @@ public class JFAdministrador extends javax.swing.JFrame {
         jPPaisLayout.setVerticalGroup(
             jPPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPaisLayout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
+                .addGap(0, 73, Short.MAX_VALUE)
                 .addGroup(jPPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPPaisLayout.createSequentialGroup()
@@ -350,22 +361,28 @@ public class JFAdministrador extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTComidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTComidasMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTComidas);
 
-        jPAgregarComida.setBorder(javax.swing.BorderFactory.createTitledBorder("Agregar comida"));
+        jPAgregarComida.setBorder(javax.swing.BorderFactory.createTitledBorder("Eliminar comida"));
 
-        jBAddComida.setText("Agregar a la base de datos");
-        jBAddComida.addActionListener(new java.awt.event.ActionListener() {
+        jBRmComida.setText("Eliminar desde la base");
+        jBRmComida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBAddComidaActionPerformed(evt);
+                jBRmComidaActionPerformed(evt);
             }
         });
 
-        jLComida.setText("Nombre de la comida:");
+        jLComida.setText("ID Comida:");
 
-        jTFComida.addActionListener(new java.awt.event.ActionListener() {
+        jTFIdComidaRm.setEditable(false);
+        jTFIdComidaRm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFComidaActionPerformed(evt);
+                jTFIdComidaRmActionPerformed(evt);
             }
         });
 
@@ -377,13 +394,13 @@ public class JFAdministrador extends javax.swing.JFrame {
         jPAgregarComidaLayout.setHorizontalGroup(
             jPAgregarComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarComidaLayout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
-                .addComponent(jBAddComida)
+                .addContainerGap(113, Short.MAX_VALUE)
+                .addComponent(jBRmComida)
                 .addGap(57, 57, 57))
             .addGroup(jPAgregarComidaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPAgregarComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFComida)
+                    .addComponent(jTFIdComidaRm)
                     .addGroup(jPAgregarComidaLayout.createSequentialGroup()
                         .addGroup(jPAgregarComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLComida)
@@ -397,14 +414,131 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLComida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFIdComidaRm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLMaximoComida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBAddComida))
+                .addComponent(jBRmComida))
         );
 
-        jLImagenComida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPAgregarComida1.setBorder(javax.swing.BorderFactory.createTitledBorder("Agregar comida"));
+
+        jBAddComida1.setText("Agregar a la base de datos");
+        jBAddComida1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAddComida1ActionPerformed(evt);
+            }
+        });
+
+        jLComida1.setText("Nombre de la comida:");
+
+        jTFComida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFComidaActionPerformed(evt);
+            }
+        });
+
+        jLMaximoComida1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLMaximoComida1.setText("Máximo 25 caracteres");
+
+        javax.swing.GroupLayout jPAgregarComida1Layout = new javax.swing.GroupLayout(jPAgregarComida1);
+        jPAgregarComida1.setLayout(jPAgregarComida1Layout);
+        jPAgregarComida1Layout.setHorizontalGroup(
+            jPAgregarComida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarComida1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBAddComida1)
+                .addGap(57, 57, 57))
+            .addGroup(jPAgregarComida1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPAgregarComida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFComida)
+                    .addGroup(jPAgregarComida1Layout.createSequentialGroup()
+                        .addGroup(jPAgregarComida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLComida1)
+                            .addComponent(jLMaximoComida1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPAgregarComida1Layout.setVerticalGroup(
+            jPAgregarComida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarComida1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLComida1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLMaximoComida1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBAddComida1))
+        );
+
+        jPAgregarComida2.setBorder(javax.swing.BorderFactory.createTitledBorder("Eliminar comida"));
+
+        jBModComida.setText("Modificar desde la base");
+        jBModComida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModComidaActionPerformed(evt);
+            }
+        });
+
+        jLComida2.setText("Nombre de la comida:");
+
+        jTFComidaMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFComidaModActionPerformed(evt);
+            }
+        });
+
+        jLMaximoComida2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLMaximoComida2.setText("Máximo 25 caracteres");
+
+        jLComida3.setText("ID Comida:");
+
+        jTFIdComidaMod.setEditable(false);
+        jTFIdComidaMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFIdComidaModActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPAgregarComida2Layout = new javax.swing.GroupLayout(jPAgregarComida2);
+        jPAgregarComida2.setLayout(jPAgregarComida2Layout);
+        jPAgregarComida2Layout.setHorizontalGroup(
+            jPAgregarComida2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPAgregarComida2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPAgregarComida2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTFComidaMod)
+                    .addComponent(jTFIdComidaMod)
+                    .addGroup(jPAgregarComida2Layout.createSequentialGroup()
+                        .addGroup(jPAgregarComida2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLComida3)
+                            .addComponent(jLComida2)
+                            .addComponent(jLMaximoComida2))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarComida2Layout.createSequentialGroup()
+                .addContainerGap(80, Short.MAX_VALUE)
+                .addComponent(jBModComida)
+                .addGap(77, 77, 77))
+        );
+        jPAgregarComida2Layout.setVerticalGroup(
+            jPAgregarComida2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarComida2Layout.createSequentialGroup()
+                .addComponent(jLComida3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFIdComidaMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLComida2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFComidaMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLMaximoComida2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBModComida)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPComidaLayout = new javax.swing.GroupLayout(jPComida);
         jPComida.setLayout(jPComidaLayout);
@@ -412,24 +546,33 @@ public class JFAdministrador extends javax.swing.JFrame {
             jPComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPComidaLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPAgregarComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLImagenComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPAgregarComida1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPComidaLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jPAgregarComida2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPComidaLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPAgregarComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPComidaLayout.setVerticalGroup(
             jPComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPComidaLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPComidaLayout.createSequentialGroup()
                 .addGroup(jPComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPComidaLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPAgregarComida1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPAgregarComida2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPAgregarComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPComidaLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPComidaLayout.createSequentialGroup()
-                        .addComponent(jPAgregarComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16)
-                        .addComponent(jLImagenComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 59, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -499,7 +642,7 @@ public class JFAdministrador extends javax.swing.JFrame {
                         .addGroup(jPAgregarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jBAddClase)
                             .addComponent(jLMaximoClase))
-                        .addGap(0, 44, Short.MAX_VALUE)))
+                        .addGap(0, 71, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPAgregarClaseLayout.setVerticalGroup(
@@ -568,7 +711,7 @@ public class JFAdministrador extends javax.swing.JFrame {
             jPAsientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPAsientoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 757, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPAsientoLayout.setVerticalGroup(
@@ -694,9 +837,9 @@ public class JFAdministrador extends javax.swing.JFrame {
         this.llenarTablaAsientos();
     }//GEN-LAST:event_formWindowOpened
 
-    private void jTFComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFComidaActionPerformed
-        this.jBAddComida.doClick();
-    }//GEN-LAST:event_jTFComidaActionPerformed
+    private void jTFIdComidaRmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFIdComidaRmActionPerformed
+        this.jBRmComida.doClick();
+    }//GEN-LAST:event_jTFIdComidaRmActionPerformed
 
     private void jBCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarSesionActionPerformed
         this.setVisible(false);
@@ -712,20 +855,17 @@ public class JFAdministrador extends javax.swing.JFrame {
         this.jBAddClase.doClick();
     }//GEN-LAST:event_jTFCapacidadActionPerformed
 
-    private void jBAddComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddComidaActionPerformed
-        Matcher matNombreComida = this.patNombres.matcher(this.jTFComida.getText());
-        if(matNombreComida.matches()){
-            int respuesta = this.ng_clsComida.insertarComida(this.jTFComida.getText());
+    private void jBRmComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRmComidaActionPerformed
+        
+            int respuesta = this.ng_clsComida.eliminarComida(Integer.parseInt(this.jTFIdComidaRm.getText()));
             if(respuesta >= 1){
                 JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
                 this.llenarTablaComidas();
             }else{
-                JOptionPane.showMessageDialog(null, "Ocurrió un error con la solicitud.\nPor favor, inténtelo más tarde.\n\nSi el problema persiste, por favor, comuníquese con los estudiantes.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Existen reservas con esta comida.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n- El nombre de la comida ingresada no es válido.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jBAddComidaActionPerformed
+        
+    }//GEN-LAST:event_jBRmComidaActionPerformed
 
     private void jBAddClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddClaseActionPerformed
         Matcher matNombreClase = this.patNombres.matcher(this.jTFNombreClase.getText());
@@ -811,6 +951,56 @@ public class JFAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBEliminarPaisActionPerformed
 
+    private void jBAddComida1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddComida1ActionPerformed
+       Matcher matNombreComida = this.patNombres.matcher(this.jTFComida.getText());
+        if(matNombreComida.matches()){
+            int respuesta = this.ng_clsComida.insertarComida(this.jTFComida.getText());
+            if(respuesta >= 1){
+                JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
+                this.llenarTablaComidas();
+            }else{
+                JOptionPane.showMessageDialog(null, "Ocurrió un error con la solicitud.\nPor favor, inténtelo más tarde.\n\nSi el problema persiste, por favor, comuníquese con los estudiantes.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n- El nombre de la comida ingresada no es válido.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBAddComida1ActionPerformed
+
+    private void jTFComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFComidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFComidaActionPerformed
+
+    private void jBModComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModComidaActionPerformed
+       Matcher matNombreComida = this.patNombres.matcher(this.jTFComidaMod.getText());
+        if(matNombreComida.matches()){
+            int respuesta = this.ng_clsComida.actualizarComida(Integer.parseInt(jTFIdComidaMod.getText()),this.jTFComidaMod.getText());
+            if(respuesta >= 1){
+                JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
+                this.llenarTablaComidas();
+            }else{
+                JOptionPane.showMessageDialog(null, "Ocurrió un error con la solicitud.\nPor favor, inténtelo más tarde.\n\nSi el problema persiste, por favor, comuníquese con los estudiantes.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n- El nombre de la comida ingresada no es válido.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBModComidaActionPerformed
+
+    private void jTFComidaModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFComidaModActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFComidaModActionPerformed
+
+    private void jTFIdComidaModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFIdComidaModActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFIdComidaModActionPerformed
+
+    private void jTComidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTComidasMouseClicked
+       Cm_ClsComida comidaSeleccionada = this.listaComidas.get(this.jTComidas.getSelectedRow());
+       this.jTFIdComidaMod.setText(""+comidaSeleccionada.getId());
+       this.jTFComidaMod.setText(comidaSeleccionada.getNombre());
+       
+       this.jTFIdComidaRm.setText(""+comidaSeleccionada.getId());
+    }//GEN-LAST:event_jTComidasMouseClicked
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -843,11 +1033,13 @@ public class JFAdministrador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAddClase;
-    private javax.swing.JButton jBAddComida;
+    private javax.swing.JButton jBAddComida1;
     private javax.swing.JButton jBAddPais;
     private javax.swing.JButton jBCerrarSesion;
     private javax.swing.JButton jBEliminarPais;
+    private javax.swing.JButton jBModComida;
     private javax.swing.JButton jBModificarPais;
+    private javax.swing.JButton jBRmComida;
     private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLBienvenido;
     private javax.swing.JLabel jLCapacidad;
@@ -855,9 +1047,13 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLCodigoPais;
     private javax.swing.JLabel jLCodigoPais1;
     private javax.swing.JLabel jLComida;
-    private javax.swing.JLabel jLImagenComida;
+    private javax.swing.JLabel jLComida1;
+    private javax.swing.JLabel jLComida2;
+    private javax.swing.JLabel jLComida3;
     private javax.swing.JLabel jLMaximoClase;
     private javax.swing.JLabel jLMaximoComida;
+    private javax.swing.JLabel jLMaximoComida1;
+    private javax.swing.JLabel jLMaximoComida2;
     private javax.swing.JLabel jLMaximoPais;
     private javax.swing.JLabel jLMaximoPais1;
     private javax.swing.JLabel jLNombreClase;
@@ -866,6 +1062,8 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPActualizarPais;
     private javax.swing.JPanel jPAgregarClase;
     private javax.swing.JPanel jPAgregarComida;
+    private javax.swing.JPanel jPAgregarComida1;
+    private javax.swing.JPanel jPAgregarComida2;
     private javax.swing.JPanel jPAgregarPais;
     private javax.swing.JPanel jPAsiento;
     private javax.swing.JPanel jPClase;
@@ -884,6 +1082,9 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JTextField jTFCodigoPaisActualizar;
     private javax.swing.JTextField jTFCodigoPaisEliminar;
     private javax.swing.JTextField jTFComida;
+    private javax.swing.JTextField jTFComidaMod;
+    private javax.swing.JTextField jTFIdComidaMod;
+    private javax.swing.JTextField jTFIdComidaRm;
     private javax.swing.JTextField jTFNombreClase;
     private javax.swing.JTextField jTFNombrePais;
     private javax.swing.JTextField jTFNombrePaisActualizar;
