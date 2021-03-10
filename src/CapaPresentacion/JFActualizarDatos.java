@@ -18,7 +18,7 @@ public class JFActualizarDatos extends javax.swing.JFrame {
 
     public JFActualizarDatos() {
          initComponents();
-         
+       
          this.setLocationRelativeTo(null);
     }
     

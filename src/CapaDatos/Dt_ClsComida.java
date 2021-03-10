@@ -31,12 +31,33 @@ public class Dt_ClsComida extends Dt_ClsConexion {
         return executeQuery("insertarComida(?)", parametros);
     }
     
-    public void actualizarComida (int id,String nombre){
+    
+    public int actualizarComida (int id,String nombre){
+        ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+        Object[] identificacionComida = new Object[3];
+        identificacionComida[0] = "int";
+        identificacionComida[1] = "id_comida";
+        identificacionComida[2] = id;
+        parametros.add(identificacionComida);
         
+        Object[] datosComida = new Object[3];
+        datosComida[0] = "String";
+        datosComida[1] = "nombre_comida";
+        datosComida[2] = nombre;
+        parametros.add(datosComida);
+        
+        
+        return executeQuery("actualizarComida(?,?)", parametros);
     }
     
-    public void borrarComida (int id){
-        
+    public int eliminarComida (int id){
+        ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+        Object[] identificacionComida = new Object[3];
+        identificacionComida[0] = "int";
+        identificacionComida[1] = "id_comida";
+        identificacionComida[2] = id;
+        parametros.add(identificacionComida);
+        return executeQuery("eliminarComida(?)", parametros);
     }
   
     

@@ -126,7 +126,6 @@ public class Dt_ClsConexion {
                 System.out.println("Nombre: " + rs.getString(2));//nombre
               
             }
-             
             id = 1;
             rs.close();
  
@@ -135,7 +134,5 @@ public class Dt_ClsConexion {
         }
         System.out.println(id);
         return id;
-    }
-    
-    
+    } 
 }

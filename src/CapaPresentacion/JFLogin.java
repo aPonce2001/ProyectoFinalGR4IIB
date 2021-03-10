@@ -185,7 +185,7 @@ public class JFLogin extends javax.swing.JFrame {
                    System.out.println(cm_cliente.getId()  <= 0);
                     if (cm_cliente.getId()  <= 0) {
                         
-                       JOptionPane.showMessageDialog(null, "182 ALERT Ingrese credenciales válidas");
+                       JOptionPane.showMessageDialog(null, "Ingrese credenciales válidas", "Ingreso de credenciales inválidas", JOptionPane.ERROR_MESSAGE);
                     } else {
                         jFReserva = new JFReserva(cm_cliente);
                         jFReserva.setVisible(true);
@@ -202,7 +202,7 @@ public class JFLogin extends javax.swing.JFrame {
                         jFAdministrador.setVisible(true);
                         dispose();
                     } else {
-                        JOptionPane.showMessageDialog(null, "Ingrese credenciales válidas");
+                        JOptionPane.showMessageDialog(null, "Ingrese credenciales válidas", "Ingreso de credenciales invalidas", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 break;

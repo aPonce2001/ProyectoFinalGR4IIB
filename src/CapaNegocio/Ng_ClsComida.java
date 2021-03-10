@@ -33,4 +33,11 @@ public class Ng_ClsComida {
     public int insertarComida(String nombre) {
         return dt_comida.insertarComida(nombre);
    }
+    public int eliminarComida(int id) {
+        return dt_comida.eliminarComida(id);
+   }
+    public int actualizarComida(int id, String nombre) {
+        return dt_comida.actualizarComida(id, nombre);
+   }
+    
 }
