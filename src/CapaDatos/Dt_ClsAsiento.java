@@ -28,35 +28,24 @@ public class Dt_ClsAsiento extends Dt_ClsConexion {
         
     }
     
-    public int actualizarEstadoAsiento(int id,String ubicacion,String estado,int id_clase_FK ){
+    public int actualizarEstadoAsiento(int id,String estado){
         ArrayList<Object[]> parametros = new ArrayList<Object[]>();
         
         Object[] actAsiento = new Object[3];
         actAsiento[0] = "int";
         actAsiento[1] = "id_asiento";
         actAsiento[2] = id;
-        
-        Object[] actUbiAsiento = new Object[3];
-        actUbiAsiento[0] = "String";
-        actUbiAsiento[1] = "ubicacion_asiento";
-        actUbiAsiento[2] = ubicacion;
 
         Object[] actEstAsiento = new Object[3];
         actEstAsiento[0] = "String";
         actEstAsiento[1] = "estado_asiento";
         actEstAsiento[2] = estado;
-        
-        Object[] actIdClaseFKAsiento = new Object[3];
-        actIdClaseFKAsiento[0] = "int";
-        actIdClaseFKAsiento[1] = "id_clase_fk";
-        actIdClaseFKAsiento[2] = id_clase_FK;
+       
         
         parametros.add(actAsiento);
-        parametros.add(actUbiAsiento);
         parametros.add(actEstAsiento);
-        parametros.add(actIdClaseFKAsiento);
         
-        return executeQuery("actualizarEstadoAsiento(?,?,?,?)", parametros);
+        return executeQuery("actualizarEstadoAsiento(?,?)", parametros);
      
     }
     

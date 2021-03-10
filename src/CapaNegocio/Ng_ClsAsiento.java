@@ -25,8 +25,8 @@ public class Ng_ClsAsiento {
          return dt_asiento.mostrarAsientoXClase(id_clase_FK);
      }
      
-     public  int actualizarEstadoAsiento(int id,String ubicacion,String estado,int id_clase_FK){
-         return dt_asiento.actualizarEstadoAsiento(id, ubicacion, estado, id_clase_FK);
+     public  int actualizarEstadoAsiento(int id,String estado){
+         return dt_asiento.actualizarEstadoAsiento(id, estado);
      }
    
      

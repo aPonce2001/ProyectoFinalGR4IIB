@@ -1,9 +1,7 @@
 package CapaPresentacion;
 
-import CapaComun.Cm_ClsComida;
-import CapaComun.Cm_ClsReserva;
-import CapaNegocio.Ng_ClsComida;
-import CapaNegocio.Ng_ClsReserva;
+import CapaComun.*;
+import CapaNegocio.*;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.sql.Array;
@@ -26,6 +24,7 @@ public class JFMisReservas extends javax.swing.JFrame {
     List<Cm_ClsComida> listaAllComida;
     Ng_ClsComida ng_comida;
     Ng_ClsReserva ng_reserva;
+    Ng_ClsAsiento ng_asiento;
     int rowLista;
     boolean isReserveSelected = false;
     
@@ -38,6 +37,7 @@ public class JFMisReservas extends javax.swing.JFrame {
         initComponents();
         ng_comida = new Ng_ClsComida();
         ng_reserva = new Ng_ClsReserva();
+        ng_asiento = new Ng_ClsAsiento();
         listaMisReserva = misReservas;
         listaAllComida = ng_comida.mostrarComidaTabla();
         //listaComidaXId = ng_comida.mostrarComidaXId(2);
@@ -54,12 +54,15 @@ public class JFMisReservas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablaMisReservas = new javax.swing.JTable();
         jBAceptar = new javax.swing.JButton();
         jBBorrarReserva = new javax.swing.JButton();
+
+        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -88,9 +91,17 @@ public class JFMisReservas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fecha", "Asiento", "Comida", "Acción"
+                "Fecha", "Asiento", "Comida"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTablaMisReservas.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jTablaMisReservasAncestorAdded(evt);
@@ -184,6 +195,8 @@ public class JFMisReservas extends javax.swing.JFrame {
         listaMisReserva.get(rowLista).getId();
         System.out.println("  listaMisReserva.get(rowLista).getId() : "+   listaMisReserva.get(rowLista).getId());
         ng_reserva.borrarReserva(listaMisReserva.get(rowLista).getId());
+        int respuesta = ng_asiento.actualizarEstadoAsiento(listaMisReserva.get(rowLista).getIdAsientoFk(),
+                    "Disponible");
         JOptionPane.showMessageDialog(null, "Reserva Eliminada: "+ listaMisReserva.get(rowLista).getId());
         listaMisReserva = JFReserva.llenarTablaReservas();
         this.mostrarDatosReserva();
@@ -248,6 +261,7 @@ public class JFMisReservas extends javax.swing.JFrame {
     private javax.swing.JButton jBAceptar;
     private javax.swing.JButton jBBorrarReserva;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablaMisReservas;

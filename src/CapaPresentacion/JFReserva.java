@@ -260,9 +260,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
                     JOptionPane.showMessageDialog(null, "Selecciona una comida para que no se muera :1");
             } else {
                 int resultado = ng_asiento.actualizarEstadoAsiento(idAsientoSelect,
-                    listaAsiento.get(i).getUbicacion(),
-                    "Ocupado",
-                    listaAsiento.get(i).getId_clse_FK());
+                    "Ocupado");
                 System.out.println("luego resultado");
                 if (resultado > 0) {
 
