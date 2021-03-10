@@ -30,7 +30,6 @@ public class JFAdministrador extends javax.swing.JFrame {
     public JFAdministrador() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.jLMapaMundi.setIcon(new ImageIcon("./src/Imagenes/Mapa Mundi.jpg"));
         this.jLImagenComida.setIcon(new ImageIcon("./src/Imagenes/ImagenComida.jpg"));
         this.ng_clsPais = new Ng_ClsPais();
         this.ng_clsComida = new Ng_ClsComida();
@@ -63,6 +62,11 @@ public class JFAdministrador extends javax.swing.JFrame {
         jLNombrePais1 = new javax.swing.JLabel();
         jTFNombrePaisActualizar = new javax.swing.JTextField();
         jBModificarPais = new javax.swing.JButton();
+        jLMaximoPais1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLCodigoEliminar = new javax.swing.JLabel();
+        jTFCodigoPaisEliminar = new javax.swing.JTextField();
+        jBEliminarPais = new javax.swing.JButton();
         jPComida = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTComidas = new javax.swing.JTable();
@@ -214,6 +218,9 @@ public class JFAdministrador extends javax.swing.JFrame {
             }
         });
 
+        jLMaximoPais1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLMaximoPais1.setText("Máximo 70 caracteres");
+
         javax.swing.GroupLayout jPActualizarPaisLayout = new javax.swing.GroupLayout(jPActualizarPais);
         jPActualizarPais.setLayout(jPActualizarPaisLayout);
         jPActualizarPaisLayout.setHorizontalGroup(
@@ -227,6 +234,9 @@ public class JFAdministrador extends javax.swing.JFrame {
                             .addComponent(jLCodigoPais1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPActualizarPaisLayout.createSequentialGroup()
+                                .addComponent(jLMaximoPais1)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jTFCodigoPaisActualizar)
                             .addComponent(jTFNombrePaisActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
                         .addContainerGap())
@@ -247,7 +257,49 @@ public class JFAdministrador extends javax.swing.JFrame {
                     .addComponent(jLNombrePais1)
                     .addComponent(jTFNombrePaisActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLMaximoPais1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBModificarPais)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Eliminar País"));
+
+        jLCodigoEliminar.setText("Código ISO 3166-1:");
+
+        jTFCodigoPaisEliminar.setEditable(false);
+
+        jBEliminarPais.setText("Eliminar desde la base");
+        jBEliminarPais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarPaisActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLCodigoEliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFCodigoPaisEliminar)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBEliminarPais)
+                .addGap(68, 68, 68))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLCodigoEliminar)
+                    .addComponent(jTFCodigoPaisEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBEliminarPais)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -261,7 +313,8 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPAgregarPais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPActualizarPais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPActualizarPais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(12, 12, 12))
         );
         jPPaisLayout.setVerticalGroup(
@@ -273,7 +326,9 @@ public class JFAdministrador extends javax.swing.JFrame {
                     .addGroup(jPPaisLayout.createSequentialGroup()
                         .addComponent(jPAgregarPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPActualizarPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jPActualizarPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         jTPEntidades.addTab("País", jPPais);
@@ -692,13 +747,9 @@ public class JFAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAddClaseActionPerformed
 
     private void jBModificarPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarPaisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBModificarPaisActionPerformed
-
-    private void jTFNombrePaisActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNombrePaisActualizarActionPerformed
-        Matcher matNombrePais = this.patNombrePais.matcher(this.jTFNombrePais.getText());
+        Matcher matNombrePais = this.patNombrePais.matcher(this.jTFNombrePaisActualizar.getText());
         if(matNombrePais.matches()){
-            int respuesta = this.ng_clsPais.actualizarPais(Integer.parseInt(this.jTFCodigoPais.getText()), this.jTFNombrePais.getText());
+            int respuesta = this.ng_clsPais.actualizarPais(Integer.parseInt(this.jTFCodigoPaisActualizar.getText()), this.jTFNombrePaisActualizar.getText());
             if(respuesta >= 1){
                 JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
                 this.llenarTablaPaises();
@@ -710,6 +761,10 @@ public class JFAdministrador extends javax.swing.JFrame {
             error += matNombrePais.matches()?"":"- El nombre del país ingresado no es válido.\n";
             JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n" + error, "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
         }
+    }//GEN-LAST:event_jBModificarPaisActionPerformed
+
+    private void jTFNombrePaisActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNombrePaisActualizarActionPerformed
+        this.jBModificarPais.doClick();
     }//GEN-LAST:event_jTFNombrePaisActualizarActionPerformed
 
     private void jBAddPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddPaisActionPerformed
@@ -741,9 +796,20 @@ public class JFAdministrador extends javax.swing.JFrame {
 
     private void jTPaisesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPaisesMouseClicked
         Cm_ClsPais paisSeleccionado = this.listaPaises.get(this.jTPaises.getSelectedRow());
-        this.jTFCodigoPaisActualizar.setText("" + paisSeleccionado.getId());
+        this.jTFCodigoPaisActualizar.setText("" + paisSeleccionado.getId() );
         this.jTFNombrePaisActualizar.setText(paisSeleccionado.getNombre());
+        this.jTFCodigoPaisEliminar.setText("" + paisSeleccionado.getId());
     }//GEN-LAST:event_jTPaisesMouseClicked
+
+    private void jBEliminarPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarPaisActionPerformed
+        int respuesta = this.ng_clsPais.borrarPais(Integer.parseInt(this.jTFCodigoPaisEliminar.getText()));
+        if(respuesta >= 1){
+            JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
+            this.llenarTablaPaises();
+        }else{
+            JOptionPane.showMessageDialog(null, "El país no se pudo borrar debido a que hay clientes de ese país registrados en la base.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBEliminarPaisActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -780,10 +846,12 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton jBAddComida;
     private javax.swing.JButton jBAddPais;
     private javax.swing.JButton jBCerrarSesion;
+    private javax.swing.JButton jBEliminarPais;
     private javax.swing.JButton jBModificarPais;
     private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLBienvenido;
     private javax.swing.JLabel jLCapacidad;
+    private javax.swing.JLabel jLCodigoEliminar;
     private javax.swing.JLabel jLCodigoPais;
     private javax.swing.JLabel jLCodigoPais1;
     private javax.swing.JLabel jLComida;
@@ -791,6 +859,7 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLMaximoClase;
     private javax.swing.JLabel jLMaximoComida;
     private javax.swing.JLabel jLMaximoPais;
+    private javax.swing.JLabel jLMaximoPais1;
     private javax.swing.JLabel jLNombreClase;
     private javax.swing.JLabel jLNombrePais;
     private javax.swing.JLabel jLNombrePais1;
@@ -802,6 +871,7 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPClase;
     private javax.swing.JPanel jPComida;
     private javax.swing.JPanel jPPais;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -812,6 +882,7 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JTextField jTFCapacidad;
     private javax.swing.JTextField jTFCodigoPais;
     private javax.swing.JTextField jTFCodigoPaisActualizar;
+    private javax.swing.JTextField jTFCodigoPaisEliminar;
     private javax.swing.JTextField jTFComida;
     private javax.swing.JTextField jTFNombreClase;
     private javax.swing.JTextField jTFNombrePais;
