@@ -156,9 +156,9 @@ public class JFMisReservas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mostrarDatosReserva() {
-      
         DefaultTableModel model = (DefaultTableModel) jTablaMisReservas.getModel();
         Object rowData[] = new Object[4];
+        model.setNumRows(0);
         for (int i = 0; i < listaMisReserva.size(); i++) {
             rowData[0] = listaMisReserva.get(i).getFecha();
             rowData[1] = listaMisReserva.get(i).getIdAsientoFk();
@@ -185,6 +185,8 @@ public class JFMisReservas extends javax.swing.JFrame {
         System.out.println("  listaMisReserva.get(rowLista).getId() : "+   listaMisReserva.get(rowLista).getId());
         ng_reserva.borrarReserva(listaMisReserva.get(rowLista).getId());
         JOptionPane.showMessageDialog(null, "Reserva Eliminada: "+ listaMisReserva.get(rowLista).getId());
+        listaMisReserva = JFReserva.llenarTablaReservas();
+        this.mostrarDatosReserva();
        }else{
             JOptionPane.showMessageDialog(null, "Debe seleccionar una reserva para eliminar!");
        }

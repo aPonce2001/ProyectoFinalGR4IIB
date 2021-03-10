@@ -37,13 +37,13 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
     List<Cm_ClsAsiento> listaAsiento;
     List<Cm_ClsComida> listaComida;
     List<Cm_ClsClase> listaClase;
-    Ng_ClsReserva dt_reserva;
+    static Ng_ClsReserva dt_reserva;
     JFActualizarDatos jfactualizarDatos;
-    Cm_ClsCliente cm_cliente;
+    static Cm_ClsCliente cm_cliente;
     Cm_ClsAsiento cm_asiento;
     
    // Ng_ClsReserva ng_reserva;
-    List<Cm_ClsReserva> listaReserva;
+    static List<Cm_ClsReserva> listaReserva;
     
     public static JButton btnAsientos[];
     ArrayList<Integer> listAsientosOcupados;
@@ -433,13 +433,16 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
     }//GEN-LAST:event_jBActualizarUsuarioActionPerformed
 
     private void jBMisReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMisReservasActionPerformed
-
+        listaReserva = dt_reserva.mostrarReservasXIdCliente(cm_cliente.getId());
         JFMisReservas jfMisReservas = new JFMisReservas(listaReserva);
         jfMisReservas.setVisible(true);
         
     }//GEN-LAST:event_jBMisReservasActionPerformed
 
-  
+    public static List<Cm_ClsReserva> llenarTablaReservas(){
+        listaReserva = dt_reserva.mostrarReservasXIdCliente(cm_cliente.getId());
+        return listaReserva;
+    }
     
     /**
      * @param args the command line arguments
