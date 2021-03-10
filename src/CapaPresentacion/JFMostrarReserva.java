@@ -9,7 +9,8 @@ import CapaComun.Cm_ClsReserva;
 import CapaNegocio.Ng_ClsReserva;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
+import java.time.*;
+import java.time.format.*;
 import java.util.Date;
 
 /**
@@ -36,10 +37,10 @@ public class JFMostrarReserva extends javax.swing.JFrame {
     }
 
     public void llenarCamposReserva() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        Date fecha = new Date();
-        String strDate = dateFormat.format(fecha);  
-        lblFecha.setText(strDate);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+        LocalDateTime hora;
+        hora = LocalDateTime.now();
+        lblFecha.setText(dtf.format(hora));
     }
 
 

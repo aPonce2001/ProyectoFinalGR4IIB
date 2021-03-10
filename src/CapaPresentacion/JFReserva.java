@@ -270,6 +270,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
                         
                         JFMostrarReserva jfMostrarReserva = new JFMostrarReserva(new Cm_ClsReserva());
                         jfMostrarReserva.setVisible(true);
+                        this.jCBClase.setSelectedIndex(0);
                          System.out.println("idAsientoSelect " + idAsientoSelect);
                        
                          btnAsientos[idAsientoSelect-1].setBackground(Color.RED);
