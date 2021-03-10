@@ -57,7 +57,12 @@ public class JFAdministrador extends javax.swing.JFrame {
         jTFCodigoPais = new javax.swing.JTextField();
         jBAddPais = new javax.swing.JButton();
         jLMaximoPais = new javax.swing.JLabel();
-        jLMapaMundi = new javax.swing.JLabel();
+        jPActualizarPais = new javax.swing.JPanel();
+        jLCodigoPais1 = new javax.swing.JLabel();
+        jTFCodigoPaisActualizar = new javax.swing.JTextField();
+        jLNombrePais1 = new javax.swing.JLabel();
+        jTFNombrePaisActualizar = new javax.swing.JTextField();
+        jBModificarPais = new javax.swing.JButton();
         jPComida = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTComidas = new javax.swing.JTable();
@@ -111,6 +116,11 @@ public class JFAdministrador extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTPaises.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTPaisesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTPaises);
 
         jPAgregarPais.setBorder(javax.swing.BorderFactory.createTitledBorder("Agregar país"));
@@ -157,7 +167,7 @@ public class JFAdministrador extends javax.swing.JFrame {
                             .addGroup(jPAgregarPaisLayout.createSequentialGroup()
                                 .addComponent(jLMaximoPais)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTFNombrePais, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(jTFNombrePais, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                             .addComponent(jTFCodigoPais))
                         .addContainerGap())
                     .addGroup(jPAgregarPaisLayout.createSequentialGroup()
@@ -178,12 +188,68 @@ public class JFAdministrador extends javax.swing.JFrame {
                     .addComponent(jTFNombrePais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLMaximoPais)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jBAddPais)
                 .addGap(12, 12, 12))
         );
 
-        jLMapaMundi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPActualizarPais.setBorder(javax.swing.BorderFactory.createTitledBorder("Actualizar País"));
+
+        jLCodigoPais1.setText("Código ISO 3166-1:");
+
+        jTFCodigoPaisActualizar.setEditable(false);
+
+        jLNombrePais1.setText("Nombre:");
+
+        jTFNombrePaisActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFNombrePaisActualizarActionPerformed(evt);
+            }
+        });
+
+        jBModificarPais.setText("Modificar desde la base");
+        jBModificarPais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModificarPaisActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPActualizarPaisLayout = new javax.swing.GroupLayout(jPActualizarPais);
+        jPActualizarPais.setLayout(jPActualizarPaisLayout);
+        jPActualizarPaisLayout.setHorizontalGroup(
+            jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPActualizarPaisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPActualizarPaisLayout.createSequentialGroup()
+                        .addGroup(jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLNombrePais1)
+                            .addComponent(jLCodigoPais1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTFCodigoPaisActualizar)
+                            .addComponent(jTFNombrePaisActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(jPActualizarPaisLayout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jBModificarPais)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPActualizarPaisLayout.setVerticalGroup(
+            jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPActualizarPaisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLCodigoPais1)
+                    .addComponent(jTFCodigoPaisActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLNombrePais1)
+                    .addComponent(jTFNombrePaisActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBModificarPais)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPPaisLayout = new javax.swing.GroupLayout(jPPais);
         jPPais.setLayout(jPPaisLayout);
@@ -195,20 +261,19 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPAgregarPais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLMapaMundi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jPActualizarPais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
         jPPaisLayout.setVerticalGroup(
             jPPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPaisLayout.createSequentialGroup()
                 .addGap(0, 12, Short.MAX_VALUE)
-                .addGroup(jPPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPPaisLayout.createSequentialGroup()
-                        .addComponent(jPAgregarPais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLMapaMundi, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jPAgregarPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPActualizarPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         jTPEntidades.addTab("País", jPPais);
@@ -578,14 +643,6 @@ public class JFAdministrador extends javax.swing.JFrame {
         this.jBAddComida.doClick();
     }//GEN-LAST:event_jTFComidaActionPerformed
 
-    private void jTFCodigoPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCodigoPaisActionPerformed
-        this.jBAddPais.doClick();
-    }//GEN-LAST:event_jTFCodigoPaisActionPerformed
-
-    private void jTFNombrePaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNombrePaisActionPerformed
-        this.jBAddPais.doClick();
-    }//GEN-LAST:event_jTFNombrePaisActionPerformed
-
     private void jBCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarSesionActionPerformed
         this.setVisible(false);
         this.jfLogin = new JFLogin();
@@ -599,25 +656,6 @@ public class JFAdministrador extends javax.swing.JFrame {
     private void jTFCapacidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCapacidadActionPerformed
         this.jBAddClase.doClick();
     }//GEN-LAST:event_jTFCapacidadActionPerformed
-
-    private void jBAddPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddPaisActionPerformed
-        Matcher matCodigo = this.patCapacidad.matcher(this.jTFCodigoPais.getText());
-        Matcher matNombrePais = this.patNombrePais.matcher(this.jTFNombrePais.getText());
-        if(matCodigo.matches() && matNombrePais.matches()){
-            int respuesta = this.ng_clsPais.insertarPais(Integer.parseInt(this.jTFCodigoPais.getText()), this.jTFNombrePais.getText());
-            if(respuesta >= 1){
-                JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
-                this.llenarTablaPaises();
-            }else{
-                JOptionPane.showMessageDialog(null, "Ocurrió un error con la solicitud.\nPor favor, inténtelo más tarde.\n\nSi el problema persiste, por favor, comuníquese con los estudiantes.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
-            }
-        }else{
-            String error = "";
-            error += matCodigo.matches()?"":"- El código de país ingresado no es válido.\n";
-            error += matNombrePais.matches()?"":"- El nombre del país ingresado no es válido.\n";
-            JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n" + error, "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jBAddPaisActionPerformed
 
     private void jBAddComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddComidaActionPerformed
         Matcher matNombreComida = this.patNombres.matcher(this.jTFComida.getText());
@@ -652,6 +690,60 @@ public class JFAdministrador extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n" + error, "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBAddClaseActionPerformed
+
+    private void jBModificarPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarPaisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBModificarPaisActionPerformed
+
+    private void jTFNombrePaisActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNombrePaisActualizarActionPerformed
+        Matcher matNombrePais = this.patNombrePais.matcher(this.jTFNombrePais.getText());
+        if(matNombrePais.matches()){
+            int respuesta = this.ng_clsPais.actualizarPais(Integer.parseInt(this.jTFCodigoPais.getText()), this.jTFNombrePais.getText());
+            if(respuesta >= 1){
+                JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
+                this.llenarTablaPaises();
+            }else{
+                JOptionPane.showMessageDialog(null, "Ocurrió un error con la solicitud.\nPor favor, inténtelo más tarde.\n\nSi el problema persiste, por favor, comuníquese con los estudiantes.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            String error = "";
+            error += matNombrePais.matches()?"":"- El nombre del país ingresado no es válido.\n";
+            JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n" + error, "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jTFNombrePaisActualizarActionPerformed
+
+    private void jBAddPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddPaisActionPerformed
+        Matcher matCodigo = this.patCapacidad.matcher(this.jTFCodigoPais.getText());
+        Matcher matNombrePais = this.patNombrePais.matcher(this.jTFNombrePais.getText());
+        if(matCodigo.matches() && matNombrePais.matches()){
+            int respuesta = this.ng_clsPais.insertarPais(Integer.parseInt(this.jTFCodigoPais.getText()), this.jTFNombrePais.getText());
+            if(respuesta >= 1){
+                JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
+                this.llenarTablaPaises();
+            }else{
+                JOptionPane.showMessageDialog(null, "Ocurrió un error con la solicitud.\nPor favor, inténtelo más tarde.\n\nSi el problema persiste, por favor, comuníquese con los estudiantes.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            String error = "";
+            error += matCodigo.matches()?"":"- El código de país ingresado no es válido.\n";
+            error += matNombrePais.matches()?"":"- El nombre del país ingresado no es válido.\n";
+            JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n" + error, "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBAddPaisActionPerformed
+
+    private void jTFCodigoPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCodigoPaisActionPerformed
+        this.jBAddPais.doClick();
+    }//GEN-LAST:event_jTFCodigoPaisActionPerformed
+
+    private void jTFNombrePaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNombrePaisActionPerformed
+        this.jBAddPais.doClick();
+    }//GEN-LAST:event_jTFNombrePaisActionPerformed
+
+    private void jTPaisesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTPaisesMouseClicked
+        Cm_ClsPais paisSeleccionado = this.listaPaises.get(this.jTPaises.getSelectedRow());
+        this.jTFCodigoPaisActualizar.setText("" + paisSeleccionado.getId());
+        this.jTFNombrePaisActualizar.setText(paisSeleccionado.getNombre());
+    }//GEN-LAST:event_jTPaisesMouseClicked
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -688,18 +780,21 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton jBAddComida;
     private javax.swing.JButton jBAddPais;
     private javax.swing.JButton jBCerrarSesion;
+    private javax.swing.JButton jBModificarPais;
     private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLBienvenido;
     private javax.swing.JLabel jLCapacidad;
     private javax.swing.JLabel jLCodigoPais;
+    private javax.swing.JLabel jLCodigoPais1;
     private javax.swing.JLabel jLComida;
     private javax.swing.JLabel jLImagenComida;
-    private javax.swing.JLabel jLMapaMundi;
     private javax.swing.JLabel jLMaximoClase;
     private javax.swing.JLabel jLMaximoComida;
     private javax.swing.JLabel jLMaximoPais;
     private javax.swing.JLabel jLNombreClase;
     private javax.swing.JLabel jLNombrePais;
+    private javax.swing.JLabel jLNombrePais1;
+    private javax.swing.JPanel jPActualizarPais;
     private javax.swing.JPanel jPAgregarClase;
     private javax.swing.JPanel jPAgregarComida;
     private javax.swing.JPanel jPAgregarPais;
@@ -716,9 +811,11 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JTable jTComidas;
     private javax.swing.JTextField jTFCapacidad;
     private javax.swing.JTextField jTFCodigoPais;
+    private javax.swing.JTextField jTFCodigoPaisActualizar;
     private javax.swing.JTextField jTFComida;
     private javax.swing.JTextField jTFNombreClase;
     private javax.swing.JTextField jTFNombrePais;
+    private javax.swing.JTextField jTFNombrePaisActualizar;
     private javax.swing.JTabbedPane jTPEntidades;
     private javax.swing.JTable jTPaises;
     // End of variables declaration//GEN-END:variables

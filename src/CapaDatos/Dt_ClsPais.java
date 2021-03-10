@@ -45,14 +45,37 @@ public class Dt_ClsPais extends Dt_ClsConexion {
 
     }
 
-    public int actualizarPais(int id, String nombre) {
-        return 0;
+    public int actualizarPais(int ID, String nombre) {
+        ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+         
+        Object[] id = new Object[3];
+        id[0] = "int";
+        id[1] = "id_Pais";
+        id[2] = ID;
+        
+        Object[] datosPais = new Object[3];
+        datosPais[0] = "String";
+        datosPais[1] = "nombre_Pais";
+        datosPais[2] = nombre;
+        
+        parametros.add(id);
+        parametros.add(datosPais);
+        
+        return executeQuery("actualizarPais(?,?)", parametros);
 
     }
 
-    public int borrarPais(int id) {
-        return 0;
-
+    public int borrarPais(int ID) {
+        ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+         
+        Object[] id = new Object[3];
+        id[0] = "int";
+        id[1] = "id_Pais";
+        id[2] = ID;
+        
+        parametros.add(id);
+        
+        return executeQuery("eliminarPais(?)", parametros);
     }
 
     public List<Cm_ClsPais> mostrarPaisAll(JComboBox jCBPais, Boolean isUpdatedAt, int selectedIdx) {

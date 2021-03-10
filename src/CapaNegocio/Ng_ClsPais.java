@@ -26,8 +26,15 @@ public class Ng_ClsPais {
      }
      
      
-     public int insertarPais(int id, String nombre) {
+    public int insertarPais(int id, String nombre) {
         return dt_pais.insertarPais(id, nombre);
     }
-     
+    
+    public int actualizarPais(int ID, String nombre){
+        return dt_pais.actualizarPais(ID, nombre);
+    }
+    
+    public int borrarPais(int ID){
+        return dt_pais.borrarPais(ID);
+    }
 }

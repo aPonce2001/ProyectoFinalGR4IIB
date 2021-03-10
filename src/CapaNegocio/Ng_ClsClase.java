@@ -28,8 +28,16 @@ public class Ng_ClsClase {
         return dt_Clase.insertarClase(nombre, capacidad);
     }
     
-     public List<Cm_ClsClase> mostrarClaseAll(JComboBox jCBClase) {
+    public int actualizarClase(int ID, String nombre, int capacidad){
+        return dt_Clase.actualizarClase(ID, nombre, capacidad);
+    }
+    
+    public int borrarClase(int ID){
+        return dt_Clase.borrarClase(ID);
+    }
+    
+    public List<Cm_ClsClase> mostrarClaseAll(JComboBox jCBClase) {
          return dt_Clase.mostrarClaseAll(jCBClase);
-     }
+    }
     
 }

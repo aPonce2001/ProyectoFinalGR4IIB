@@ -40,12 +40,42 @@ public class Dt_ClsClase extends Dt_ClsConexion {
     }
  
 
-    public void actualizarClase(int id, String nombre, int capacidad) {
-
+    public int actualizarClase(int ID, String nombre, int capacidad) {
+        ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+        
+        Object[] id = new Object[3];
+        id[0] = "int";
+        id[1] = "id_clase;";
+        id[2] = ID;
+        
+        Object[] datosNombre = new Object[3];
+        datosNombre[0] = "String";
+        datosNombre[1] = "nombre_clase";
+        datosNombre[2] = nombre;
+        
+        Object[] datosCapacidad = new Object[3];
+        datosCapacidad[0] = "int";
+        datosCapacidad[1] = "capacidad_clase";
+        datosCapacidad[2] = capacidad;
+        
+        parametros.add(id);
+        parametros.add(datosNombre);
+        parametros.add(datosCapacidad);
+        
+        return executeQuery("insertarClase(?,?,?)", parametros);
     }
 
-    public void borrarClase(int id) {
-
+    public int borrarClase(int ID) {
+        ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+         
+        Object[] id = new Object[3];
+        id[0] = "int";
+        id[1] = "id_Clases";
+        id[2] = ID;
+        
+        parametros.add(id);
+        
+        return executeQuery("eliminarClase(?)", parametros);
     }
     
     public List<Cm_ClsClase> mostrarClaseAll(JComboBox jCBClase) {
