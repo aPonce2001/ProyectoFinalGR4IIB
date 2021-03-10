@@ -103,7 +103,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
         scrollPane1 = new java.awt.ScrollPane();
         jBMisReservas = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Reserve su viaje:");
 
@@ -255,10 +255,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
             if(idAsientoSelect == 0 ) {
                 System.out.println("Seleccione un asiento");
                  JOptionPane.showMessageDialog(null, "Seleccione un asiento");
-            } else if (jCBReservaComida.getSelectedIndex() == 0) {
-                System.out.println("Selecciona una comida para que no se muera :");
-                    JOptionPane.showMessageDialog(null, "Selecciona una comida para que no se muera :1");
-            } else {
+            } else{
                 int resultado = ng_asiento.actualizarEstadoAsiento(idAsientoSelect,
                     "Ocupado");
                 System.out.println("luego resultado");
@@ -266,7 +263,6 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
 
                     Object item = jCBReservaComida.getSelectedItem();
                     String value = ((Cm_ClsComboItem) item).getValue();
-
                     int resultado2 = dt_reserva.insertarReserva(cm_cliente.getId(), idAsientoSelect, Integer.parseInt(value));
 
                    
@@ -277,10 +273,9 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
                          System.out.println("idAsientoSelect " + idAsientoSelect);
                        
                          btnAsientos[idAsientoSelect-1].setBackground(Color.RED);
-                         listaAsiento.get(idAsientoSelect-1).setEstado("Ocupado");
+                         listaAsiento.get(idAsientoSelect - 1).setEstado("Ocupado");
                          listAsientosSelect.remove(0);
-                         
-                         
+                                                  
                      } else {
                          JOptionPane.showMessageDialog(null, "Fail Ingreso Reserva");
                      }
@@ -427,14 +422,14 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
         System.out.println(cm_cliente);
         jfactualizarDatos = new JFActualizarDatos(cm_cliente);
         jfactualizarDatos.setVisible(true);
-
+        dispose();
     }//GEN-LAST:event_jBActualizarUsuarioActionPerformed
 
     private void jBMisReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMisReservasActionPerformed
         listaReserva = dt_reserva.mostrarReservasXIdCliente(cm_cliente.getId());
         JFMisReservas jfMisReservas = new JFMisReservas(listaReserva);
         jfMisReservas.setVisible(true);
-        
+        this.jCBClase.setSelectedIndex(0);
     }//GEN-LAST:event_jBMisReservasActionPerformed
 
     public static List<Cm_ClsReserva> llenarTablaReservas(){

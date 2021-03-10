@@ -30,6 +30,10 @@ public class Ng_ClsReserva {
         return dt_reserva.insertarReserva(id_cliente_fk, id_asiento_fk, id_comida_fk);
     }
     
+    public int insertarReserva( int id_cliente_fk, int id_asiento_fk, String id_comida_fk) {
+        return dt_reserva.insertarReserva(id_cliente_fk, id_asiento_fk, id_comida_fk);
+    }
+    
     public int actualizarReserva(int id, int id_cliente_fk, int id_asiento_fk, int id_comida_fk) {
         return dt_reserva.actualizarReserva(id, id_cliente_fk, id_asiento_fk, id_comida_fk);
     }

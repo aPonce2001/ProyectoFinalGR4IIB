@@ -168,14 +168,13 @@ public class JFMisReservas extends javax.swing.JFrame {
 
     private void mostrarDatosReserva() {
         DefaultTableModel model = (DefaultTableModel) jTablaMisReservas.getModel();
-        Object rowData[] = new Object[4];
+        Object rowData[] = new Object[3];
         model.setNumRows(0);
         for (int i = 0; i < listaMisReserva.size(); i++) {
             rowData[0] = listaMisReserva.get(i).getFecha();
             rowData[1] = listaMisReserva.get(i).getIdAsientoFk();
             System.out.println("listaMisReserva.get(i).getIdComidaFk(): "+listaMisReserva.get(i).getIdComidaFk());
             rowData[2] = listaAllComida.get(listaMisReserva.get(i).getIdComidaFk() - 1).getNombre();
-            rowData[3] = "ELIMINAR";
             model.addRow(rowData);
         }
     }
@@ -208,7 +207,7 @@ public class JFMisReservas extends javax.swing.JFrame {
 
     private void jTablaMisReservasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablaMisReservasMouseClicked
       // TODO add your handling code here:
-         isReserveSelected = true;
+        isReserveSelected = true;
         JTable source = (JTable)evt.getSource();
         rowLista = source.rowAtPoint( evt.getPoint() );
         int column = source.columnAtPoint( evt.getPoint() );

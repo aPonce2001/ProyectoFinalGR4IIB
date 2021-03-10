@@ -48,6 +48,33 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
 
     }
 
+    public int insertarReserva(int id_cliente_fk, int id_asiento_fk, String id_comida_fk) {
+
+        ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+
+        Object[] datosIdCliente = new Object[3];
+        datosIdCliente[0] = "int";
+        datosIdCliente[1] = "id_cliente_fk";
+        datosIdCliente[2] = id_cliente_fk;
+
+        Object[] datosIdAsiento = new Object[3];
+        datosIdAsiento[0] = "int";
+        datosIdAsiento[1] = "id_asiento_fk";
+        datosIdAsiento[2] = id_asiento_fk;
+
+        Object[] datosIdComida = new Object[3];
+        datosIdComida[0] = "int";
+        datosIdComida[1] = "id_comida_fk";
+        datosIdComida[2] = id_comida_fk;
+        
+        parametros.add(datosIdCliente);
+        parametros.add(datosIdAsiento);
+        parametros.add(datosIdComida);
+ 
+        return executeQuery("insertarReserva(?,?,?)", parametros);
+
+    }
+    
     public int actualizarReserva(int id, int id_cliente_fk, int id_asiento_fk, int id_comida_fk) {
         ArrayList<Object[]> parametros = new ArrayList<Object[]>();
         Object[] datosId = new Object[4];

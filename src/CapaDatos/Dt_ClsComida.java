@@ -75,17 +75,13 @@ public class Dt_ClsComida extends Dt_ClsConexion {
             ResultSet rs = cs.executeQuery();
 
             //LLenamos nuestro ComboBox
-            jCBReservaComida.addItem("Seleccione una opción");
             while (rs.next()) {
-
                 //   System.out.println("Id: " + rs.getString(1));//id
                 // System.out.println("Nombre: " + rs.getString(2));//nombre
                 listaComida.add(new Cm_ClsComida(
                         (int) rs.getInt("id"),
                         (String) rs.getString("nombre")
                 ));
-                
-                 
                  jCBReservaComida.addItem(new Cm_ClsComboItem(rs.getString("nombre"), String.valueOf(rs.getInt("id"))));
             }
 
