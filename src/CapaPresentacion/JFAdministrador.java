@@ -76,7 +76,7 @@ public class JFAdministrador extends javax.swing.JFrame {
         jTFIdComidaRm = new javax.swing.JTextField();
         jLMaximoComida = new javax.swing.JLabel();
         jPAgregarComida1 = new javax.swing.JPanel();
-        jBAddComida1 = new javax.swing.JButton();
+        jBAddComida = new javax.swing.JButton();
         jLComida1 = new javax.swing.JLabel();
         jTFComida = new javax.swing.JTextField();
         jLMaximoComida1 = new javax.swing.JLabel();
@@ -97,6 +97,19 @@ public class JFAdministrador extends javax.swing.JFrame {
         jTFCapacidad = new javax.swing.JTextField();
         jBAddClase = new javax.swing.JButton();
         jLMaximoClase = new javax.swing.JLabel();
+        jPModificarClase = new javax.swing.JPanel();
+        jLCapacidadMod = new javax.swing.JLabel();
+        jLNombreClaseMod = new javax.swing.JLabel();
+        jLIDClase = new javax.swing.JLabel();
+        jTFIDClaseMod = new javax.swing.JTextField();
+        jTFClaseMod = new javax.swing.JTextField();
+        jLMaximoClase1 = new javax.swing.JLabel();
+        jTFCapacidadMod = new javax.swing.JTextField();
+        jBModificarClase = new javax.swing.JButton();
+        jPBorrarClase = new javax.swing.JPanel();
+        jLIDClase1 = new javax.swing.JLabel();
+        jTFIDClaseRm = new javax.swing.JTextField();
+        jBEliminarClase = new javax.swing.JButton();
         jPAsiento = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTAsientos = new javax.swing.JTable();
@@ -172,28 +185,26 @@ public class JFAdministrador extends javax.swing.JFrame {
             jPAgregarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPAgregarPaisLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPAgregarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLCodigoPais)
+                    .addComponent(jLNombrePais))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPAgregarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPAgregarPaisLayout.createSequentialGroup()
-                        .addGroup(jPAgregarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLCodigoPais)
-                            .addComponent(jLNombrePais))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPAgregarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPAgregarPaisLayout.createSequentialGroup()
-                                .addComponent(jLMaximoPais)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTFNombrePais, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                            .addComponent(jTFCodigoPais))
-                        .addContainerGap())
-                    .addGroup(jPAgregarPaisLayout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jBAddPais)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jLMaximoPais)
+                        .addGap(0, 115, Short.MAX_VALUE))
+                    .addComponent(jTFNombrePais, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                    .addComponent(jTFCodigoPais))
+                .addContainerGap())
+            .addGroup(jPAgregarPaisLayout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(jBAddPais)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPAgregarPaisLayout.setVerticalGroup(
             jPAgregarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPAgregarPaisLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPAgregarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLCodigoPais)
                     .addComponent(jTFCodigoPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -203,9 +214,8 @@ public class JFAdministrador extends javax.swing.JFrame {
                     .addComponent(jTFNombrePais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLMaximoPais)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jBAddPais)
-                .addGap(12, 12, 12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBAddPais))
         );
 
         jPActualizarPais.setBorder(javax.swing.BorderFactory.createTitledBorder("Actualizar País"));
@@ -238,23 +248,21 @@ public class JFAdministrador extends javax.swing.JFrame {
             jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPActualizarPaisLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLNombrePais1)
+                    .addComponent(jLCodigoPais1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPActualizarPaisLayout.createSequentialGroup()
-                        .addGroup(jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLNombrePais1)
-                            .addComponent(jLCodigoPais1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPActualizarPaisLayout.createSequentialGroup()
-                                .addComponent(jLMaximoPais1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTFCodigoPaisActualizar)
-                            .addComponent(jTFNombrePaisActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(jPActualizarPaisLayout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jBModificarPais)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jLMaximoPais1)
+                        .addGap(0, 115, Short.MAX_VALUE))
+                    .addComponent(jTFCodigoPaisActualizar)
+                    .addComponent(jTFNombrePaisActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPActualizarPaisLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBModificarPais)
+                .addGap(85, 85, 85))
         );
         jPActualizarPaisLayout.setVerticalGroup(
             jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,16 +338,18 @@ public class JFAdministrador extends javax.swing.JFrame {
         );
         jPPaisLayout.setVerticalGroup(
             jPPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPaisLayout.createSequentialGroup()
-                .addGap(0, 73, Short.MAX_VALUE)
+            .addGroup(jPPaisLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                     .addGroup(jPPaisLayout.createSequentialGroup()
                         .addComponent(jPAgregarPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPActualizarPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         jTPEntidades.addTab("País", jPPais);
@@ -393,10 +403,6 @@ public class JFAdministrador extends javax.swing.JFrame {
         jPAgregarComida.setLayout(jPAgregarComidaLayout);
         jPAgregarComidaLayout.setHorizontalGroup(
             jPAgregarComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarComidaLayout.createSequentialGroup()
-                .addContainerGap(113, Short.MAX_VALUE)
-                .addComponent(jBRmComida)
-                .addGap(57, 57, 57))
             .addGroup(jPAgregarComidaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPAgregarComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -407,6 +413,10 @@ public class JFAdministrador extends javax.swing.JFrame {
                             .addComponent(jLMaximoComida))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarComidaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBRmComida)
+                .addGap(97, 97, 97))
         );
         jPAgregarComidaLayout.setVerticalGroup(
             jPAgregarComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -418,15 +428,16 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLMaximoComida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBRmComida))
+                .addComponent(jBRmComida)
+                .addContainerGap())
         );
 
         jPAgregarComida1.setBorder(javax.swing.BorderFactory.createTitledBorder("Agregar comida"));
 
-        jBAddComida1.setText("Agregar a la base de datos");
-        jBAddComida1.addActionListener(new java.awt.event.ActionListener() {
+        jBAddComida.setText("Agregar a la base de datos");
+        jBAddComida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBAddComida1ActionPerformed(evt);
+                jBAddComidaActionPerformed(evt);
             }
         });
 
@@ -445,10 +456,6 @@ public class JFAdministrador extends javax.swing.JFrame {
         jPAgregarComida1.setLayout(jPAgregarComida1Layout);
         jPAgregarComida1Layout.setHorizontalGroup(
             jPAgregarComida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarComida1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBAddComida1)
-                .addGap(57, 57, 57))
             .addGroup(jPAgregarComida1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPAgregarComida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,8 +464,12 @@ public class JFAdministrador extends javax.swing.JFrame {
                         .addGroup(jPAgregarComida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLComida1)
                             .addComponent(jLMaximoComida1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 211, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPAgregarComida1Layout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(jBAddComida)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPAgregarComida1Layout.setVerticalGroup(
             jPAgregarComida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -470,10 +481,11 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLMaximoComida1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBAddComida1))
+                .addComponent(jBAddComida)
+                .addContainerGap())
         );
 
-        jPAgregarComida2.setBorder(javax.swing.BorderFactory.createTitledBorder("Eliminar comida"));
+        jPAgregarComida2.setBorder(javax.swing.BorderFactory.createTitledBorder("Modificar comida"));
 
         jBModComida.setText("Modificar desde la base");
         jBModComida.addActionListener(new java.awt.event.ActionListener() {
@@ -496,11 +508,6 @@ public class JFAdministrador extends javax.swing.JFrame {
         jLComida3.setText("ID Comida:");
 
         jTFIdComidaMod.setEditable(false);
-        jTFIdComidaMod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFIdComidaModActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPAgregarComida2Layout = new javax.swing.GroupLayout(jPAgregarComida2);
         jPAgregarComida2.setLayout(jPAgregarComida2Layout);
@@ -519,7 +526,7 @@ public class JFAdministrador extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarComida2Layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBModComida)
                 .addGap(77, 77, 77))
         );
@@ -546,33 +553,26 @@ public class JFAdministrador extends javax.swing.JFrame {
             jPComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPComidaLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPAgregarComida1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPComidaLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jPAgregarComida2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPComidaLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPAgregarComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPAgregarComida2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPAgregarComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPComidaLayout.setVerticalGroup(
             jPComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPComidaLayout.createSequentialGroup()
+            .addGroup(jPComidaLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
                 .addGroup(jPComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPComidaLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPComidaLayout.createSequentialGroup()
                         .addComponent(jPAgregarComida1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPAgregarComida2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPAgregarComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPComidaLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 59, Short.MAX_VALUE)))
+                        .addComponent(jPAgregarComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 51, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -593,6 +593,11 @@ public class JFAdministrador extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTClases.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTClasesMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(jTClases);
@@ -639,11 +644,13 @@ public class JFAdministrador extends javax.swing.JFrame {
                     .addComponent(jTFNombreClase)
                     .addComponent(jTFCapacidad)
                     .addGroup(jPAgregarClaseLayout.createSequentialGroup()
-                        .addGroup(jPAgregarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBAddClase)
-                            .addComponent(jLMaximoClase))
-                        .addGap(0, 71, Short.MAX_VALUE)))
+                        .addComponent(jLMaximoClase)
+                        .addGap(0, 163, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarClaseLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBAddClase)
+                .addGap(71, 71, 71))
         );
         jPAgregarClaseLayout.setVerticalGroup(
             jPAgregarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -663,6 +670,129 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPModificarClase.setBorder(javax.swing.BorderFactory.createTitledBorder("Modificar clase"));
+
+        jLCapacidadMod.setText("Capacidad:");
+
+        jLNombreClaseMod.setText("Clase:");
+
+        jLIDClase.setText("ID:");
+
+        jTFIDClaseMod.setEditable(false);
+
+        jTFClaseMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFClaseModActionPerformed(evt);
+            }
+        });
+
+        jLMaximoClase1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLMaximoClase1.setText("Máximo 25 caracteres");
+
+        jTFCapacidadMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFCapacidadModActionPerformed(evt);
+            }
+        });
+
+        jBModificarClase.setText("Modificar desde la base");
+        jBModificarClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModificarClaseActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPModificarClaseLayout = new javax.swing.GroupLayout(jPModificarClase);
+        jPModificarClase.setLayout(jPModificarClaseLayout);
+        jPModificarClaseLayout.setHorizontalGroup(
+            jPModificarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPModificarClaseLayout.createSequentialGroup()
+                .addGroup(jPModificarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPModificarClaseLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(jPModificarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLIDClase)
+                            .addComponent(jLNombreClaseMod))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPModificarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTFIDClaseMod)
+                            .addComponent(jTFClaseMod)
+                            .addGroup(jPModificarClaseLayout.createSequentialGroup()
+                                .addComponent(jLMaximoClase1)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPModificarClaseLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLCapacidadMod)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFCapacidadMod)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPModificarClaseLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jBModificarClase)
+                .addGap(80, 80, 80))
+        );
+        jPModificarClaseLayout.setVerticalGroup(
+            jPModificarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPModificarClaseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPModificarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLIDClase)
+                    .addComponent(jTFIDClaseMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPModificarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLNombreClaseMod)
+                    .addComponent(jTFClaseMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLMaximoClase1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPModificarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFCapacidadMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLCapacidadMod))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBModificarClase)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPBorrarClase.setBorder(javax.swing.BorderFactory.createTitledBorder("Eliminar clase"));
+
+        jLIDClase1.setText("ID:");
+
+        jTFIDClaseRm.setEditable(false);
+
+        jBEliminarClase.setText("Eliminar desde la base");
+        jBEliminarClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarClaseActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPBorrarClaseLayout = new javax.swing.GroupLayout(jPBorrarClase);
+        jPBorrarClase.setLayout(jPBorrarClaseLayout);
+        jPBorrarClaseLayout.setHorizontalGroup(
+            jPBorrarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPBorrarClaseLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLIDClase1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTFIDClaseRm, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBorrarClaseLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBEliminarClase)
+                .addGap(83, 83, 83))
+        );
+        jPBorrarClaseLayout.setVerticalGroup(
+            jPBorrarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPBorrarClaseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPBorrarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLIDClase1)
+                    .addComponent(jTFIDClaseRm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBEliminarClase)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPClaseLayout = new javax.swing.GroupLayout(jPClase);
         jPClase.setLayout(jPClaseLayout);
         jPClaseLayout.setHorizontalGroup(
@@ -671,7 +801,10 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPAgregarClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPAgregarClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPModificarClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPBorrarClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPClaseLayout.setVerticalGroup(
@@ -679,9 +812,15 @@ public class JFAdministrador extends javax.swing.JFrame {
             .addGroup(jPClaseLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPAgregarClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPClaseLayout.createSequentialGroup()
+                        .addComponent(jPAgregarClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPModificarClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPBorrarClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTPEntidades.addTab("Clase", jPClase);
@@ -856,15 +995,13 @@ public class JFAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFCapacidadActionPerformed
 
     private void jBRmComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRmComidaActionPerformed
-        
-            int respuesta = this.ng_clsComida.eliminarComida(Integer.parseInt(this.jTFIdComidaRm.getText()));
-            if(respuesta >= 1){
-                JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
-                this.llenarTablaComidas();
-            }else{
-                JOptionPane.showMessageDialog(null, "Existen reservas con esta comida.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
-            }
-        
+        int respuesta = this.ng_clsComida.eliminarComida(Integer.parseInt(this.jTFIdComidaRm.getText()));
+        if(respuesta >= 1){
+            JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
+            this.llenarTablaComidas();
+        }else{
+            JOptionPane.showMessageDialog(null, "Existen reservas con esta comida o no existe.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jBRmComidaActionPerformed
 
     private void jBAddClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddClaseActionPerformed
@@ -947,11 +1084,11 @@ public class JFAdministrador extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
             this.llenarTablaPaises();
         }else{
-            JOptionPane.showMessageDialog(null, "El país no se pudo borrar debido a que hay clientes de ese país registrados en la base.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El país no se pudo borrar debido a que hay clientes de ese país registrados en la base, o no existe.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBEliminarPaisActionPerformed
 
-    private void jBAddComida1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddComida1ActionPerformed
+    private void jBAddComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddComidaActionPerformed
        Matcher matNombreComida = this.patNombres.matcher(this.jTFComida.getText());
         if(matNombreComida.matches()){
             int respuesta = this.ng_clsComida.insertarComida(this.jTFComida.getText());
@@ -964,10 +1101,10 @@ public class JFAdministrador extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n- El nombre de la comida ingresada no es válido.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jBAddComida1ActionPerformed
+    }//GEN-LAST:event_jBAddComidaActionPerformed
 
     private void jTFComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFComidaActionPerformed
-        // TODO add your handling code here:
+        this.jBAddComida.doClick();
     }//GEN-LAST:event_jTFComidaActionPerformed
 
     private void jBModComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModComidaActionPerformed
@@ -986,12 +1123,8 @@ public class JFAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jBModComidaActionPerformed
 
     private void jTFComidaModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFComidaModActionPerformed
-        // TODO add your handling code here:
+        this.jBModComida.doClick();
     }//GEN-LAST:event_jTFComidaModActionPerformed
-
-    private void jTFIdComidaModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFIdComidaModActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFIdComidaModActionPerformed
 
     private void jTComidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTComidasMouseClicked
        Cm_ClsComida comidaSeleccionada = this.listaComidas.get(this.jTComidas.getSelectedRow());
@@ -1000,6 +1133,51 @@ public class JFAdministrador extends javax.swing.JFrame {
        
        this.jTFIdComidaRm.setText(""+comidaSeleccionada.getId());
     }//GEN-LAST:event_jTComidasMouseClicked
+
+    private void jTFClaseModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFClaseModActionPerformed
+        this.jBModificarClase.doClick();
+    }//GEN-LAST:event_jTFClaseModActionPerformed
+
+    private void jTFCapacidadModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCapacidadModActionPerformed
+        this.jBModificarClase.doClick();
+    }//GEN-LAST:event_jTFCapacidadModActionPerformed
+
+    private void jBModificarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarClaseActionPerformed
+        Matcher matNombreClase = this.patNombres.matcher(this.jTFClaseMod.getText());
+        Matcher matCapacidad = this.patCapacidad.matcher(this.jTFCapacidadMod.getText());
+        if(matNombreClase.matches() && matCapacidad.matches()){
+            int respuesta = this.ng_clsClase.actualizarClase(Integer.parseInt(this.jTFIDClaseMod.getText()), this.jTFClaseMod.getText(), Integer.parseInt(this.jTFCapacidadMod.getText()));
+            if(respuesta >= 1){
+                JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
+                this.llenarTablaClases();
+            }else{
+                JOptionPane.showMessageDialog(null, "Ocurrió un error con la solicitud.\nPor favor, inténtelo más tarde.\n\nSi el problema persiste, por favor, comuníquese con los estudiantes.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            String error = "";
+            error += matNombreClase.matches()?"":"- El nombre de la clase ingresada no es válido.\n";
+            error += matCapacidad.matches()?"":"- La capacidad ingresada no es válida.\n";
+            JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n" + error, "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBModificarClaseActionPerformed
+
+    private void jBEliminarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarClaseActionPerformed
+        int respuesta = this.ng_clsClase.borrarClase(Integer.parseInt(this.jTFIDClaseRm.getText()));
+            if(respuesta >= 1){
+                JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
+                this.llenarTablaClases();
+            }else{
+                JOptionPane.showMessageDialog(null, "La clase está en una reserva o no existe.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_jBEliminarClaseActionPerformed
+
+    private void jTClasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTClasesMouseClicked
+        Cm_ClsClase claseSeleccionada = this.listaClases.get(this.jTClases.getSelectedRow());
+        this.jTFIDClaseMod.setText("" + claseSeleccionada.getId());
+        this.jTFClaseMod.setText(claseSeleccionada.getNombre());
+        this.jTFCapacidadMod.setText("" + claseSeleccionada.getCapacidad());
+        this.jTFIDClaseRm.setText("" + claseSeleccionada.getId());
+    }//GEN-LAST:event_jTClasesMouseClicked
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1033,16 +1211,19 @@ public class JFAdministrador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAddClase;
-    private javax.swing.JButton jBAddComida1;
+    private javax.swing.JButton jBAddComida;
     private javax.swing.JButton jBAddPais;
     private javax.swing.JButton jBCerrarSesion;
+    private javax.swing.JButton jBEliminarClase;
     private javax.swing.JButton jBEliminarPais;
     private javax.swing.JButton jBModComida;
+    private javax.swing.JButton jBModificarClase;
     private javax.swing.JButton jBModificarPais;
     private javax.swing.JButton jBRmComida;
     private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLBienvenido;
     private javax.swing.JLabel jLCapacidad;
+    private javax.swing.JLabel jLCapacidadMod;
     private javax.swing.JLabel jLCodigoEliminar;
     private javax.swing.JLabel jLCodigoPais;
     private javax.swing.JLabel jLCodigoPais1;
@@ -1050,13 +1231,17 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLComida1;
     private javax.swing.JLabel jLComida2;
     private javax.swing.JLabel jLComida3;
+    private javax.swing.JLabel jLIDClase;
+    private javax.swing.JLabel jLIDClase1;
     private javax.swing.JLabel jLMaximoClase;
+    private javax.swing.JLabel jLMaximoClase1;
     private javax.swing.JLabel jLMaximoComida;
     private javax.swing.JLabel jLMaximoComida1;
     private javax.swing.JLabel jLMaximoComida2;
     private javax.swing.JLabel jLMaximoPais;
     private javax.swing.JLabel jLMaximoPais1;
     private javax.swing.JLabel jLNombreClase;
+    private javax.swing.JLabel jLNombreClaseMod;
     private javax.swing.JLabel jLNombrePais;
     private javax.swing.JLabel jLNombrePais1;
     private javax.swing.JPanel jPActualizarPais;
@@ -1066,8 +1251,10 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPAgregarComida2;
     private javax.swing.JPanel jPAgregarPais;
     private javax.swing.JPanel jPAsiento;
+    private javax.swing.JPanel jPBorrarClase;
     private javax.swing.JPanel jPClase;
     private javax.swing.JPanel jPComida;
+    private javax.swing.JPanel jPModificarClase;
     private javax.swing.JPanel jPPais;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1078,11 +1265,15 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JTable jTClases;
     private javax.swing.JTable jTComidas;
     private javax.swing.JTextField jTFCapacidad;
+    private javax.swing.JTextField jTFCapacidadMod;
+    private javax.swing.JTextField jTFClaseMod;
     private javax.swing.JTextField jTFCodigoPais;
     private javax.swing.JTextField jTFCodigoPaisActualizar;
     private javax.swing.JTextField jTFCodigoPaisEliminar;
     private javax.swing.JTextField jTFComida;
     private javax.swing.JTextField jTFComidaMod;
+    private javax.swing.JTextField jTFIDClaseMod;
+    private javax.swing.JTextField jTFIDClaseRm;
     private javax.swing.JTextField jTFIdComidaMod;
     private javax.swing.JTextField jTFIdComidaRm;
     private javax.swing.JTextField jTFNombreClase;

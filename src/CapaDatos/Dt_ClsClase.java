@@ -45,7 +45,7 @@ public class Dt_ClsClase extends Dt_ClsConexion {
         
         Object[] id = new Object[3];
         id[0] = "int";
-        id[1] = "id_clase;";
+        id[1] = "id_clase";
         id[2] = ID;
         
         Object[] datosNombre = new Object[3];
@@ -62,7 +62,7 @@ public class Dt_ClsClase extends Dt_ClsConexion {
         parametros.add(datosNombre);
         parametros.add(datosCapacidad);
         
-        return executeQuery("insertarClase(?,?,?)", parametros);
+        return executeQuery("actualizarClase(?,?,?)", parametros);
     }
 
     public int borrarClase(int ID) {
@@ -70,7 +70,7 @@ public class Dt_ClsClase extends Dt_ClsConexion {
          
         Object[] id = new Object[3];
         id[0] = "int";
-        id[1] = "id_Clases";
+        id[1] = "id_clase";
         id[2] = ID;
         
         parametros.add(id);
