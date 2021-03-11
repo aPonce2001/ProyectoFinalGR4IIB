@@ -7,10 +7,8 @@ package CapaComun;
 
 import java.sql.Date;
 
-/**
- *
- * @author Dennis David
- */
+//@author Dennis David
+ 
 public class Cm_ClsReserva {
     
     private int id;

@@ -22,7 +22,7 @@ public class Ng_ClsCliente {
         return dt_cliente.actualizarCliente(id, nombre, apellido, cedula, passwd, id_pais_fk);
     }
     
-    public List<Cm_ClsCliente> mostrarPaisAll() {
+    public List<Cm_ClsCliente> mostrarClienteAll() {
          return dt_cliente.mostrarClienteAll();
      }
     

@@ -16,10 +16,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Dennis David
- */
+//@author Dennis David
+
 public class Ng_ClsReserva {
 
     Dt_ClsReserva dt_reserva = new Dt_ClsReserva();

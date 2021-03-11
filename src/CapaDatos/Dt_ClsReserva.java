@@ -12,9 +12,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Dennis David
- */
+//@author Dennis David
+
 public class Dt_ClsReserva extends Dt_ClsConexion {
 
     public Dt_ClsReserva() {

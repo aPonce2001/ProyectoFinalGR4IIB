@@ -8,9 +8,8 @@ import java.util.List;
 import java.util.regex.*;
 import javax.swing.JOptionPane;
 
-/**
- * @author Dennis David
- */
+//@author Dennis David
+
 public class JFActualizarDatos extends javax.swing.JFrame {
     Cm_ClsCliente cm_cliente;
     Ng_ClsPais ng_pais;
@@ -79,7 +78,6 @@ public class JFActualizarDatos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Actualización");
-        setMaximumSize(new java.awt.Dimension(313, 469));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Actualización de datos"));
 

@@ -14,9 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-/**
- * @author Dennis David
- */
+//@author Dennis David
+ 
 public class JFMisReservas extends javax.swing.JFrame {
 
     List<Cm_ClsReserva> listaMisReserva;

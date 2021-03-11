@@ -30,7 +30,11 @@ public class Ng_ClsAsiento {
      }
    
      
-     public List<Cm_ClsAsiento> mostrarAsientoAll() {
+    public List<Cm_ClsAsiento> mostrarAsientoAll() {
        return dt_asiento.mostrarAsientoAll();
-     }
+    }
+     
+    public List<Cm_ClsAsiento> mostrarAsientosDisponibles() {
+       return dt_asiento.mostrarAsientosDisponibles();
+    }
 }

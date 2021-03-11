@@ -17,11 +17,14 @@ public class JFAdministrador extends javax.swing.JFrame {
     Ng_ClsComida ng_clsComida = new Ng_ClsComida();
     Ng_ClsClase ng_clsClase = new Ng_ClsClase();
     Ng_ClsAsiento ng_clsAsiento = new Ng_ClsAsiento();
+    Ng_ClsReserva ng_clsReserva = new Ng_ClsReserva();
+    Ng_ClsCliente ng_clsCliente = new Ng_ClsCliente();
     List<Cm_ClsClase> listaClasesCB;
     List<Cm_ClsPais> listaPaises;
     List<Cm_ClsComida> listaComidas;
     List<Cm_ClsClase> listaClases;
     List<Cm_ClsAsiento> listaAsientos;
+    List<Cm_ClsReserva> listaReservas;
     private Pattern patNombrePais = Pattern.compile("[a-zA-ZñáéíóúÑÁÉÍÓÚ\\s]{1,70}");
     private Pattern patNombres = Pattern.compile("[a-zA-ZñáéíóúÑÁÉÍÓÚ\\s]{1,25}");
     private Pattern patCapacidad = Pattern.compile("[0-9]+");
@@ -30,15 +33,20 @@ public class JFAdministrador extends javax.swing.JFrame {
     public JFAdministrador() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
         this.ng_clsPais = new Ng_ClsPais();
         this.ng_clsComida = new Ng_ClsComida();
         this.ng_clsClase = new Ng_ClsClase();
         this.ng_clsAsiento = new Ng_ClsAsiento();
+        this.ng_clsCliente = new Ng_ClsCliente();
+        this.listaPaises = this.ng_clsPais.mostrarPaisAll(jCBPaisOrigenAdd, false, 0);
+        this.listaPaises = this.ng_clsPais.mostrarPaisAll(jCBPaisDestinoAdd, false, 0);
+        this.listaPaises = this.ng_clsPais.mostrarPaisAll(jCBPaisOrigenMod, false, 0);
+        this.listaPaises = this.ng_clsPais.mostrarPaisAll(jCBPaisDestinoMod, false, 0);
         this.llenarTablaPaises();
         this.llenarTablaComidas();
         this.llenarTablaClases();
         this.llenarTablaAsientos();
+        this.llenarTablaReservas();
     }
 
     @SuppressWarnings("unchecked")
@@ -117,34 +125,36 @@ public class JFAdministrador extends javax.swing.JFrame {
         jPAgregarClase1 = new javax.swing.JPanel();
         jLNombreClase1 = new javax.swing.JLabel();
         jLCapacidad1 = new javax.swing.JLabel();
-        jBAddClase1 = new javax.swing.JButton();
-        jCBCLiente = new javax.swing.JComboBox<>();
-        jCBAsiento = new javax.swing.JComboBox<>();
-        jCBCOmida = new javax.swing.JComboBox<>();
+        jBAddReserva = new javax.swing.JButton();
+        jCBClienteAdd = new javax.swing.JComboBox<>();
+        jCBAsientoAdd = new javax.swing.JComboBox<>();
+        jCBComidaAdd = new javax.swing.JComboBox<>();
         jLCapacidad2 = new javax.swing.JLabel();
         jLCapacidad3 = new javax.swing.JLabel();
         jLCapacidad4 = new javax.swing.JLabel();
-        jCBPaisOrigen = new javax.swing.JComboBox<>();
-        jCBPaisDestino = new javax.swing.JComboBox<>();
-        jPAgregarClase2 = new javax.swing.JPanel();
-        jLNombreClase2 = new javax.swing.JLabel();
-        jLCapacidad5 = new javax.swing.JLabel();
-        jBModificarReserva = new javax.swing.JButton();
-        jCBCLiente1 = new javax.swing.JComboBox<>();
-        jCBAsiento1 = new javax.swing.JComboBox<>();
-        jCBCOmida1 = new javax.swing.JComboBox<>();
-        jLCapacidad6 = new javax.swing.JLabel();
-        jLCapacidad7 = new javax.swing.JLabel();
-        jLCapacidad8 = new javax.swing.JLabel();
-        jCBPaisOrigen1 = new javax.swing.JComboBox<>();
-        jCBPaisDestino1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jTFIDmod = new javax.swing.JTextField();
+        jCBPaisOrigenAdd = new javax.swing.JComboBox<>();
+        jCBPaisDestinoAdd = new javax.swing.JComboBox<>();
+        jPAgregarClase5 = new javax.swing.JPanel();
+        jLNombreClase4 = new javax.swing.JLabel();
+        jLCapacidad13 = new javax.swing.JLabel();
+        jBModificarReserva2 = new javax.swing.JButton();
+        jCBCLienteMod = new javax.swing.JComboBox<>();
+        jCBAsientoMod = new javax.swing.JComboBox<>();
+        jCBComidaMod = new javax.swing.JComboBox<>();
+        jLCapacidad14 = new javax.swing.JLabel();
+        jLCapacidad15 = new javax.swing.JLabel();
+        jLCapacidad16 = new javax.swing.JLabel();
+        jCBPaisOrigenMod = new javax.swing.JComboBox<>();
+        jCBPaisDestinoMod = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jTFIDReservaMod = new javax.swing.JTextField();
         jPAgregarClase3 = new javax.swing.JPanel();
         jBEliminarReserva = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTFIdReservaEliminar = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jBRegistrar = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTReservas = new javax.swing.JTable();
         jLBienvenido = new javax.swing.JLabel();
         jBCerrarSesion = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
@@ -223,15 +233,17 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPAgregarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPAgregarPaisLayout.createSequentialGroup()
-                        .addComponent(jLMaximoPais)
-                        .addGap(0, 115, Short.MAX_VALUE))
-                    .addComponent(jTFNombrePais, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                    .addComponent(jTFCodigoPais))
-                .addContainerGap())
-            .addGroup(jPAgregarPaisLayout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(jBAddPais)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(6, 6, 6)
+                        .addComponent(jBAddPais)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPAgregarPaisLayout.createSequentialGroup()
+                        .addGroup(jPAgregarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPAgregarPaisLayout.createSequentialGroup()
+                                .addComponent(jLMaximoPais)
+                                .addGap(0, 168, Short.MAX_VALUE))
+                            .addComponent(jTFNombrePais, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                            .addComponent(jTFCodigoPais))
+                        .addContainerGap())))
         );
         jPAgregarPaisLayout.setVerticalGroup(
             jPAgregarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,14 +299,14 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addGroup(jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPActualizarPaisLayout.createSequentialGroup()
                         .addComponent(jLMaximoPais1)
-                        .addGap(0, 115, Short.MAX_VALUE))
+                        .addGap(0, 168, Short.MAX_VALUE))
                     .addComponent(jTFCodigoPaisActualizar)
-                    .addComponent(jTFNombrePaisActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
+                    .addComponent(jTFNombrePaisActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPActualizarPaisLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBModificarPais)
-                .addGap(85, 85, 85))
+                .addGap(99, 99, 99))
         );
         jPActualizarPaisLayout.setVerticalGroup(
             jPActualizarPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,12 +347,12 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLCodigoEliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFCodigoPaisEliminar)
+                .addComponent(jTFCodigoPaisEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBEliminarPais)
-                .addGap(68, 68, 68))
+                .addGap(92, 92, 92))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,7 +385,7 @@ public class JFAdministrador extends javax.swing.JFrame {
             .addGroup(jPPaisLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
                     .addGroup(jPPaisLayout.createSequentialGroup()
                         .addComponent(jPAgregarPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -443,12 +455,12 @@ public class JFAdministrador extends javax.swing.JFrame {
                         .addGroup(jPAgregarComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLComida)
                             .addComponent(jLMaximoComida))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 287, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarComidaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBRmComida)
-                .addGap(97, 97, 97))
+                .addGap(121, 121, 121))
         );
         jPAgregarComidaLayout.setVerticalGroup(
             jPAgregarComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,12 +508,12 @@ public class JFAdministrador extends javax.swing.JFrame {
                         .addGroup(jPAgregarComida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLComida1)
                             .addComponent(jLMaximoComida1))
-                        .addGap(0, 211, Short.MAX_VALUE)))
+                        .addGap(0, 264, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPAgregarComida1Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarComida1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBAddComida)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(100, 100, 100))
         );
         jPAgregarComida1Layout.setVerticalGroup(
             jPAgregarComida1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -555,12 +567,12 @@ public class JFAdministrador extends javax.swing.JFrame {
                             .addComponent(jLComida3)
                             .addComponent(jLComida2)
                             .addComponent(jLMaximoComida2))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 264, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarComida2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBModComida)
-                .addGap(77, 77, 77))
+                .addGap(117, 117, 117))
         );
         jPAgregarComida2Layout.setVerticalGroup(
             jPAgregarComida2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -604,7 +616,7 @@ public class JFAdministrador extends javax.swing.JFrame {
                         .addComponent(jPAgregarComida2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPAgregarComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 285, Short.MAX_VALUE)))
+                        .addGap(0, 98, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -677,12 +689,12 @@ public class JFAdministrador extends javax.swing.JFrame {
                     .addComponent(jTFCapacidad)
                     .addGroup(jPAgregarClaseLayout.createSequentialGroup()
                         .addComponent(jLMaximoClase)
-                        .addGap(0, 163, Short.MAX_VALUE)))
+                        .addGap(0, 216, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarClaseLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBAddClase)
-                .addGap(71, 71, 71))
+                .addGap(98, 98, 98))
         );
         jPAgregarClaseLayout.setVerticalGroup(
             jPAgregarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -751,7 +763,7 @@ public class JFAdministrador extends javax.swing.JFrame {
                             .addComponent(jTFClaseMod)
                             .addGroup(jPModificarClaseLayout.createSequentialGroup()
                                 .addComponent(jLMaximoClase1)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 216, Short.MAX_VALUE))))
                     .addGroup(jPModificarClaseLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLCapacidadMod)
@@ -761,7 +773,7 @@ public class JFAdministrador extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPModificarClaseLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jBModificarClase)
-                .addGap(80, 80, 80))
+                .addGap(103, 103, 103))
         );
         jPModificarClaseLayout.setVerticalGroup(
             jPModificarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -806,12 +818,12 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addGap(51, 51, 51)
                 .addComponent(jLIDClase1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFIDClaseRm, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                .addComponent(jTFIDClaseRm, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBorrarClaseLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBEliminarClase)
-                .addGap(83, 83, 83))
+                .addGap(109, 109, 109))
         );
         jPBorrarClaseLayout.setVerticalGroup(
             jPBorrarClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -851,7 +863,7 @@ public class JFAdministrador extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPBorrarClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -882,211 +894,183 @@ public class JFAdministrador extends javax.swing.JFrame {
             jPAsientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPAsientoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 856, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPAsientoLayout.setVerticalGroup(
             jPAsientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPAsientoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTPEntidades.addTab("Asiento", jPAsiento);
 
         jPAgregarClase1.setBorder(javax.swing.BorderFactory.createTitledBorder("Agregar Reserva"));
 
-        jLNombreClase1.setText("Id Cliente:");
+        jLNombreClase1.setText("Cliente:");
 
-        jLCapacidad1.setText("Id Asiento:");
+        jLCapacidad1.setText("Asiento:");
 
-        jBAddClase1.setText("Agregar a la base de datos");
-        jBAddClase1.addActionListener(new java.awt.event.ActionListener() {
+        jBAddReserva.setText("Agregar a la base de datos");
+        jBAddReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBAddClase1ActionPerformed(evt);
+                jBAddReservaActionPerformed(evt);
             }
         });
 
-        jCBCLiente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLCapacidad2.setText("Comida:");
 
-        jCBAsiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLCapacidad3.setText("País de origen:");
 
-        jCBCOmida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLCapacidad2.setText("Id Comida:");
-
-        jLCapacidad3.setText("Id Pais Origen:");
-
-        jLCapacidad4.setText("Id Pais Destino");
-
-        jCBPaisOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jCBPaisDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLCapacidad4.setText("País de destino:");
 
         javax.swing.GroupLayout jPAgregarClase1Layout = new javax.swing.GroupLayout(jPAgregarClase1);
         jPAgregarClase1.setLayout(jPAgregarClase1Layout);
         jPAgregarClase1Layout.setHorizontalGroup(
             jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarClase1Layout.createSequentialGroup()
-                .addContainerGap(88, Short.MAX_VALUE)
-                .addComponent(jBAddClase1)
-                .addGap(71, 71, 71))
             .addGroup(jPAgregarClase1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addGroup(jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPAgregarClase1Layout.createSequentialGroup()
-                            .addComponent(jLNombreClase1)
-                            .addGap(18, 18, 18)
-                            .addComponent(jCBCLiente, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPAgregarClase1Layout.createSequentialGroup()
-                            .addGroup(jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLCapacidad1)
-                                .addComponent(jLCapacidad2))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jCBCOmida, 0, 225, Short.MAX_VALUE)
-                                .addComponent(jCBAsiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPAgregarClase1Layout.createSequentialGroup()
-                        .addComponent(jLCapacidad3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCBPaisOrigen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPAgregarClase1Layout.createSequentialGroup()
                         .addComponent(jLCapacidad4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCBPaisDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(1, 1, 1)
+                        .addComponent(jCBPaisDestinoAdd, 0, 281, Short.MAX_VALUE))
+                    .addGroup(jPAgregarClase1Layout.createSequentialGroup()
+                        .addGroup(jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLCapacidad2)
+                            .addComponent(jLCapacidad3)
+                            .addComponent(jLCapacidad1)
+                            .addComponent(jLNombreClase1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCBPaisOrigenAdd, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCBClienteAdd, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCBAsientoAdd, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCBComidaAdd, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarClase1Layout.createSequentialGroup()
+                .addContainerGap(115, Short.MAX_VALUE)
+                .addComponent(jBAddReserva)
+                .addGap(105, 105, 105))
         );
         jPAgregarClase1Layout.setVerticalGroup(
             jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPAgregarClase1Layout.createSequentialGroup()
-                .addGroup(jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPAgregarClase1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLNombreClase1))
-                    .addComponent(jCBCLiente, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCBClienteAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLNombreClase1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCBAsientoAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLCapacidad1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLCapacidad1)
-                    .addComponent(jCBAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCBCOmida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBComidaAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLCapacidad2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLCapacidad3)
-                    .addComponent(jCBPaisOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jCBPaisOrigenAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPAgregarClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLCapacidad4)
-                    .addComponent(jCBPaisDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBAddClase1)
-                .addContainerGap())
+                    .addComponent(jCBPaisDestinoAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLCapacidad4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBAddReserva)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPAgregarClase2.setBorder(javax.swing.BorderFactory.createTitledBorder("Modificar Reserva"));
+        jPAgregarClase5.setBorder(javax.swing.BorderFactory.createTitledBorder("Modificar Reserva"));
 
-        jLNombreClase2.setText("Id Cliente:");
+        jLNombreClase4.setText("Cliente:");
 
-        jLCapacidad5.setText("Id Asiento:");
+        jLCapacidad13.setText("Asiento:");
 
-        jBModificarReserva.setText("Modificar reserva");
-        jBModificarReserva.addActionListener(new java.awt.event.ActionListener() {
+        jBModificarReserva2.setText("Modificar reserva");
+        jBModificarReserva2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBModificarReservaActionPerformed(evt);
+                jBModificarReserva2ActionPerformed(evt);
             }
         });
 
-        jCBCLiente1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLCapacidad14.setText("Comida:");
 
-        jCBAsiento1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLCapacidad15.setText("País de origen:");
 
-        jCBCOmida1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLCapacidad16.setText("País de destino:");
 
-        jLCapacidad6.setText("Id Comida:");
+        jLabel4.setText("ID Reserva:");
 
-        jLCapacidad7.setText("Id Pais Origen:");
+        jTFIDReservaMod.setEditable(false);
 
-        jLCapacidad8.setText("Id Pais Destino");
-
-        jCBPaisOrigen1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jCBPaisDestino1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel1.setText("Id Reserva:");
-
-        jTFIDmod.setEditable(false);
-
-        javax.swing.GroupLayout jPAgregarClase2Layout = new javax.swing.GroupLayout(jPAgregarClase2);
-        jPAgregarClase2.setLayout(jPAgregarClase2Layout);
-        jPAgregarClase2Layout.setHorizontalGroup(
-            jPAgregarClase2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarClase2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBModificarReserva)
-                .addGap(71, 71, 71))
-            .addGroup(jPAgregarClase2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPAgregarClase2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarClase2Layout.createSequentialGroup()
-                        .addComponent(jLNombreClase2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCBCLiente1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarClase2Layout.createSequentialGroup()
-                        .addComponent(jLCapacidad5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCBAsiento1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPAgregarClase2Layout.createSequentialGroup()
-                        .addComponent(jLCapacidad8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCBPaisDestino1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPAgregarClase2Layout.createSequentialGroup()
-                        .addComponent(jLCapacidad7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCBPaisOrigen1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPAgregarClase2Layout.createSequentialGroup()
-                        .addComponent(jLCapacidad6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCBCOmida1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPAgregarClase2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTFIDmod)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPAgregarClase2Layout.setVerticalGroup(
-            jPAgregarClase2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPAgregarClase2Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addGroup(jPAgregarClase2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTFIDmod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPAgregarClase2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLNombreClase2)
-                    .addComponent(jCBCLiente1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPAgregarClase2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLCapacidad5)
-                    .addComponent(jCBAsiento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPAgregarClase2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLCapacidad6)
-                    .addComponent(jCBCOmida1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPAgregarClase2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLCapacidad7)
-                    .addComponent(jCBPaisOrigen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPAgregarClase2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLCapacidad8)
-                    .addComponent(jCBPaisDestino1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(jBModificarReserva)
+        javax.swing.GroupLayout jPAgregarClase5Layout = new javax.swing.GroupLayout(jPAgregarClase5);
+        jPAgregarClase5.setLayout(jPAgregarClase5Layout);
+        jPAgregarClase5Layout.setHorizontalGroup(
+            jPAgregarClase5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPAgregarClase5Layout.createSequentialGroup()
+                .addGroup(jPAgregarClase5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPAgregarClase5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLCapacidad16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCBPaisDestinoMod, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPAgregarClase5Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLCapacidad15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCBPaisOrigenMod, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarClase5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPAgregarClase5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarClase5Layout.createSequentialGroup()
+                        .addComponent(jBModificarReserva2)
+                        .addGap(121, 121, 121))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarClase5Layout.createSequentialGroup()
+                        .addGroup(jPAgregarClase5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLCapacidad14)
+                            .addGroup(jPAgregarClase5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLNombreClase4)
+                                .addComponent(jLCapacidad13))
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPAgregarClase5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCBComidaMod, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCBAsientoMod, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCBCLienteMod, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTFIDReservaMod, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
+                        .addContainerGap())))
+        );
+        jPAgregarClase5Layout.setVerticalGroup(
+            jPAgregarClase5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPAgregarClase5Layout.createSequentialGroup()
+                .addGroup(jPAgregarClase5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTFIDReservaMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPAgregarClase5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLNombreClase4)
+                    .addComponent(jCBCLienteMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPAgregarClase5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLCapacidad13)
+                    .addComponent(jCBAsientoMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPAgregarClase5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLCapacidad14)
+                    .addComponent(jCBComidaMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPAgregarClase5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLCapacidad15)
+                    .addComponent(jCBPaisOrigenMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPAgregarClase5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLCapacidad16)
+                    .addComponent(jCBPaisDestinoMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBModificarReserva2))
         );
 
         jPAgregarClase3.setBorder(javax.swing.BorderFactory.createTitledBorder("Eliminar Reserva"));
@@ -1107,15 +1091,17 @@ public class JFAdministrador extends javax.swing.JFrame {
         jPAgregarClase3Layout.setHorizontalGroup(
             jPAgregarClase3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPAgregarClase3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
                 .addGroup(jPAgregarClase3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFIdReservaEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPAgregarClase3Layout.createSequentialGroup()
+                    .addGroup(jPAgregarClase3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTFIdReservaEliminar))
+                    .addGroup(jPAgregarClase3Layout.createSequentialGroup()
+                        .addGap(136, 136, 136)
                         .addComponent(jBEliminarReserva)
-                        .addGap(61, 61, 61)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPAgregarClase3Layout.setVerticalGroup(
             jPAgregarClase3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1124,45 +1110,70 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addGroup(jPAgregarClase3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTFIdReservaEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBEliminarReserva)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Agregar Cliente");
+        jBRegistrar.setText("Registrar un nuevo cliente");
+        jBRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBRegistrarActionPerformed(evt);
+            }
+        });
+
+        jTReservas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "N.º", "Cliente", "Asiento", "Comida", "País de origen", "País de destino"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(jTReservas);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(458, 458, 458)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPAgregarClase2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPAgregarClase3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jPAgregarClase5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPAgregarClase1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPAgregarClase3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(465, 465, 465)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jPAgregarClase1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                        .addComponent(jBRegistrar)
+                        .addGap(110, 110, 110))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPAgregarClase1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPAgregarClase2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPAgregarClase3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane5)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPAgregarClase1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPAgregarClase5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPAgregarClase3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBRegistrar)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jTPEntidades.addTab("Reserva", jPanel2);
@@ -1188,17 +1199,16 @@ public class JFAdministrador extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTPEntidades)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLBienvenido)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBCerrarSesion))
-                            .addComponent(jBSalir, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jBSalir, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jTPEntidades))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1211,8 +1221,7 @@ public class JFAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTPEntidades)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBSalir)
-                .addContainerGap())
+                .addComponent(jBSalir))
         );
 
         pack();
@@ -1267,6 +1276,32 @@ public class JFAdministrador extends javax.swing.JFrame {
             fila[3] = aux.getId_clse_FK();
             modeloTabla.addRow(fila);
         }
+    }
+    
+    private void llenarTablaReservas(){
+        this.listaReservas = this.ng_clsReserva.mostrarReservaAll();
+        DefaultTableModel modeloTabla = (DefaultTableModel)this.jTReservas.getModel();
+        modeloTabla.setNumRows(0);
+        Object[] fila = new Object[6];
+        for(Cm_ClsReserva aux: this.listaReservas){
+            fila[0] = aux.getId();
+            fila[1] = aux.getIdClientFk();
+            fila[2] = aux.getIdAsientoFk();
+            fila[3] = aux.getIdComidaFk();
+            fila[4] = aux.getIdPaisOrigenFk();
+            fila[5] = aux.getIdPaisDestinoFk();
+        }
+    }
+    
+    private void llenarComboBoxPaises(){
+        this.jCBPaisOrigenAdd.removeAllItems();
+        this.jCBPaisDestinoAdd.removeAllItems();
+        this.jCBPaisOrigenMod.removeAllItems();
+        this.jCBPaisDestinoMod.removeAllItems();
+        this.listaPaises = this.ng_clsPais.mostrarPaisAll(jCBPaisOrigenAdd, false, 0);
+        this.listaPaises = this.ng_clsPais.mostrarPaisAll(jCBPaisDestinoAdd, false, 0);
+        this.listaPaises = this.ng_clsPais.mostrarPaisAll(jCBPaisOrigenMod, false, 0);
+        this.listaPaises = this.ng_clsPais.mostrarPaisAll(jCBPaisDestinoMod, false, 0);
     }
     
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
@@ -1334,6 +1369,7 @@ public class JFAdministrador extends javax.swing.JFrame {
             if(respuesta >= 1){
                 JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
                 this.llenarTablaPaises();
+                this.llenarComboBoxPaises();
             }else{
                 JOptionPane.showMessageDialog(null, "Ocurrió un error con la solicitud.\nPor favor, inténtelo más tarde.\n\nSi el problema persiste, por favor, comuníquese con los estudiantes.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
             }
@@ -1356,6 +1392,7 @@ public class JFAdministrador extends javax.swing.JFrame {
             if(respuesta >= 1){
                 JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
                 this.llenarTablaPaises();
+                this.llenarComboBoxPaises();
             }else{
                 JOptionPane.showMessageDialog(null, "Ocurrió un error con la solicitud.\nPor favor, inténtelo más tarde.\n\nSi el problema persiste, por favor, comuníquese con los estudiantes.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
             }
@@ -1387,6 +1424,11 @@ public class JFAdministrador extends javax.swing.JFrame {
         if(respuesta >= 1){
             JOptionPane.showMessageDialog(null, "La operación se ha realizado con éxito", "Completo", JOptionPane.INFORMATION_MESSAGE);
             this.llenarTablaPaises();
+            this.llenarComboBoxPaises();
+            this.listaPaises = this.ng_clsPais.mostrarPaisAll(jCBPaisOrigenAdd, false, 0);
+            this.listaPaises = this.ng_clsPais.mostrarPaisAll(jCBPaisDestinoAdd, false, 0);
+            this.listaPaises = this.ng_clsPais.mostrarPaisAll(jCBPaisOrigenMod, false, 0);
+            this.listaPaises = this.ng_clsPais.mostrarPaisAll(jCBPaisDestinoMod, false, 0);
         }else{
             JOptionPane.showMessageDialog(null, "El país no se pudo borrar debido a que hay clientes de ese país registrados en la base, o no existe.", "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
         }
@@ -1483,17 +1525,42 @@ public class JFAdministrador extends javax.swing.JFrame {
         this.jTFIDClaseRm.setText("" + claseSeleccionada.getId());
     }//GEN-LAST:event_jTClasesMouseClicked
 
-    private void jBAddClase1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddClase1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBAddClase1ActionPerformed
+    private void jBRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRegistrarActionPerformed
+        JFRegistroCliente jfRegistro = new JFRegistroCliente();
+        jfRegistro.setVisible(true);
+    }//GEN-LAST:event_jBRegistrarActionPerformed
 
-    private void jBModificarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarReservaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBModificarReservaActionPerformed
+    private void jBAddReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddReservaActionPerformed
+        if(jCBClienteAdd.getSelectedIndex() != 0 && jCBAsientoAdd.getSelectedIndex() != 0 && jCBClienteAdd.getSelectedIndex() != 0 && jCBComidaAdd.getSelectedIndex() != 0 && jCBPaisOrigenAdd.getSelectedIndex() != 0 && jCBPaisDestinoAdd.getSelectedIndex() != 0){
+            
+        }else{
+            String error = "";
+            error += jCBClienteAdd.getSelectedIndex() != 0?"":"- No ha seleccionado un cliente.\n";
+            error += jCBAsientoAdd.getSelectedIndex() != 0?"":"- No ha seleccionado un asiento.\n";
+            error += jCBComidaAdd.getSelectedIndex() != 0?"":"- No ha seleccionado una comida.\n";
+            error += jCBPaisOrigenAdd.getSelectedIndex() != 0?"":"- No ha seleccionado un país de origen.\n";
+            error += jCBPaisDestinoAdd.getSelectedIndex() != 0?"":"- No ha seleccionado un país de destino.\n";
+            JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n" + error, "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBAddReservaActionPerformed
 
     private void jBEliminarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarReservaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBEliminarReservaActionPerformed
+
+    private void jBModificarReserva2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarReserva2ActionPerformed
+        if(jCBCLienteMod.getSelectedIndex() != 0 && jCBAsientoMod.getSelectedIndex() != 0 && jCBCLienteMod.getSelectedIndex() != 0 && jCBComidaMod.getSelectedIndex() != 0 && jCBPaisOrigenMod.getSelectedIndex() != 0 && jCBPaisDestinoMod.getSelectedIndex() != 0){
+            
+        }else{
+            String error = "";
+            error += jCBCLienteMod.getSelectedIndex() != 0?"":"- No ha seleccionado un cliente.\n";
+            error += jCBAsientoMod.getSelectedIndex() != 0?"":"- No ha seleccionado un asiento.\n";
+            error += jCBComidaMod.getSelectedIndex() != 0?"":"- No ha seleccionado una comida.\n";
+            error += jCBPaisOrigenMod.getSelectedIndex() != 0?"":"- No ha seleccionado un país de origen.\n";
+            error += jCBPaisDestinoMod.getSelectedIndex() != 0?"":"- No ha seleccionado un país de destino.\n";
+            JOptionPane.showMessageDialog(null, "Comprueba la siguiente información:\n\n" + error, "Error en la solicitud", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBModificarReserva2ActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1527,9 +1594,9 @@ public class JFAdministrador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAddClase;
-    private javax.swing.JButton jBAddClase1;
     private javax.swing.JButton jBAddComida;
     private javax.swing.JButton jBAddPais;
+    private javax.swing.JButton jBAddReserva;
     private javax.swing.JButton jBCerrarSesion;
     private javax.swing.JButton jBEliminarClase;
     private javax.swing.JButton jBEliminarPais;
@@ -1537,30 +1604,30 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton jBModComida;
     private javax.swing.JButton jBModificarClase;
     private javax.swing.JButton jBModificarPais;
-    private javax.swing.JButton jBModificarReserva;
+    private javax.swing.JButton jBModificarReserva2;
+    private javax.swing.JButton jBRegistrar;
     private javax.swing.JButton jBRmComida;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jCBAsiento;
-    private javax.swing.JComboBox<String> jCBAsiento1;
-    private javax.swing.JComboBox<String> jCBCLiente;
-    private javax.swing.JComboBox<String> jCBCLiente1;
-    private javax.swing.JComboBox<String> jCBCOmida;
-    private javax.swing.JComboBox<String> jCBCOmida1;
-    private javax.swing.JComboBox<String> jCBPaisDestino;
-    private javax.swing.JComboBox<String> jCBPaisDestino1;
-    private javax.swing.JComboBox<String> jCBPaisOrigen;
-    private javax.swing.JComboBox<String> jCBPaisOrigen1;
+    private javax.swing.JComboBox<String> jCBAsientoAdd;
+    private javax.swing.JComboBox<String> jCBAsientoMod;
+    private javax.swing.JComboBox<String> jCBCLienteMod;
+    private javax.swing.JComboBox<String> jCBClienteAdd;
+    private javax.swing.JComboBox<String> jCBComidaAdd;
+    private javax.swing.JComboBox<String> jCBComidaMod;
+    private javax.swing.JComboBox<String> jCBPaisDestinoAdd;
+    private javax.swing.JComboBox<String> jCBPaisDestinoMod;
+    private javax.swing.JComboBox<String> jCBPaisOrigenAdd;
+    private javax.swing.JComboBox<String> jCBPaisOrigenMod;
     private javax.swing.JLabel jLBienvenido;
     private javax.swing.JLabel jLCapacidad;
     private javax.swing.JLabel jLCapacidad1;
+    private javax.swing.JLabel jLCapacidad13;
+    private javax.swing.JLabel jLCapacidad14;
+    private javax.swing.JLabel jLCapacidad15;
+    private javax.swing.JLabel jLCapacidad16;
     private javax.swing.JLabel jLCapacidad2;
     private javax.swing.JLabel jLCapacidad3;
     private javax.swing.JLabel jLCapacidad4;
-    private javax.swing.JLabel jLCapacidad5;
-    private javax.swing.JLabel jLCapacidad6;
-    private javax.swing.JLabel jLCapacidad7;
-    private javax.swing.JLabel jLCapacidad8;
     private javax.swing.JLabel jLCapacidadMod;
     private javax.swing.JLabel jLCodigoEliminar;
     private javax.swing.JLabel jLCodigoPais;
@@ -1580,17 +1647,17 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLMaximoPais1;
     private javax.swing.JLabel jLNombreClase;
     private javax.swing.JLabel jLNombreClase1;
-    private javax.swing.JLabel jLNombreClase2;
+    private javax.swing.JLabel jLNombreClase4;
     private javax.swing.JLabel jLNombreClaseMod;
     private javax.swing.JLabel jLNombrePais;
     private javax.swing.JLabel jLNombrePais1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPActualizarPais;
     private javax.swing.JPanel jPAgregarClase;
     private javax.swing.JPanel jPAgregarClase1;
-    private javax.swing.JPanel jPAgregarClase2;
     private javax.swing.JPanel jPAgregarClase3;
+    private javax.swing.JPanel jPAgregarClase5;
     private javax.swing.JPanel jPAgregarComida;
     private javax.swing.JPanel jPAgregarComida1;
     private javax.swing.JPanel jPAgregarComida2;
@@ -1607,6 +1674,7 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTAsientos;
     private javax.swing.JTable jTClases;
     private javax.swing.JTable jTComidas;
@@ -1620,7 +1688,7 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JTextField jTFComidaMod;
     private javax.swing.JTextField jTFIDClaseMod;
     private javax.swing.JTextField jTFIDClaseRm;
-    private javax.swing.JTextField jTFIDmod;
+    private javax.swing.JTextField jTFIDReservaMod;
     private javax.swing.JTextField jTFIdComidaMod;
     private javax.swing.JTextField jTFIdComidaRm;
     private javax.swing.JTextField jTFIdReservaEliminar;
@@ -1629,5 +1697,6 @@ public class JFAdministrador extends javax.swing.JFrame {
     private javax.swing.JTextField jTFNombrePaisActualizar;
     private javax.swing.JTabbedPane jTPEntidades;
     private javax.swing.JTable jTPaises;
+    private javax.swing.JTable jTReservas;
     // End of variables declaration//GEN-END:variables
 }
