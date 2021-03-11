@@ -26,16 +26,12 @@ public class Ng_ClsReserva {
     public Ng_ClsReserva() {
     }
     
-    public int insertarReserva( int id_cliente_fk, int id_asiento_fk, int id_comida_fk) {
-        return dt_reserva.insertarReserva(id_cliente_fk, id_asiento_fk, id_comida_fk);
+    public int insertarReserva(int id_cliente_fk, int id_asiento_fk, int id_comida_fk, int id_pais_origen_fk, int id_pais_destino_fk) {
+        return dt_reserva.insertarReserva(id_cliente_fk, id_asiento_fk, id_comida_fk, id_pais_origen_fk, id_pais_destino_fk);
     }
     
-    public int insertarReserva( int id_cliente_fk, int id_asiento_fk, String id_comida_fk) {
-        return dt_reserva.insertarReserva(id_cliente_fk, id_asiento_fk, id_comida_fk);
-    }
-    
-    public int actualizarReserva(int id, int id_cliente_fk, int id_asiento_fk, int id_comida_fk) {
-        return dt_reserva.actualizarReserva(id, id_cliente_fk, id_asiento_fk, id_comida_fk);
+    public int actualizarReserva(int id, int id_cliente_fk, int id_asiento_fk, int id_comida_fk, int id_pais_origen_fk, int id_pais_destino_fk) {
+        return dt_reserva.actualizarReserva(id, id_cliente_fk, id_asiento_fk, id_comida_fk, id_pais_origen_fk, id_pais_destino_fk);
     }
     
     public List<Cm_ClsReserva> mostrarReservasXIdCliente(int id_cliente_fk) {

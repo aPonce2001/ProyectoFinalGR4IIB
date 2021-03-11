@@ -12,6 +12,7 @@ import CapaNegocio.Ng_ClsAsiento;
 import CapaNegocio.Ng_ClsClase;
 import CapaNegocio.Ng_ClsCliente;
 import CapaNegocio.Ng_ClsComida;
+import CapaNegocio.Ng_ClsPais;
 import CapaNegocio.Ng_ClsReserva;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -34,6 +35,8 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
     Ng_ClsComida ng_comida;
     Ng_ClsAsiento ng_asiento;
     Ng_ClsClase ng_clase;
+    Ng_ClsPais ng_pais;
+    List<Cm_ClsPais> listaPais;
     List<Cm_ClsAsiento> listaAsiento;
     List<Cm_ClsComida> listaComida;
     List<Cm_ClsClase> listaClase;
@@ -80,7 +83,9 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
         this.setLocationRelativeTo(null);
         
         listAsientosSelect = new ArrayList<>();
-       
+        this.ng_pais = new Ng_ClsPais();
+        listaPais = ng_pais.mostrarPaisAll(jCBPaisOrigen, false, 0);
+        listaPais = ng_pais.mostrarPaisAll(jCBPaisDestino, false, 0);
     }
 
     /**
@@ -103,9 +108,9 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
         scrollPane1 = new java.awt.ScrollPane();
         jBMisReservas = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCBPaisOrigen = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jCBPaisDestino = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,7 +132,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
             }
         });
 
-        jBSalir.setText("Salir");
+        jBSalir.setText("Cerrar sesión");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalirActionPerformed(evt);
@@ -172,27 +177,38 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
 
         jLabel2.setText("Pais Origen:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel3.setText("Pais Destino:");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(jBSalir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBReservar)
-                .addGap(134, 134, 134))
+                .addGap(255, 255, 255))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
+                        .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCBReservaComida, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCBPaisOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCBPaisDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -202,26 +218,11 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(124, 124, 124)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)))))
+                                .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(jCBReservaComida, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(113, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41))
+                        .addContainerGap()
+                        .addComponent(jBSalir)))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,25 +237,24 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jCBPaisDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jCBPaisOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jCBReservaComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBReservar)
-                    .addComponent(jBSalir))
-                .addGap(31, 31, 31))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBReservar)
+                .addGap(9, 9, 9)
+                .addComponent(jBSalir)
+                .addContainerGap())
         );
 
         pack();
@@ -272,7 +272,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
         if(listAsientosSelect.size() == 0 ) {
                 System.out.println("Seleccione un asiento");
                  JOptionPane.showMessageDialog(null, "Seleccione un asiento");
-            }
+        }
         
         for (int i = 0; i < listAsientosSelect.size(); i++) {
             System.out.println("Arraylist contains:" + listAsientosSelect.get(i));
@@ -283,8 +283,10 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
             
             if(idAsientoSelect == 0 ) {
                 System.out.println("Seleccione un asiento");
-                 JOptionPane.showMessageDialog(null, "Seleccione un asiento");
-            } else{
+                JOptionPane.showMessageDialog(null, "Seleccione un asiento");
+            }else if(this.jCBPaisOrigen.getSelectedIndex() == 0 || this.jCBPaisDestino.getSelectedIndex() == 0){
+                JOptionPane.showMessageDialog(null, "Seleccione un país de origen y de destino");
+            }else{
                 int resultado = ng_asiento.actualizarEstadoAsiento(idAsientoSelect,
                     "Ocupado");
                 System.out.println("luego resultado");
@@ -292,7 +294,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
 
                     Object item = jCBReservaComida.getSelectedItem();
                     String value = ((Cm_ClsComboItem) item).getValue();
-                    int resultado2 = dt_reserva.insertarReserva(cm_cliente.getId(), idAsientoSelect, Integer.parseInt(value));
+                    int resultado2 = dt_reserva.insertarReserva(cm_cliente.getId(), idAsientoSelect, Integer.parseInt(value), this.listaPais.get(this.jCBPaisOrigen.getSelectedIndex() - 1).getId(), this.listaPais.get(this.jCBPaisDestino.getSelectedIndex() - 1).getId());
 
                    
                      if(resultado2 > 0) {
@@ -307,7 +309,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
                          listAsientosSelect.remove(0);
                                                   
                      } else {
-                         JOptionPane.showMessageDialog(null, "Fail Ingreso Reserva");
+                        JOptionPane.showMessageDialog(null, "Fail Ingreso Reserva");
                      }
                 } else {
                     JOptionPane.showMessageDialog(null, "Fallo Asiento");
@@ -477,9 +479,9 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
     private javax.swing.JButton jBReservar;
     private javax.swing.JButton jBSalir;
     private javax.swing.JComboBox<String> jCBClase;
+    private javax.swing.JComboBox<String> jCBPaisDestino;
+    private javax.swing.JComboBox<String> jCBPaisOrigen;
     private javax.swing.JComboBox<String> jCBReservaComida;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
