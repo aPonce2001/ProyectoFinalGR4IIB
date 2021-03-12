@@ -185,7 +185,7 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
    
      public List<Cm_ClsReserva> mostrarReservaAll() {
        List<Cm_ClsReserva> listaReserva = new ArrayList<Cm_ClsReserva>();
-        String storeProcedure = "mostrarReservaAll(?)";
+        String storeProcedure = "mostrarReservaAll()";
 
         int id = 0;
         try {

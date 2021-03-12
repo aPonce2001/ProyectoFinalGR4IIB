@@ -180,7 +180,7 @@ public class JFRegistroCliente extends javax.swing.JFrame {
                 .addGap(49, 49, 49))
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
