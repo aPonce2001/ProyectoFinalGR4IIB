@@ -1,23 +1,12 @@
 package CapaDatos;
 
-import CapaComun.Cm_ClsAsiento;
-import CapaComun.Cm_ClsCliente;
-import CapaComun.Cm_ClsReserva;
-import static CapaDatos.Dt_ClsConexion.executeQuery;
-import static CapaDatos.Dt_ClsConexion.getConnectionString;
-import static CapaDatos.Dt_ClsConexion.getDbName;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import CapaComun.*;
+import static CapaDatos.Dt_ClsConexion.*;
+import java.sql.*;
+import java.util.*;
 
-/**
- *
- * @author Dennis David
- */
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
+
 public class Dt_ClsAsiento extends Dt_ClsConexion {
 
     public Dt_ClsAsiento() {
@@ -87,10 +76,6 @@ public class Dt_ClsAsiento extends Dt_ClsConexion {
 
                     cs.setInt(columnName, columnValue);
                 }
-                /*else if(param.equals("date")) {
-                    //cs.setDate("capacidad", 100);
-                }*/
-
             }
 
             ResultSet rs = cs.executeQuery();

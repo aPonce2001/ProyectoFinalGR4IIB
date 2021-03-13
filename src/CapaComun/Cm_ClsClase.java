@@ -1,10 +1,8 @@
  
 package CapaComun;
 
-/**
- *
- * @author Dennis David
- */
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
+
 public class Cm_ClsClase {
     
         private int id;
