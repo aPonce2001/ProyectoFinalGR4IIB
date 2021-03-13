@@ -161,8 +161,8 @@ public class JFLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIngresarActionPerformed
-        String usuario = "1";
-        String password = "1";
+        String usuario = "admin";
+        String password = "P@ssw0rd";
 
         String passwordIngresado = this.jPFContrasena.getText();
         String usuarioIngresado = this.jTUsuario.getText();
@@ -181,7 +181,7 @@ public class JFLogin extends javax.swing.JFrame {
                    System.out.println(cm_cliente.getId()  <= 0);
                     if (cm_cliente.getId()  <= 0) {
                         
-                       JOptionPane.showMessageDialog(null, "182 ALERT Ingrese credenciales válidas");
+                       JOptionPane.showMessageDialog(null, "Ingrese credenciales válidas");
                     } else {
                         jFReserva = new JFReserva(cm_cliente);
                         jFReserva.setVisible(true);
