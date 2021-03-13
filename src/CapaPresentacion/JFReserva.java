@@ -95,6 +95,7 @@ public class JFReserva extends javax.swing.JFrame implements MouseListener {
         jCBPaisDestino = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Haz tu reserva");
 
         jLabel1.setText("Seleccione una clase:");
 

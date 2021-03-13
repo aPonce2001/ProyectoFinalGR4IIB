@@ -53,6 +53,8 @@ public class JFMostrarReserva extends javax.swing.JFrame {
 
         button1.setLabel("button1");
 
+        setTitle("Reserva completa");
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro Reservas"));
         jPanel1.setToolTipText("");
 
@@ -131,7 +133,7 @@ public class JFMostrarReserva extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

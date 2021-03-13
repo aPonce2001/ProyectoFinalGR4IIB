@@ -40,7 +40,5 @@ public class Cm_ClsClase {
 
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
-    }
-    
-    
+    } 
 }

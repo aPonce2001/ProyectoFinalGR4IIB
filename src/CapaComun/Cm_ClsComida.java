@@ -31,8 +31,4 @@ public class Cm_ClsComida {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-     
-    
-    
 }

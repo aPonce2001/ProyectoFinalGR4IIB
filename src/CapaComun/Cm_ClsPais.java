@@ -31,6 +31,4 @@ public class Cm_ClsPais {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    
 }

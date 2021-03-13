@@ -50,6 +50,4 @@ public class Cm_ClsAsiento {
     public void setId_clse_FK(int id_clse_FK) {
         this.id_clse_FK = id_clse_FK;
     }
-   
-    
 }
