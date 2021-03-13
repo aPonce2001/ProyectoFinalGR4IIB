@@ -52,7 +52,6 @@ public class Dt_ClsAsiento extends Dt_ClsConexion {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(getConnectionString());
-            System.out.println("Conexión exitosa");
 
             String SQL = "{call "+getDbName()+".dbo." + storeProcedure + "}";
             CallableStatement cs = con.prepareCall(SQL);
@@ -83,8 +82,6 @@ public class Dt_ClsAsiento extends Dt_ClsConexion {
             
             while (rs.next()) {
 
-                //   System.out.println("Id: " + rs.getString(1));//id
-                // System.out.println("Nombre: " + rs.getString(2));//nombre
                 listaAsiento.add(new Cm_ClsAsiento(
                         (int) rs.getInt("id"),
                         (String) rs.getString("ubicacion"),
@@ -114,11 +111,10 @@ public class Dt_ClsAsiento extends Dt_ClsConexion {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(getConnectionString());
-            System.out.println("Conexión exitosa");
 
             String SQL = "{call "+getDbName()+".dbo." + storeProcedure + "}";
             CallableStatement cs = con.prepareCall(SQL);
-           ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+            ArrayList<Object[]> parametros = new ArrayList<Object[]>();
        
 
             for (Object[] param : parametros) {
@@ -133,33 +129,24 @@ public class Dt_ClsAsiento extends Dt_ClsConexion {
 
                     cs.setInt(columnName, columnValue);
                 }
-                /*else if(param.equals("date")) {
-                    //cs.setDate("capacidad", 100);
-                }*/
-
             }
 
             ResultSet rs = cs.executeQuery();
 
             
             while (rs.next()) {
-
-                //   System.out.println("Id: " + rs.getString(1));//id
-                // System.out.println("Nombre: " + rs.getString(2));//nombre
                 listaAsiento.add(new Cm_ClsAsiento(
                         (int) rs.getInt("id"),
                         (String)rs.getString("ubicacion"), 
                         (String)rs.getString("estado"), 
                         (int) rs.getInt("id_clase_FK"))     
-                );
-                 
+                );   
             }
 
             id = 1;
             rs.close();
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
 
         return listaAsiento;
@@ -174,11 +161,10 @@ public class Dt_ClsAsiento extends Dt_ClsConexion {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(getConnectionString());
-            System.out.println("Conexión exitosa");
 
             String SQL = "{call "+getDbName()+".dbo." + storeProcedure + "}";
             CallableStatement cs = con.prepareCall(SQL);
-           ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+            ArrayList<Object[]> parametros = new ArrayList<Object[]>();
        
 
             for (Object[] param : parametros) {
@@ -193,33 +179,24 @@ public class Dt_ClsAsiento extends Dt_ClsConexion {
 
                     cs.setInt(columnName, columnValue);
                 }
-                /*else if(param.equals("date")) {
-                    //cs.setDate("capacidad", 100);
-                }*/
-
             }
 
             ResultSet rs = cs.executeQuery();
 
             
             while (rs.next()) {
-
-                //   System.out.println("Id: " + rs.getString(1));//id
-                // System.out.println("Nombre: " + rs.getString(2));//nombre
                 listaAsiento.add(new Cm_ClsAsiento(
                         (int) rs.getInt("id"),
                         (String)rs.getString("ubicacion"), 
                         (String)rs.getString("estado"), 
                         (int) rs.getInt("id_clase_FK"))     
-                );
-                 
+                );     
             }
 
             id = 1;
             rs.close();
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
 
         return listaAsiento;

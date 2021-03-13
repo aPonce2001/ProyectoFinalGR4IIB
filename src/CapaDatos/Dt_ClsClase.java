@@ -1,20 +1,12 @@
 package CapaDatos;
 
-import CapaComun.Cm_ClsClase;
-import CapaComun.Cm_ClsComboItem;
-import CapaComun.Cm_ClsPais;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JComboBox;
+import CapaComun.*;
+import java.sql.*;
+import java.util.*;
+import javax.swing.*;
 
-/**
- *
- * @author Dennis David
- */
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
+
 public class Dt_ClsClase extends Dt_ClsConexion {
 
     public Dt_ClsClase() {
@@ -86,27 +78,20 @@ public class Dt_ClsClase extends Dt_ClsConexion {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(getConnectionString());
-            System.out.println("Conexión exitosa");
             String SQL = "{call "+getDbName()+".dbo." + storeProcedure + "}";
      
             CallableStatement cs = con.prepareCall(SQL);
              
             ResultSet rs = cs.executeQuery();
 
-            //LLenamos nuestro ComboBox
             jCBClase.addItem("Seleccione una opción");
              
             while (rs.next()) {
-
-                //System.out.println("Id: " + rs.getString(1));//id
-                //System.out.println("Nombre: " + rs.getString(2));//nombre
                 listaClase.add(new Cm_ClsClase(
                         (int) rs.getInt("id"),
                         (String) rs.getString("nombre"),
                         (int) rs.getInt("capacidad")
                 ));
-                
-                 
                  jCBClase.addItem(new Cm_ClsComboItem(rs.getString("nombre"), String.valueOf(rs.getInt("id"))));
             }
 
@@ -116,8 +101,6 @@ public class Dt_ClsClase extends Dt_ClsConexion {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
         return listaClase;
-
     }
 }

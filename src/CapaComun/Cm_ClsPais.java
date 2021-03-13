@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package CapaComun;
 
-/**
- *
- * @author Dennis David
- */
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
+
 public class Cm_ClsPais {
     
     private int id;

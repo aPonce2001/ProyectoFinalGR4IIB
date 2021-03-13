@@ -1,7 +1,7 @@
 
 package CapaPresentacion;
 
-//@author Andrés Ponce
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
 
 import javax.swing.*;
 import CapaComun.*;

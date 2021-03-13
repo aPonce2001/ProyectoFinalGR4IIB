@@ -3,9 +3,9 @@ package CapaNegocio;
 import CapaComun.Cm_ClsCliente;
 import CapaDatos.Dt_ClsCliente;
 import java.util.List;
-/*
- * @author Dennis David
- */
+
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
+
 public class Ng_ClsCliente {
 
     Dt_ClsCliente dt_cliente = new Dt_ClsCliente();

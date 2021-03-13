@@ -2,17 +2,11 @@
 package CapaPresentacion;
 
 import CapaComun.Cm_ClsReserva;
-import CapaNegocio.Ng_ClsReserva;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.*;
-import java.util.Date;
 
-/**
- *
- * @author Dennis David
- */
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
+
 public class JFMostrarReserva extends javax.swing.JFrame {
 
     Cm_ClsReserva cm_reserva;

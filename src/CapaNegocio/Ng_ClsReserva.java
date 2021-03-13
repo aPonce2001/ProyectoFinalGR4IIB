@@ -1,22 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package CapaNegocio;
 
 import CapaComun.Cm_ClsReserva;
 import CapaDatos.Dt_ClsReserva;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
-//@author Dennis David
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
 
 public class Ng_ClsReserva {
 

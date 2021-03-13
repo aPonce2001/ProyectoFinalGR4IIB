@@ -5,9 +5,8 @@ import CapaComun.Cm_ClsCliente;
 import CapaNegocio.Ng_ClsCliente;
 import javax.swing.JOptionPane;
 
-/**
- * @author Dennis David
- */
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
+
 public class JFLogin extends javax.swing.JFrame {
 
     JFRegistroCliente jFRegistroCliente;

@@ -2,19 +2,12 @@ package CapaPresentacion;
 
 import CapaComun.*;
 import CapaNegocio.*;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-//@author Dennis David
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
  
 public class JFMisReservas extends javax.swing.JFrame {
 

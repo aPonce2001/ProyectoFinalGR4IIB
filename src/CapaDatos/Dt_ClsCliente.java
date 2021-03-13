@@ -1,19 +1,11 @@
 package CapaDatos;
 
-import CapaComun.Cm_ClsCliente;
-import CapaComun.Cm_ClsPais;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JComboBox;
+import CapaComun.*;
+import java.sql.*;
+import java.util.*;
 
-/**
- *
- * @author Dennis David
- */
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
+
 public class Dt_ClsCliente extends Dt_ClsConexion {
 
     public Dt_ClsCliente() {
@@ -96,8 +88,6 @@ public class Dt_ClsCliente extends Dt_ClsConexion {
         parametros.add(datosCedula);
         parametros.add(datosPasswd);
         parametros.add(datosPaisFk);
-        
-        System.out.println("dt -> actualizarCliente");
        
         return executeQuery("actualizarCliente(?,?,?,?,?,?)", parametros);
         
@@ -115,7 +105,6 @@ public class Dt_ClsCliente extends Dt_ClsConexion {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(getConnectionString());
-            System.out.println("Conexión exitosa");
 
             String SQL = "{call "+getDbName()+".dbo." + storeProcedureName + "}";
             CallableStatement cs = con.prepareCall(SQL);
@@ -133,19 +122,12 @@ public class Dt_ClsCliente extends Dt_ClsConexion {
 
                     cs.setInt(columnName, columnValue);
                 }
-                /*else if(param.equals("date")) {
-                    //cs.setDate("capacidad", 100);
-                }*/
-
             }
 
             ResultSet rs = cs.executeQuery();
 
             
             while (rs.next()) {
-
-                //   System.out.println("Id: " + rs.getString(1));//id
-                // System.out.println("Nombre: " + rs.getString(2));//nombre
                 listaCliente.add(new Cm_ClsCliente(
                         (int) rs.getInt("id"),
                         (String) rs.getString("nombre"),
@@ -153,8 +135,7 @@ public class Dt_ClsCliente extends Dt_ClsConexion {
                         (String) rs.getString("cedula"),
                         (String) rs.getString("passwd"),
                         (int) rs.getInt("id_pais_fk")
-                ));
-                 
+                ));   
             }
 
             id = 1;
@@ -183,17 +164,17 @@ public class Dt_ClsCliente extends Dt_ClsConexion {
             ArrayList<Object[]> parametros = new ArrayList<Object[]>();
 
             Object[] datosNombre = new Object[3];
-        datosNombre[0] = "String";
-        datosNombre[1] = "cedula_cliente";
-        datosNombre[2] = cedula;
+            datosNombre[0] = "String";
+            datosNombre[1] = "cedula_cliente";
+            datosNombre[2] = cedula;
 
-        Object[] datosApellido = new Object[3];
-        datosApellido[0] = "String";
-        datosApellido[1] = "passwd_cliente";
-        datosApellido[2] = passwd;
- 
-        parametros.add(datosNombre);
-        parametros.add(datosApellido);
+            Object[] datosApellido = new Object[3];
+            datosApellido[0] = "String";
+            datosApellido[1] = "passwd_cliente";
+            datosApellido[2] = passwd;
+
+            parametros.add(datosNombre);
+            parametros.add(datosApellido);
    
             for (Object[] param : parametros) {
                 if (param[0].equals("String")) {
@@ -207,19 +188,12 @@ public class Dt_ClsCliente extends Dt_ClsConexion {
 
                     cs.setInt(columnName, columnValue);
                 }
-                /*else if(param.equals("date")) {
-                    //cs.setDate("capacidad", 100);
-                }*/
-
             }
 
             ResultSet rs = cs.executeQuery();
 
             
             while (rs.next()) {
-                // Procesando retoro de datos desde la base de datos
-                //   System.out.println("Id: " + rs.getString(1));//id
-                // System.out.println("Nombre: " + rs.getString(2));//nombre
                 usuarioLogeado = new Cm_ClsCliente(
                         (int) rs.getInt("id"),
                         (String) rs.getString("nombre"),
@@ -227,20 +201,15 @@ public class Dt_ClsCliente extends Dt_ClsConexion {
                         (String) rs.getString("cedula"),
                         (String) rs.getString("passwd"),
                         (int) rs.getInt("id_pais_fk")
-                );
-                 
+                );     
             }
 
             id = 1;
             rs.close();
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
 
-        return usuarioLogeado;
-
-        
+        return usuarioLogeado; 
     }
-
 }

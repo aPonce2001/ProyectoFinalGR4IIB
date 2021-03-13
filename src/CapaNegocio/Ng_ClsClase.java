@@ -1,22 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package CapaNegocio;
 
 import CapaComun.Cm_ClsClase;
 import CapaDatos.Dt_ClsClase;
-import static CapaDatos.Dt_ClsConexion.executeQuery;
-import CapaDatos.Dt_ClsPais;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import javax.swing.JComboBox;
 
-/**
- *
- * @author Dennis David
- */
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
+
 public class Ng_ClsClase {
 
     Dt_ClsClase dt_Clase =  new Dt_ClsClase();

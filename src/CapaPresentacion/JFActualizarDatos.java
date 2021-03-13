@@ -1,14 +1,12 @@
 package CapaPresentacion;
 
-import CapaComun.Cm_ClsCliente;
-import CapaComun.Cm_ClsPais;
-import CapaNegocio.Ng_ClsCliente;
-import CapaNegocio.Ng_ClsPais;
+import CapaComun.*;
+import CapaNegocio.*;
 import java.util.List;
 import java.util.regex.*;
 import javax.swing.JOptionPane;
 
-//@author Dennis David
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
 
 public class JFActualizarDatos extends javax.swing.JFrame {
     Cm_ClsCliente cm_cliente;

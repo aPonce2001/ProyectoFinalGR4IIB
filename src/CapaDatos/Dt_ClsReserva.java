@@ -1,18 +1,13 @@
 package CapaDatos;
 
 
-import CapaComun.Cm_ClsCliente;
-import CapaComun.Cm_ClsReserva;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+import CapaComun.*;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-//@author Dennis David
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
 
 public class Dt_ClsReserva extends Dt_ClsConexion {
 
@@ -117,7 +112,6 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
     }
 
    public List<Cm_ClsReserva> mostrarReservasXIdCliente(int id_cliente_fk) {
-       System.out.println("Entro mostrar reser: " + id_cliente_fk);
         List<Cm_ClsReserva> listaReserva = new ArrayList<Cm_ClsReserva>();
         String storeProcedure = "mostrarReservaXId(?)";
 
@@ -125,16 +119,14 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(getConnectionString());
-            System.out.println("Conexión exitosa");
 
             String SQL = "{call "+getDbName()+".dbo." + storeProcedure + "}";
             CallableStatement cs = con.prepareCall(SQL);
-           ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+            ArrayList<Object[]> parametros = new ArrayList<Object[]>();
             Object[] datosNombre = new Object[3];
             datosNombre[0] = "int";
             datosNombre[1] = "id_cliente_fk";
             datosNombre[2] = id_cliente_fk;
-             System.out.println("datosNombre: " + datosNombre.length);
             parametros.add(datosNombre);
 
             for (Object[] param : parametros) {
@@ -147,13 +139,7 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
                     int columnValue = (int) (param[2]);
                     cs.setInt(columnName, columnValue);
                 }else{ 
-                
-                 System.out.println("aqui cayo");
                 }
-                /*else if(param.equals("date")) {
-                    //cs.setDate("capacidad", 100);
-                }*/
-
             }
 
             ResultSet rs = cs.executeQuery();
@@ -168,19 +154,16 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
                         (int) rs.getInt("id_comida_fk"),
                         (int) rs.getInt("id_pais_origen_fk"),
                         (int) rs.getInt("id_pais_destino_fk")
-                ));
-                 
+                ));  
             }
 
             id = 1;
             rs.close();
 
         } catch (Exception e) {
-            System.out.println("Cayó Exception: " +e.getMessage());
         }
       
         return listaReserva;
-
     }
    
      public List<Cm_ClsReserva> mostrarReservaAll() {
@@ -191,11 +174,10 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(getConnectionString());
-            System.out.println("Conexión exitosa");
 
             String SQL = "{call "+getDbName()+".dbo." + storeProcedure + "}";
             CallableStatement cs = con.prepareCall(SQL);
-           ArrayList<Object[]> parametros = new ArrayList<Object[]>();
+            ArrayList<Object[]> parametros = new ArrayList<Object[]>();
        
 
             for (Object[] param : parametros) {
@@ -210,19 +192,12 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
 
                     cs.setInt(columnName, columnValue);
                 }
-                /*else if(param.equals("date")) {
-                    //cs.setDate("capacidad", 100);
-                }*/
-
             }
 
             ResultSet rs = cs.executeQuery();
 
             
             while (rs.next()) {
-
-                //   System.out.println("Id: " + rs.getString(1));//id
-                // System.out.println("Nombre: " + rs.getString(2));//nombre
                 listaReserva.add(new Cm_ClsReserva(
                         (int) rs.getInt("id"),
                         (Date) rs.getDate("fecha"),
@@ -237,9 +212,7 @@ public class Dt_ClsReserva extends Dt_ClsConexion {
 
             id = 1;
             rs.close();
-
         } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
 
         return listaReserva;

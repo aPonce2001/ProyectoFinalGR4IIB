@@ -1,33 +1,15 @@
  
 package CapaPresentacion;
 
-import CapaComun.Cm_ClsAsiento;
-import CapaComun.Cm_ClsClase;
-import CapaComun.Cm_ClsCliente;
-import CapaComun.Cm_ClsComboItem;
-import CapaComun.Cm_ClsComida;
-import CapaComun.Cm_ClsPais;
-import CapaComun.Cm_ClsReserva;
-import CapaNegocio.Ng_ClsAsiento;
-import CapaNegocio.Ng_ClsClase;
-import CapaNegocio.Ng_ClsCliente;
-import CapaNegocio.Ng_ClsComida;
-import CapaNegocio.Ng_ClsPais;
-import CapaNegocio.Ng_ClsReserva;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import CapaComun.*;
+import CapaNegocio.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
 
-//@author Dennis David
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
 
 public class JFReserva extends javax.swing.JFrame implements MouseListener {
 

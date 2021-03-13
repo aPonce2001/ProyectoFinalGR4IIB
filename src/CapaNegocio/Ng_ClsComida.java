@@ -2,15 +2,12 @@
 package CapaNegocio;
 
 import CapaComun.Cm_ClsComida;
-import CapaComun.Cm_ClsPais;
 import CapaDatos.Dt_ClsComida;
 import java.util.List;
 import javax.swing.JComboBox;
 
-/**
- *
- * @author Dennis David
- */
+//@authors Dennis David Lincango, Kelvin Ojeda, Andrés Ponce
+
 public class Ng_ClsComida {
 
     Dt_ClsComida dt_comida = new Dt_ClsComida();
